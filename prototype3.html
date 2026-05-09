@@ -1,0 +1,1576 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Единая инновационная среда</title>
+  <link href="https://cdn.fontsource.org/fonts/inter/400.css" rel="stylesheet">
+  <link href="https://cdn.fontsource.org/fonts/inter/500.css" rel="stylesheet">
+  <link href="https://cdn.fontsource.org/fonts/inter/600.css" rel="stylesheet">
+  <link href="https://cdn.fontsource.org/fonts/inter/700.css" rel="stylesheet">
+  <link href="https://cdn.fontsource.org/fonts/inter/800.css" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --bg-2: #ffffff;
+      --panel: #ffffff;
+      --panel-2: #f1f5f9;
+      --stroke: #e2e8f0;
+      --stroke-2: #cbd5e1;
+      --text: #0f172a;
+      --text-2: #334155;
+      --muted: #64748b;
+      --accent: #3b82f6;
+      --accent-2: #6366f1;
+      --accent-glow: rgba(59,130,246,0.15);
+      --good: #10b981;
+      --good-bg: rgba(16,185,129,0.10);
+      --warn: #f59e0b;
+      --warn-bg: rgba(245,158,11,0.10);
+      --danger: #ef4444;
+      --danger-bg: rgba(239,68,68,0.10);
+      --blue-bg: rgba(59,130,246,0.10);
+      --red-accent: #ef4444;
+      --red-accent-bg: rgba(239,68,68,0.10);
+      --radius: 16px;
+      --radius-sm: 12px;
+      --radius-xs: 8px;
+      --nav-h: 68px;
+      --safe-b: env(safe-area-inset-bottom, 0px);
+      --safe-t: env(safe-area-inset-top, 0px);
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+      --shadow: 0 4px 12px rgba(0,0,0,0.06);
+      --shadow-lg: 0 8px 24px rgba(0,0,0,0.08);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    html, body { height: 100%; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      overflow: hidden;
+    }
+    body::before { display: none; }
+    .app {
+      position: relative; z-index: 1; height: 100dvh;
+      display: grid; grid-template-rows: auto 1fr auto;
+      padding-top: var(--safe-t); background: var(--bg);
+    }
+    .topbar {
+      padding: 12px 16px 10px; display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      background: rgba(255,255,255,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--stroke);
+    }
+    .topbar-left { display: grid; gap: 2px; min-width: 0; }
+    .topbar h1 { font-size: 17px; font-weight: 700; line-height: 1.25; color: var(--text); }
+    .topbar-actions { display: flex; gap: 8px; flex-shrink: 0; }
+    .icon-btn {
+      width: 38px; height: 38px; border: 1px solid var(--stroke); background: var(--bg-2);
+      color: var(--text-2); border-radius: 12px; display: grid; place-items: center; font-size: 16px; cursor: pointer; transition: all .2s;
+    }
+    .icon-btn:active { transform: scale(0.92); }
+    .icon-btn.has-badge { position: relative; }
+    .icon-btn.has-badge::after {
+      content: ''; position: absolute; top: 6px; right: 6px;
+      width: 8px; height: 8px; background: var(--accent); border-radius: 50%; border: 2px solid var(--bg-2);
+    }
+    .content { overflow-y: auto; overflow-x: hidden; padding: 14px 14px 20px; scroll-behavior: smooth; }
+    .content::-webkit-scrollbar { width: 0; }
+    .screen { display: none; }
+    .screen.active { display: block; animation: screenIn .28s cubic-bezier(.22,1,.36,1); }
+    @keyframes screenIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    .stack { display: grid; gap: 14px; }
+    .card {
+      background: var(--panel); border: 1px solid var(--stroke);
+      border-radius: var(--radius); padding: 16px; position: relative; box-shadow: var(--shadow-sm);
+    }
+    .card h3 { font-size: 15px; font-weight: 600; margin-bottom: 8px; color: var(--text); }
+    .card h4 { font-size: 12px; font-weight: 500; color: var(--text-2); margin-bottom: 6px; }
+    .muted { color: var(--muted); }
+    .section-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 10px; }
+    .badge {
+      padding: 5px 10px; border-radius: 999px; font-size: 10.5px; font-weight: 600; letter-spacing: 0.02em; white-space: nowrap;
+    }
+    .badge.good { background: var(--good-bg); color: var(--good); }
+    .badge.warn { background: var(--warn-bg); color: var(--warn); }
+    .badge.danger { background: var(--danger-bg); color: var(--danger); }
+    .badge.blue { background: var(--blue-bg); color: var(--accent); }
+    .badge.neutral { background: rgba(0,0,0,0.05); color: var(--text-2); }
+    .badge.outline { background: transparent; border: 1px solid var(--stroke); color: var(--muted); }
+    .badge.purple { background: rgba(99,102,241,0.10); color: var(--accent-2); }
+    .badge.gold { background: rgba(245,158,11,0.15); color: #d97706; }
+    .action-card {
+      display: flex; align-items: center; gap: 16px; padding: 16px;
+      background: var(--bg-2); border: 1px solid var(--stroke); border-radius: var(--radius); cursor: pointer; transition: all 0.2s;
+    }
+    .action-card:active { transform: scale(0.98); background: rgba(0,0,0,0.02); }
+    .action-icon {
+      width: 48px; height: 48px; border-radius: 14px; background: var(--blue-bg); color: var(--accent);
+      display: grid; place-items: center; font-size: 24px; flex-shrink: 0;
+    }
+    .action-card.primary .action-icon { background: var(--accent); color: white; }
+    .action-info h4 { font-size: 14px; font-weight: 600; margin: 0 0 4px; color: var(--text); }
+    .action-info p { font-size: 12px; color: var(--muted); line-height: 1.4; margin: 0; }
+    .project-card {
+      padding: 14px; background: var(--bg-2); border: 1px solid var(--stroke);
+      border-radius: var(--radius-sm); margin-bottom: 10px; cursor: pointer; transition: all 0.2s;
+    }
+    .project-card:active { transform: scale(0.99); }
+    .project-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px; }
+    .project-source { font-size: 10px; text-transform: uppercase; font-weight: 700; letter-spacing: 0.05em; }
+    .project-source.company { color: var(--accent); }
+    .project-source.student { color: var(--accent-2); }
+    .project-title { font-size: 14px; font-weight: 600; color: var(--text); }
+    .project-meta { font-size: 11px; color: var(--muted); margin-top: 4px; line-height: 1.4; }
+    .project-skills { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+    .skill-tag { font-size: 10px; padding: 3px 8px; background: var(--panel-2); border-radius: 4px; color: var(--text-2); }
+    .project-detail-header {
+      padding: 20px; background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      border-radius: var(--radius); color: white; margin-bottom: 14px;
+    }
+    .project-detail-header h2 { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+    .project-detail-header p { font-size: 13px; opacity: 0.9; line-height: 1.5; }
+    .team-member {
+      display: flex; align-items: center; gap: 12px; padding: 12px;
+      background: var(--bg-2); border: 1px solid var(--stroke); border-radius: var(--radius-sm); margin-bottom: 8px;
+    }
+    .team-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--panel-2); display: grid; place-items: center; font-size: 18px; flex-shrink: 0; }
+    .team-info { flex: 1; }
+    .team-info strong { font-size: 13px; color: var(--text); }
+    .team-info .role { font-size: 11px; color: var(--accent); font-weight: 600; }
+    .team-info .task { font-size: 11px; color: var(--muted); margin-top: 2px; }
+    .material-item {
+      display: flex; align-items: center; gap: 12px; padding: 12px;
+      background: var(--bg-2); border: 1px solid var(--stroke); border-radius: var(--radius-sm);
+      margin-bottom: 8px; cursor: pointer; transition: all 0.2s;
+    }
+    .material-item:active { background: rgba(0,0,0,0.03); }
+    .material-icon {
+      width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center; font-size: 16px; flex-shrink: 0;
+    }
+    .material-icon.doc { background: var(--blue-bg); }
+    .material-icon.meeting { background: var(--good-bg); }
+    .material-icon.ai { background: rgba(99,102,241,0.10); }
+    .material-icon.tip { background: var(--warn-bg); }
+    .material-info { flex: 1; }
+    .material-info strong { font-size: 13px; color: var(--text); }
+    .material-info .meta { font-size: 11px; color: var(--muted); margin-top: 2px; }
+    .filter-tabs { display: flex; gap: 8px; margin-bottom: 14px; }
+    .filter-tab {
+      padding: 8px 16px; border-radius: 999px; font-size: 12px; font-weight: 600;
+      background: var(--bg-2); border: 1px solid var(--stroke); color: var(--muted); cursor: pointer; transition: all 0.2s;
+    }
+    .filter-tab.active { background: var(--accent); color: white; border-color: var(--accent); }
+    .progress-track { height: 8px; background: rgba(0,0,0,0.06); border-radius: 999px; overflow: hidden; margin-top: 8px; }
+    .progress-fill { height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--accent), var(--accent-2)); transition: width .6s; }
+    .story-timeline { display: grid; gap: 12px; padding-left: 4px; border-left: 2px solid var(--stroke); margin-left: 8px; }
+    .story-item { position: relative; padding-left: 20px; }
+    .story-dot { position: absolute; left: -27px; top: 2px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 2px solid white; }
+    .story-item.done .story-dot { background: var(--good); }
+    .story-item.wait .story-dot { background: var(--stroke-2); }
+    .story-item h5 { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+    .story-item p { font-size: 11px; color: var(--muted); line-height: 1.4; }
+    .btn-row { display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn {
+      border: 1px solid var(--stroke); background: var(--bg-2); color: var(--text); padding: 11px 15px;
+      border-radius: var(--radius-sm); font: 500 13px/1 inherit; cursor: pointer; transition: all .15s;
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    }
+    .btn:active { transform: scale(0.98); }
+    .btn.primary { background: var(--accent); color: white; border-color: var(--accent); font-weight: 600; box-shadow: 0 4px 12px rgba(59,130,246,0.25); }
+    .btn.red-btn { background: var(--red-accent); color: white; border-color: var(--red-accent); font-weight: 600; }
+    .btn.block { width: 100%; }
+    .btn.sm { padding: 9px 12px; font-size: 12px; }
+    .btn.ghost { background: transparent; border: none; color: var(--accent); padding: 8px 12px; }
+    .btn.ghost.left { padding-left: 0; }
+    .list { display: grid; gap: 8px; }
+    .item {
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
+      padding: 14px; border-radius: var(--radius-sm); background: var(--bg-2); border: 1px solid var(--stroke);
+      cursor: pointer; transition: all .2s;
+    }
+    .item:active { background: rgba(0,0,0,0.03); transform: scale(0.99); }
+    .item strong { display: block; font-size: 13px; font-weight: 600; color: var(--text); }
+    .item .meta { margin-top: 3px; font-size: 11.5px; color: var(--muted); line-height: 1.4; }
+    .item .left { flex: 1; min-width: 0; }
+    .item .right { flex-shrink: 0; }
+    .field { display: grid; gap: 6px; margin-bottom: 12px; }
+    .field label { font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+    .field input, .field textarea, .field select {
+      width: 100%; color: var(--text); background: var(--bg-2); border: 1px solid var(--stroke);
+      border-radius: var(--radius-sm); padding: 11px 13px; font: 13px/1.4 inherit; outline: none;
+    }
+    .field input:focus, .field textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(59,130,246,0.10); }
+    .tabs {
+      height: calc(var(--nav-h) + var(--safe-b)); padding-bottom: var(--safe-b);
+      display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--stroke); background: var(--panel);
+    }
+    .tab {
+      border: none; background: transparent; color: var(--muted); display: grid; place-items: center;
+      gap: 4px; padding: 8px 2px 6px; font: inherit; cursor: pointer; transition: color .15s;
+    }
+    .tab .ico { font-size: 19px; line-height: 1; }
+    .tab .txt { font-size: 10px; font-weight: 500; letter-spacing: 0.01em; }
+    .tab.active { color: var(--accent); }
+    .tab.active .ico {
+      width: 36px; height: 36px; border-radius: 11px; display: grid; place-items: center;
+      background: var(--accent); color: white; font-size: 17px; box-shadow: 0 4px 12px rgba(59,130,246,0.25);
+    }
+    .msg-list { display: grid; gap: 8px; max-height: 280px; overflow-y: auto; }
+    .msg { padding: 11px 13px; border-radius: 14px; font-size: 13px; line-height: 1.5; max-width: 90%; }
+    .msg.agent { background: var(--panel-2); border: 1px solid var(--stroke); justify-self: start; color: var(--text-2); }
+    .msg.agent .msg-label { font-size: 9px; font-weight: 600; color: var(--accent); margin-bottom: 3px; text-transform: uppercase; }
+    .msg.user { background: var(--accent); color: white; justify-self: end; }
+    .composer { display: flex; gap: 8px; align-items: center; margin-top: 12px; }
+    .composer input {
+      flex: 1; min-width: 0; color: var(--text); background: var(--bg-2); border: 1px solid var(--stroke);
+      border-radius: var(--radius-sm); padding: 12px 14px; font: 13px inherit; outline: none;
+    }
+    .auth-screen { display: none; height: 100dvh; flex-direction: column; background: var(--bg); padding: var(--safe-t) 0 var(--safe-b); }
+    .auth-screen.active { display: flex; }
+    .auth-content { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px 20px; }
+    .auth-logo { width: 100px; height: 100px; border-radius: 28px; display: grid; place-items: center; margin-bottom: 20px; box-shadow: var(--shadow-lg); background: linear-gradient(135deg, var(--accent), var(--accent-2)); }
+    .auth-logo svg { width: 56px; height: 56px; }
+    .auth-logo-small { width: 72px; height: 72px; border-radius: 20px; display: grid; place-items: center; margin-bottom: 14px; box-shadow: var(--shadow); background: linear-gradient(135deg, var(--accent), var(--accent-2)); }
+    .auth-logo-small svg { width: 40px; height: 40px; }
+    .auth-title { font-size: 22px; font-weight: 700; text-align: center; margin-bottom: 4px; color: var(--text); }
+    .auth-subtitle { font-size: 13px; color: var(--muted); text-align: center; line-height: 1.5; max-width: 260px; margin-bottom: 24px; }
+    .auth-field { margin-bottom: 14px; width: 100%; max-width: 340px; }
+    .auth-field label { display: block; font-size: 12px; font-weight: 600; color: var(--muted); margin-bottom: 6px; }
+    .auth-field input {
+      width: 100%; padding: 12px 14px; border-radius: var(--radius-sm); border: 1px solid var(--stroke);
+      background: var(--bg-2); color: var(--text); font: 14px/1.4 inherit; outline: none;
+    }
+    .auth-btn { width: 100%; max-width: 340px; padding: 13px; border: none; border-radius: var(--radius-sm); font: 600 15px inherit; cursor: pointer; transition: all .2s; margin-top: 6px; }
+    .auth-btn:active { transform: scale(0.98); }
+    .auth-btn.red { background: var(--accent); color: white; box-shadow: 0 4px 12px rgba(59,130,246,0.25); }
+    .auth-link {
+      display: block; text-align: center; margin-top: 16px; font-size: 12px;
+      color: var(--muted); cursor: default; background: none; border: none; font: inherit; width: 100%; max-width: 340px;
+    }
+    .profile-header { display: flex; flex-direction: column; align-items: center; padding: 24px 0 20px; }
+    .profile-avatar { width: 96px; height: 96px; border-radius: 50%; background: var(--panel-2); border: 3px solid var(--stroke); display: grid; place-items: center; font-size: 36px; margin-bottom: 14px; position: relative; }
+    .profile-avatar .edit-badge { position: absolute; bottom: 2px; right: 2px; width: 28px; height: 28px; border-radius: 50%; background: var(--accent); border: 3px solid var(--bg); display: grid; place-items: center; font-size: 12px; cursor: pointer; color: white; }
+    .profile-name { font-size: 20px; font-weight: 700; margin-bottom: 4px; color: var(--text); }
+    .profile-bio { font-size: 13px; color: var(--muted); text-align: center; max-width: 240px; margin-bottom: 14px; line-height: 1.4; }
+    .profile-info { display: grid; gap: 1px; background: var(--stroke); border-radius: var(--radius-sm); overflow: hidden; margin: 16px 0; }
+    .profile-info-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; background: var(--panel); }
+    .profile-info-row .label { font-size: 12px; color: var(--muted); }
+    .profile-info-row .value { font-size: 13px; font-weight: 500; text-align: right; max-width: 60%; word-break: break-all; color: var(--text); }
+    .settings-list { display: grid; gap: 1px; background: var(--stroke); border-radius: var(--radius-sm); overflow: hidden; }
+    .settings-item { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 16px; background: var(--panel); cursor: pointer; }
+    .settings-item .left { display: flex; align-items: center; gap: 12px; }
+    .settings-item .ico { font-size: 18px; width: 24px; text-align: center; }
+    .settings-item .label { font-size: 14px; font-weight: 500; color: var(--text); }
+    .settings-item .arrow { color: var(--muted); font-size: 14px; }
+    .settings-item.danger .label { color: var(--red-accent); }
+    .sub-tabs { display: flex; gap: 4px; margin-bottom: 14px; overflow-x: auto; }
+    .sub-tab {
+      padding: 8px 14px; border-radius: 999px; font-size: 12px; font-weight: 600;
+      background: var(--bg-2); border: 1px solid var(--stroke); color: var(--muted); cursor: pointer; transition: all 0.2s; white-space: nowrap;
+    }
+    .sub-tab.active { background: var(--accent); color: white; border-color: var(--accent); }
+    .material-detail-header {
+      display: flex; align-items: center; gap: 16px; padding: 20px;
+      background: var(--panel); border: 1px solid var(--stroke); border-radius: var(--radius); margin-bottom: 14px;
+    }
+    .material-detail-icon {
+      width: 56px; height: 56px; border-radius: 16px; display: grid; place-items: center; font-size: 28px; flex-shrink: 0;
+    }
+    .material-detail-icon.meeting { background: var(--good-bg); }
+    .material-detail-icon.doc { background: var(--blue-bg); }
+    .material-detail-icon.ai { background: rgba(99,102,241,0.10); }
+    .material-detail-icon.tip { background: var(--warn-bg); }
+    .material-detail-info h2 { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+    .material-detail-info .meta { font-size: 12px; color: var(--muted); }
+    .material-content {
+      padding: 20px; background: var(--panel); border: 1px solid var(--stroke);
+      border-radius: var(--radius); margin-bottom: 14px;
+    }
+    .material-content h3 { font-size: 14px; font-weight: 600; margin-bottom: 12px; color: var(--text); }
+    .material-content p { font-size: 13px; color: var(--text-2); line-height: 1.7; margin-bottom: 12px; }
+    .material-content ul { padding-left: 20px; margin-bottom: 12px; }
+    .material-content li { font-size: 13px; color: var(--text-2); line-height: 1.7; margin-bottom: 4px; }
+    .material-content .highlight {
+      padding: 14px; border-radius: var(--radius-sm); background: var(--blue-bg);
+      border-left: 3px solid var(--accent); margin: 14px 0;
+    }
+    .material-content .highlight p { margin: 0; color: var(--text); font-size: 13px; }
+    .tip-card {
+      padding: 14px; background: var(--warn-bg); border: 1px solid rgba(245,158,11,0.2);
+      border-radius: var(--radius-sm); margin-bottom: 12px;
+    }
+    .tip-card h4 { font-size: 13px; font-weight: 600; color: var(--warn); margin-bottom: 6px; }
+    .tip-card p { font-size: 12px; color: var(--text-2); line-height: 1.6; }
+    .rec-card {
+      padding: 14px; background: rgba(99,102,241,0.06); border: 1px solid rgba(99,102,241,0.15);
+      border-radius: var(--radius-sm); margin-bottom: 12px;
+    }
+    .rec-card h4 { font-size: 13px; font-weight: 600; color: var(--accent-2); margin-bottom: 6px; }
+    .rec-card p { font-size: 12px; color: var(--text-2); line-height: 1.6; }
+    .link-item {
+      display: flex; align-items: center; gap: 10px; padding: 10px 12px;
+      background: var(--bg-2); border: 1px solid var(--stroke); border-radius: var(--radius-xs);
+      margin-bottom: 8px; cursor: pointer; transition: all 0.2s;
+    }
+    .link-item:active { background: rgba(0,0,0,0.03); }
+    .link-item .link-ico { font-size: 16px; }
+    .link-item .link-text { font-size: 12px; color: var(--accent); font-weight: 500; }
+    .ai-activation-card {
+      padding: 20px; background: linear-gradient(135deg, rgba(99,102,241,0.08), rgba(59,130,246,0.06));
+      border: 1px solid rgba(99,102,241,0.15); border-radius: var(--radius); margin-bottom: 14px;
+    }
+    .ai-activation-card h3 { font-size: 15px; font-weight: 600; color: var(--accent-2); margin-bottom: 8px; }
+    .ai-activation-card p { font-size: 12px; color: var(--text-2); line-height: 1.6; margin-bottom: 14px; }
+    .ai-feature {
+      display: flex; align-items: center; gap: 10px; padding: 10px 0;
+      border-bottom: 1px solid rgba(99,102,241,0.1);
+    }
+    .ai-feature:last-child { border-bottom: none; }
+    .ai-feature .ico { font-size: 18px; }
+    .ai-feature .txt { font-size: 12px; color: var(--text-2); }
+    .ai-status {
+      display: flex; align-items: center; gap: 8px; padding: 12px 14px;
+      background: var(--bg-2); border: 1px solid var(--stroke); border-radius: var(--radius-sm); margin-bottom: 14px;
+    }
+    .ai-status-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--muted); }
+    .ai-status-dot.active { background: var(--good); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+    .ai-status .txt { font-size: 12px; font-weight: 500; color: var(--text); }
+    .ai-status .meta { font-size: 11px; color: var(--muted); margin-left: auto; }
+    .timeline { display: grid; gap: 2px; }
+    .tl-item { display: grid; grid-template-columns: 28px 1fr; gap: 10px; }
+    .tl-dot {
+      width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center;
+      font-weight: 800; font-size: 11px; background: var(--panel-2); color: var(--muted); position: relative; border: 1px solid var(--stroke);
+    }
+    .tl-dot.done { background: var(--accent); color: white; border-color: var(--accent); }
+    .tl-dot.current { background: var(--accent); color: white; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(59,130,246,0.2); }
+    .tl-dot.future { background: var(--bg-2); color: var(--muted); border-style: dashed; }
+    .tl-item:not(:last-child) .tl-dot::after {
+      content: ''; position: absolute; top: 32px; left: 50%; transform: translateX(-50%);
+      width: 2px; height: 28px; background: var(--stroke);
+    }
+    .tl-item:not(:last-child) .tl-dot.done::after { background: var(--accent); }
+    .tl-box {
+      padding: 12px 14px; border-radius: var(--radius-sm); background: var(--bg-2);
+      border: 1px solid var(--stroke); margin-bottom: 8px;
+    }
+    .tl-box strong { font-size: 13px; color: var(--text); }
+    .tl-box .meta { margin-top: 2px; font-size: 11px; color: var(--muted); }
+    .toast {
+      position: fixed; top: 60px; left: 50%; transform: translateX(-50%) translateY(-120px);
+      background: var(--panel); border: 1px solid var(--stroke); border-radius: var(--radius-sm);
+      padding: 12px 20px; font-size: 13px; font-weight: 600; z-index: 200;
+      transition: transform .4s cubic-bezier(.22,1,.36,1); box-shadow: var(--shadow-lg); color: var(--text);
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+    .toast.success { border-color: var(--good); color: var(--good); }
+    .toast.info { border-color: var(--accent); color: var(--accent); }
+
+    /* Gamification & UI Tweaks */
+    @keyframes recPulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.6; transform: scale(1.1); } }
+    .rec-dot { width: 10px; height: 10px; border-radius: 50%; background: #ef4444; animation: recPulse 1.5s infinite; }
+    .recording-indicator {
+      display: flex; align-items: center; gap: 10px; padding: 12px 14px;
+      background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2);
+      border-radius: var(--radius-sm); margin-bottom: 14px;
+    }
+    .recording-indicator .rec-text { font-size: 12px; font-weight: 600; color: #ef4444; }
+    .recording-indicator .rec-meta { font-size: 11px; color: var(--muted); margin-left: auto; }
+
+    .achievements-scroll { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 4px; margin-top: 10px; }
+    .achievement {
+      display: flex; flex-direction: column; align-items: center; gap: 6px; min-width: 72px; padding: 10px 8px;
+      background: var(--bg-2); border: 1px solid var(--stroke); border-radius: var(--radius-sm);
+    }
+    .achievement .ach-icon { font-size: 24px; }
+    .achievement .ach-name { font-size: 10px; font-weight: 600; color: var(--text); text-align: center; }
+    .achievement .ach-desc { font-size: 9px; color: var(--muted); text-align: center; line-height: 1.3; }
+    .achievement.locked { opacity: 0.4; }
+    .achievement.locked .ach-icon { filter: grayscale(1); }
+
+    .level-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; background: linear-gradient(135deg, rgba(245,158,11,0.12), rgba(245,158,11,0.06)); border: 1px solid rgba(245,158,11,0.2); border-radius: 999px; }
+    .level-badge .star { font-size: 14px; }
+    .level-badge .level-text { font-size: 12px; font-weight: 700; color: #d97706; }
+
+    .challenge-card {
+      padding: 14px; background: linear-gradient(135deg, rgba(245,158,11,0.06), rgba(245,158,11,0.02));
+      border: 1px solid rgba(245,158,11,0.15); border-radius: var(--radius-sm); margin-bottom: 10px;
+    }
+    .challenge-card h4 { font-size: 13px; font-weight: 600; color: var(--warn); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+    .challenge-card p { font-size: 12px; color: var(--text-2); line-height: 1.6; margin-bottom: 10px; }
+    .challenge-card .reward { font-size: 11px; color: var(--good); font-weight: 600; }
+
+    @media (min-width: 860px) {
+      body { display: grid; place-items: center; }
+      .app, .auth-screen {
+        width: min(420px, 100vw); height: min(920px, 100dvh);
+        border: 1px solid var(--stroke); box-shadow: var(--shadow-lg);
+        border-radius: 24px; overflow: hidden;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== SPLASH ===== -->
+  <div class="auth-screen active" id="splash">
+    <div class="auth-content">
+      <div class="auth-logo">
+        <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="4" width="48" height="48" rx="12" fill="white" fill-opacity="0.2"/>
+          <circle cx="28" cy="20" r="10" stroke="white" stroke-width="2.5" fill="none"/>
+          <path d="M28 30v12" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M20 38h16" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="22" cy="18" r="2" fill="white"/><circle cx="34" cy="18" r="2" fill="white"/><circle cx="28" cy="24" r="2" fill="white"/>
+        </svg>
+      </div>
+      <div class="auth-title">Единая<br>инновационная среда</div>
+      <div class="auth-subtitle" style="margin-top:12px;">Phygital Innovation Ecosystem</div>
+    </div>
+  </div>
+
+  <!-- ===== LOGIN ===== -->
+  <div class="auth-screen" id="login">
+    <div class="auth-content">
+      <div class="auth-logo-small">
+        <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="4" width="48" height="48" rx="12" fill="white" fill-opacity="0.2"/>
+          <circle cx="28" cy="20" r="10" stroke="white" stroke-width="2.5" fill="none"/>
+          <path d="M28 30v12" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="22" cy="18" r="2" fill="white"/><circle cx="34" cy="18" r="2" fill="white"/>
+        </svg>
+      </div>
+      <div class="auth-title" style="font-size:20px;">Вход в систему</div>
+      <div class="auth-subtitle">Введите данные для доступа к платформе</div>
+      <div class="auth-field"><label>Email</label><input id="loginEmail" type="email" value="exs@mail.ru" /></div>
+      <div class="auth-field"><label>Пароль</label><input id="loginPass" type="password" value="••••••••" /></div>
+      <button class="auth-btn red" onclick="doLogin()">Войти</button>
+      <div class="auth-link">Нет аккаунта? Зарегистрироваться</div>
+      <div class="auth-link" style="margin-top:8px;">Забыли пароль?</div>
+    </div>
+  </div>
+  <div class="auth-screen" id="register"><div class="auth-content"><div class="auth-logo-small"><svg viewBox="0 0 56 56" fill="none"><rect x="4" y="4" width="48" height="48" rx="12" fill="white" fill-opacity="0.2"/><circle cx="28" cy="20" r="10" stroke="white" stroke-width="2.5" fill="none"/><path d="M28 30v12" stroke="white" stroke-width="2.5" stroke-linecap="round"/><circle cx="22" cy="18" r="2" fill="white"/><circle cx="34" cy="18" r="2" fill="white"/></svg></div><div class="auth-title" style="font-size:20px;">Регистрация</div><button class="auth-btn red" onclick="goAuth('login')">Назад</button></div></div>
+  <div class="auth-screen" id="forgot"><div class="auth-content"><div class="auth-logo-small"><svg viewBox="0 0 56 56" fill="none"><rect x="4" y="4" width="48" height="48" rx="12" fill="white" fill-opacity="0.2"/><circle cx="28" cy="20" r="10" stroke="white" stroke-width="2.5" fill="none"/><path d="M28 30v12" stroke="white" stroke-width="2.5" stroke-linecap="round"/><circle cx="22" cy="18" r="2" fill="white"/><circle cx="34" cy="18" r="2" fill="white"/></svg></div><div class="auth-title" style="font-size:20px;">Восстановление</div><button class="auth-btn red" onclick="goAuth('login')">Назад</button></div></div>
+
+  <!-- ===== MAIN APP ===== -->
+  <div class="app" id="mainApp" style="display:none;">
+    <header class="topbar">
+      <div class="topbar-left"><h1 id="screenTitle">Главная</h1></div>
+      <div class="topbar-actions">
+        <button class="icon-btn has-badge" onclick="go('notifications')">🔔</button>
+        <button class="icon-btn" onclick="go('agent')">✦</button>
+      </div>
+    </header>
+    <main class="content">
+
+      <!-- HOME -->
+      <section class="screen active" id="home">
+        <div class="stack">
+          <!-- Progress & Gamification -->
+          <div class="card">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+              <div style="display:flex;align-items:center;gap:10px;">
+                <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,#f59e0b,#d97706);display:grid;place-items:center;font-size:20px;">⭐</div>
+                <div>
+                  <div class="level-badge"><span class="star">⭐</span><span class="level-text">Уровень 3</span></div>
+                  <div class="muted" style="font-size:10px;margin-top:3px;">Исследователь</div>
+                </div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-size:18px;font-weight:800;color:var(--text);">650</div>
+                <div class="muted" style="font-size:10px;">очков опыта</div>
+              </div>
+            </div>
+            <div class="progress-track"><div class="progress-fill" style="width:65%"></div></div>
+            <div style="display:flex;justify-content:space-between;margin-top:6px;">
+              <span class="muted" style="font-size:10px;">До уровня 4: Исследователь</span>
+              <span class="muted" style="font-size:10px;">350 / 1000 XP</span>
+            </div>
+          </div>
+
+          <!-- Achievements -->
+          <div class="card">
+            <div class="section-head"><h3 style="margin:0;">Достижения</h3><span class="badge gold">3 из 12</span></div>
+            <div class="achievements-scroll">
+              <div class="achievement">
+                <div class="ach-icon">🔍</div>
+                <div class="ach-name">Первый шаг</div>
+                <div class="ach-desc">Проведено интервью</div>
+              </div>
+              <div class="achievement">
+                <div class="ach-icon">💡</div>
+                <div class="ach-name">Генератор идей</div>
+                <div class="ach-desc">10+ идей</div>
+              </div>
+              <div class="achievement">
+                <div class="ach-icon">🔧</div>
+                <div class="ach-name">Создатель</div>
+                <div class="ach-desc">Прототип собран</div>
+              </div>
+              <div class="achievement locked">
+                <div class="ach-icon">🏆</div>
+                <div class="ach-name">Тестировщик</div>
+                <div class="ach-desc">5 тестов</div>
+              </div>
+              <div class="achievement locked">
+                <div class="ach-icon">🤝</div>
+                <div class="ach-name">Командный игрок</div>
+                <div class="ach-desc">Помощь команде</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top:4px;">
+            <h3 style="margin-bottom:12px;">Действия</h3>
+            <div class="action-card" onclick="go('myproject')"><div class="action-icon">🚀</div><div class="action-info"><h4>Мой проект</h4><p>Нейро-Интерфейс VR · Фаза: Создание</p></div></div>
+            <div class="action-card" onclick="go('marketplace')"><div class="action-icon">🏢</div><div class="action-info"><h4>Выбрать проект</h4><p>Задачи от компаний и студентов</p></div></div>
+            <div class="action-card primary" onclick="go('create')"><div class="action-icon">✨</div><div class="action-info"><h4>Создать проект</h4><p>Сформулируйте свою задачу или идею</p></div></div>
+          </div>
+
+          <!-- Challenge from AI -->
+          <div class="challenge-card">
+            <h4>⚡ Вызов от агента</h4>
+            <p>Вы трижды обращались к одной идее текстом. Попробуйте построить физический макет в активной зоне — это может раскрыть новые аспекты решения.</p>
+            <div class="reward">🎯 Награда: +50 XP + бейдж "Экспериментатор"</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- MY PROJECT -->
+      <section class="screen" id="myproject">
+        <div class="stack">
+          <div class="card">
+            <div style="display:flex;justify-content:space-between;align-items:start;gap:10px;">
+              <div><h3 style="font-size:16px;">Нейро-Интерфейс VR</h3><div class="muted" style="font-size:11px;margin-top:2px;">Open Format · 5 участников</div></div>
+              <span class="badge blue">Фаза: Создание</span>
+            </div>
+            <div class="progress-track"><div class="progress-fill" style="width:65%"></div></div>
+          </div>
+          <div class="sub-tabs">
+            <div class="sub-tab active" onclick="showProjectSection('progress', this)">Прогресс</div>
+            <div class="sub-tab" onclick="showProjectSection('team', this)">Команда</div>
+            <div class="sub-tab" onclick="showProjectSection('materials', this)">Материалы</div>
+          </div>
+          <div id="proj-progress" class="card">
+            <h3>Нарратив прогресса</h3>
+            <div class="story-timeline" style="margin-top:12px;">
+              <div class="story-item done"><div class="story-dot"></div><h5>Проблема сформулирована</h5><p>Определено, что в VR не хватает тактильной обратной связи.</p></div>
+              <div class="story-item done"><div class="story-dot"></div><h5>Исследование проведено</h5><p>Интервью с 5 пользователями подтвердили гипотезу.</p></div>
+              <div class="story-item"><div class="story-dot"></div><h5>Прототипирование</h5><p>Сборка макета перчатки с сенсорами.</p></div>
+              <div class="story-item wait"><div class="story-dot"></div><h5>Тестирование</h5><p>Ожидает начала.</p></div>
+            </div>
+          </div>
+          <div id="proj-team" class="card" style="display:none;">
+            <h3>Команда</h3>
+            <div style="margin-top:12px;">
+              <div class="team-member"><div class="team-avatar">👤</div><div class="team-info"><strong>Тихомирова Анастасия</strong><div class="role">Лидер проекта</div><div class="task">Координация, UX-исследование</div></div></div>
+              <div class="team-member"><div class="team-avatar">👨‍</div><div class="team-info"><strong>Козлов Дмитрий</strong><div class="role">Разработчик</div><div class="task">Программирование сенсоров</div></div></div>
+              <div class="team-member"><div class="team-avatar">🎨</div><div class="team-info"><strong>Иванова Мария</strong><div class="role">Дизайнер</div><div class="task">Прототипирование, 3D-модели</div></div></div>
+              <div class="team-member"><div class="team-avatar">📊</div><div class="team-info"><strong>Петров Алексей</strong><div class="role">Аналитик</div><div class="task">Обработка данных, тестирование</div></div></div>
+              <div class="team-member"><div class="team-avatar">🔧</div><div class="team-info"><strong>Сидоров Игорь</strong><div class="role">Инженер</div><div class="task">Сборка прототипа, электроника</div></div></div>
+            </div>
+          </div>
+          <div id="proj-materials" class="card" style="display:none;">
+            <h3>Материалы и документы</h3>
+            <div style="margin-top:12px;">
+              <div class="material-item" onclick="openMaterial(0)"><div class="material-icon meeting">📝</div><div class="material-info"><strong>Конспект встречи от 15.01</strong><div class="meta">Зафиксировано ИИ-агентом · 12 мин чтения</div></div></div>
+              <div class="material-item" onclick="openMaterial(1)"><div class="material-icon doc">📄</div><div class="material-info"><strong>Результаты интервью с пользователями</strong><div class="meta">PDF · Загружено командой</div></div></div>
+              <div class="material-item" onclick="openMaterial(2)"><div class="material-icon ai">✦</div><div class="material-info"><strong>Анализ ИИ-агента: паттерны команды</strong><div class="meta">Автоматический отчёт · Сгенерировано</div></div></div>
+              <div class="material-item" onclick="openMaterial(3)"><div class="material-icon doc">🖼</div><div class="material-info"><strong>Фото прототипа v1</strong><div class="meta">Изображение · Загружено 18.01</div></div></div>
+              <div class="material-item" onclick="openMaterial(4)"><div class="material-icon meeting">📋</div><div class="material-info"><strong>План тестирования</strong><div class="meta">Документ · Совместное редактирование</div></div></div>
+              <div class="material-item" onclick="openMaterial(5)"><div class="material-icon ai">✦</div><div class="material-info"><strong>Рекомендации по материалам</strong><div class="meta">ИИ-агент · На основе анализа проекта</div></div></div>
+            </div>
+          </div>
+          <div class="btn-row" style="padding:0 2px;">
+            <button class="btn" style="flex:1;" onclick="go('agent')">✦ Агент</button>
+            <button class="btn primary" style="flex:1;" onclick="go('work')">⚡ Работа</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- MARKETPLACE -->
+      <section class="screen" id="marketplace">
+        <div class="stack">
+          <div class="card">
+            <div class="section-head"><h3 style="margin:0;">Доступные проекты</h3></div>
+            <div class="filter-tabs">
+              <div class="filter-tab active" onclick="filterProjects('all', this)">Все</div>
+              <div class="filter-tab" onclick="filterProjects('company', this)">От компаний</div>
+              <div class="filter-tab" onclick="filterProjects('student', this)">От студентов</div>
+            </div>
+          </div>
+          <div id="projectList">
+            <div class="project-card" data-type="company" onclick="openProjectDetail(0)">
+              <div class="project-header"><div class="project-source company">От: IT-Corp</div><span class="badge neutral">Открыто</span></div>
+              <div class="project-title">Оптимизация логистики склада</div>
+              <div class="project-meta">Python, Аналитика данных. Разработка алгоритма маршрутизации.</div>
+              <div class="project-skills"><span class="skill-tag">Python</span><span class="skill-tag">SQL</span><span class="skill-tag">Аналитика</span></div>
+            </div>
+            <div class="project-card" data-type="student" onclick="openProjectDetail(1)">
+              <div class="project-header"><div class="project-source student">От: Студент</div><span class="badge blue">Исследование</span></div>
+              <div class="project-title">Мобильное приложение для студентов</div>
+              <div class="project-meta">Flutter, UI/UX, Бэкенд. Приложение для расписания и заметок.</div>
+              <div class="project-skills"><span class="skill-tag">Flutter</span><span class="skill-tag">Firebase</span></div>
+            </div>
+            <div class="project-card" data-type="company" onclick="openProjectDetail(2)">
+              <div class="project-header"><div class="project-source company">От: EcoStart</div><span class="badge warn">Срочно</span></div>
+              <div class="project-title">Система умного полива для теплиц</div>
+              <div class="project-meta">Arduino, IoT, Мехатроника. Автоматизация полива.</div>
+              <div class="project-skills"><span class="skill-tag">C++</span><span class="skill-tag">Hardware</span></div>
+            </div>
+            <div class="project-card" data-type="student" onclick="openProjectDetail(3)">
+              <div class="project-header"><div class="project-source student">От: Студент</div><span class="badge purple">Креатив</span></div>
+              <div class="project-title">Геймификация обучения</div>
+              <div class="project-meta">Геймдизайн, Педагогика. Игровая механика для вовлечённости.</div>
+              <div class="project-skills"><span class="skill-tag">Геймдизайн</span><span class="skill-tag">UX</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJECT DETAIL -->
+      <section class="screen" id="projectDetail">
+        <div class="stack">
+          <button class="btn ghost left" onclick="go('marketplace')">← Назад к проектам</button>
+          <div class="project-detail-header">
+            <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:8px;">
+              <span class="badge" style="background:rgba(255,255,255,0.2);color:white;" id="detailSource">От: IT-Corp</span>
+              <span class="badge" style="background:rgba(255,255,255,0.2);color:white;" id="detailStatus">Открыто</span>
+            </div>
+            <h2 id="detailTitle">Оптимизация логистики склада</h2>
+            <p id="detailDesc">Необходимы компетенции: Python, Аналитика данных.</p>
+          </div>
+          <div class="card">
+            <h3>Необходимые компетенции</h3>
+            <div class="project-skills" id="detailSkills" style="margin-top:8px;"><span class="skill-tag">Python</span><span class="skill-tag">SQL</span><span class="skill-tag">Аналитика</span></div>
+          </div>
+          <div class="card">
+            <h3>О проекте</h3>
+            <div class="muted" style="font-size:13px;line-height:1.6;margin-top:8px;" id="detailFullDesc">Описание проекта...</div>
+          </div>
+          <button class="btn primary block" onclick="takeProject()">Взять проект</button>
+        </div>
+      </section>
+
+      <!-- CREATE -->
+      <section class="screen" id="create">
+        <div class="stack">
+          <div class="card">
+            <div class="section-head"><h3 style="margin:0;">Создать проект</h3><span class="badge blue">Open Format</span></div>
+            <div class="form">
+              <div class="field"><label>Название</label><input id="projName" placeholder="Введите название..." /></div>
+              <div class="field"><label>Формулировка проблемы</label><textarea id="projProblem" placeholder="Какую проблему вы хотите решить?"></textarea></div>
+              <div class="field"><label>Необходимые компетенции</label><input placeholder="Например: Дизайн, Программирование" /></div>
+              <div class="btn-row"><button class="btn primary block" onclick="createProject()">Начать</button></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- WORK -->
+      <section class="screen" id="work">
+        <div class="stack">
+          <div class="card">
+            <div style="display:flex;justify-content:space-between;align-items:start;gap:10px;">
+              <div><h3 style="font-size:16px;" id="workTitle">Нейро-Интерфейс VR</h3><div class="muted" style="font-size:11px;margin-top:2px;">Open Format · 5 участников</div></div>
+              <span class="badge blue">Фаза: Создание</span>
+            </div>
+            <div class="progress-track"><div class="progress-fill" style="width:65%"></div></div>
+          </div>
+          <div class="card">
+            <div class="section-head"><h3 style="margin:0;">Фазы цикла</h3></div>
+            <div class="timeline" style="margin-top:12px;">
+              <div class="tl-item"><div class="tl-dot done">1</div><div class="tl-box"><div style="display:flex;justify-content:space-between;align-items:center;"><strong style="font-size:13px;">Исследование</strong><span class="badge good">готово</span></div><div class="meta">Сбор данных, интервью</div></div></div>
+              <div class="tl-item"><div class="tl-dot current">2</div><div class="tl-box" style="border-color:rgba(59,130,246,0.2);"><div style="display:flex;justify-content:space-between;align-items:center;"><strong style="font-size:13px;">Создание</strong><span class="badge blue">в процессе</span></div><div class="meta">Генерация, прототипирование</div></div></div>
+              <div class="tl-item"><div class="tl-dot future">3</div><div class="tl-box"><div style="display:flex;justify-content:space-between;align-items:center;"><strong style="font-size:13px;">Проверка</strong><span class="badge outline">ожидает</span></div><div class="meta">Тестирование, рефлексия</div></div></div>
+            </div>
+          </div>
+          <div class="btn-row" style="padding:0 2px;">
+            <button class="btn" style="flex:1;" onclick="go('agent')">✦ Агент</button>
+            <button class="btn" style="flex:1;" onclick="go('myproject')">🚀 Мой проект</button>
+            <button class="btn primary" style="flex:1;" onclick="go('validation')">→ Проверка</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- VALIDATION -->
+      <section class="screen" id="validation">
+        <div class="stack">
+          <div class="card">
+            <div class="section-head"><h3 style="margin:0;">Валидация решения</h3><span class="badge blue">open format</span></div>
+            <div class="muted" style="font-size:12px;line-height:1.55;margin-bottom:14px;">Валидация через пользователей, экспертов и компании как партнёров.</div>
+            <div class="kpis"><div class="kpi"><div class="val" style="color:var(--accent);">12</div><div class="lbl">сценариев</div></div><div class="kpi"><div class="val" style="color:var(--accent-2);">3</div><div class="lbl">эксперта</div></div><div class="kpi"><div class="val" style="color:var(--good);">1</div><div class="lbl">партнёр</div></div></div>
+          </div>
+          <div class="card">
+            <div class="section-head"><h3 style="margin:0;">Каналы валидации</h3></div>
+            <div class="list">
+              <div class="item" style="cursor:default;"><div class="left"><strong>👥 Тест с пользователями</strong><div class="meta">Понимаемость и удобство</div></div><div class="right"><span class="badge blue">ожидает</span></div></div>
+              <div class="item" style="cursor:default;"><div class="left"><strong>🎓 Экспертная обратная связь</strong><div class="meta">Реалистичность решения</div></div><div class="right"><span class="badge good">готово</span></div></div>
+              <div class="item" style="cursor:default;"><div class="left"><strong>🏢 Апробация в компании</strong><div class="meta">Пилотное использование</div></div><div class="right"><span class="badge warn">по договорённости</span></div></div>
+            </div>
+          </div>
+          <div class="card" style="border-left:3px solid var(--good);">
+            <div class="section-head"><h3 style="margin:0;">Готовность к переходу</h3><span class="badge good">почти готова</span></div>
+            <button class="btn primary block" onclick="showToast('Критерии готовности зафиксированы','success')">Зафиксировать готовность</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== MATERIAL DETAIL ===== -->
+      <section class="screen" id="materialDetail">
+        <div class="stack">
+          <button class="btn ghost left" onclick="go('myproject'); showProjectSection('materials', document.querySelectorAll('.sub-tab')[2]);">← Назад к материалам</button>
+
+          <div class="material-detail-header" id="matDetailHeader">
+            <div class="material-detail-icon meeting" id="matDetailIcon">📝</div>
+            <div class="material-detail-info">
+              <h2 id="matDetailTitle">Конспект встречи от 15.01</h2>
+              <div class="meta" id="matDetailMeta">Зафиксировано ИИ-агентом · 15 января 2025</div>
+            </div>
+          </div>
+
+          <!-- Tags -->
+          <div style="display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap;" id="matDetailTags">
+            <span class="badge neutral">Встреча</span><span class="badge blue">Фаза: Исследование</span>
+          </div>
+
+          <!-- Content area -->
+          <div class="material-content" id="matDetailContent">
+            <!-- Dynamic content -->
+          </div>
+
+          <!-- Related materials -->
+          <div class="card" id="matRelatedCard">
+            <div class="section-head"><h3 style="margin:0;">Связанные материалы</h3></div>
+            <div style="margin-top:10px;">
+              <div class="material-item" onclick="openMaterial(2)"><div class="material-icon ai">✦</div><div class="material-info"><strong>Анализ ИИ-агента: паттерны команды</strong><div class="meta">Автоматический отчёт</div></div></div>
+            </div>
+          </div>
+
+          <!-- AI Agent chat link -->
+          <div class="card" style="border-left:3px solid var(--accent);">
+            <div class="section-head"><h3 style="margin:0;">Есть вопросы?</h3></div>
+            <div style="font-size:13px;color:var(--text-2);line-height:1.55;margin-bottom:12px;">Обсудите этот материал с ИИ-агентом: уточните детали, задайте вопрос или попросите разъяснить рекомендацию.</div>
+            <button class="btn primary block" onclick="go('agent')">✦ Задать вопрос агенту</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== AGENT SCREEN ===== -->
+      <section class="screen" id="agent">
+        <div class="stack">
+          <div class="card">
+            <div class="agent-header" style="display:grid;grid-template-columns:64px 1fr;gap:14px;align-items:center;">
+              <div style="width:64px;height:64px;border-radius:22px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:grid;place-items:center;font-size:26px;color:white;">✦</div>
+              <div>
+                <h3 style="font-size:16px;margin-bottom:4px;">ИИ-агент проекта</h3>
+                <div class="muted" style="font-size:11px;">Советник · Память · Аналитика</div>
+              </div>
+            </div>
+            <div class="stack" style="margin-top:14px;">
+              <div class="toggle-row"><div class="label-group"><strong>Фоновый режим</strong><div class="meta">Считывает контекст</div></div><div class="switch on" onclick="this.classList.toggle('on')"></div></div>
+              <div class="toggle-row"><div class="label-group"><strong>Проактивный режим</strong><div class="meta">Даёт подсказки</div></div><div class="switch on" onclick="this.classList.toggle('on')"></div></div>
+            </div>
+          </div>
+
+          <!-- AI Activation for physical space -->
+          <div class="ai-activation-card">
+            <h3>🎙 Активация для физической сессии</h3>
+            <p>ИИ-агент будет фиксировать диалоги, предлагать смену ролей при трудностях и собирать все материалы автоматически.</p>
+
+            <!-- Status Indicator -->
+            <div class="ai-status">
+              <div class="ai-status-dot active"></div>
+              <span class="txt">Готов к работе</span>
+              <span class="meta">Ожидание запуска</span>
+            </div>
+
+            <div class="ai-feature"><span class="ico">🎤</span><span class="txt">Фиксация диалогов в реальном времени</span></div>
+            <div class="ai-feature"><span class="ico">🔄</span><span class="txt">Предложения по смене ролей при трудностях</span></div>
+            <div class="ai-feature"><span class="ico">📋</span><span class="txt">Автоматическое создание конспектов</span></div>
+            <div class="ai-feature"><span class="ico">💡</span><span class="txt">Подсказки и аналогии во время работы</span></div>
+            <div style="margin-top:14px;">
+              <button class="btn primary block" onclick="activateAgent()">Запустить агент на сессии</button>
+            </div>
+          </div>
+
+          <!-- Personal tips for user -->
+          <div class="card">
+            <div class="section-head"><h3 style="margin:0;">Персональные советы для вас</h3><span class="badge warn">3 новых</span></div>
+            <div style="margin-top:10px;">
+              <div class="tip-card" onclick="openMaterial(6)">
+                <h4>💡 Совет по вашей роли</h4>
+                <p>Как лидер проекта, попробуйте делегировать сбор данных аналитику, чтобы сосредоточиться на координации прототипирования.</p>
+              </div>
+              <div class="tip-card" onclick="openMaterial(7)">
+                <h4>📈 Рекомендация по работе</h4>
+                <p>Ваша активность снизилась на 30% за последние 3 дня. Попробуйте провести короткую сессию синхронизации с командой.</p>
+              </div>
+              <div class="tip-card" onclick="openMaterial(8)">
+                <h4>🔍 Глубже в тему</h4>
+                <p>Рекомендуем изучить кейсы тактильных интерфейсов в медицине — аналогии могут помочь в вашем проекте.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- AI recommendations and conclusions -->
+          <div class="card">
+            <div class="section-head"><h3 style="margin:0;">Рекомендации и выводы ИИ</h3></div>
+            <div style="margin-top:10px;">
+              <div class="rec-card" onclick="openMaterial(9)">
+                <h4>📊 Анализ паттернов команды</h4>
+                <p>Команда систематически возвращается к одной идее без продвижения. Рекомендация: сменить формат работы.</p>
+              </div>
+              <div class="rec-card" onclick="openMaterial(10)">
+                <h4>🎯 Общие рекомендации по проекту</h4>
+                <p>Следующий логичный шаг — тестирование прототипа с реальными пользователями. Подготовка займёт 2-3 дня.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Materials from AI -->
+          <div class="card">
+            <div class="section-head"><h3 style="margin:0;">Материалы от ИИ-агента</h3></div>
+            <div style="margin-top:10px;">
+              <div class="material-item" onclick="openMaterial(11)"><div class="material-icon ai">✦</div><div class="material-info"><strong>Подборка: тактильные интерфейсы</strong><div class="meta">5 статей и примеров · Сгенерировано агентом</div></div></div>
+              <div class="material-item" onclick="openMaterial(12)"><div class="material-icon ai">✦</div><div class="material-info"><strong>Аналогии из других индустрий</strong><div class="meta">3 примера решения похожих проблем</div></div></div>
+            </div>
+          </div>
+
+          <!-- Agent Chat -->
+          <div class="card">
+            <div class="section-head"><h3 style="margin:0;">Диалог с агентом</h3></div>
+            <div class="msg-list" id="agentMessages">
+              <div class="msg agent"><div class="msg-label">Агент</div>Я вижу, что команда застряла в обсуждении. Рекомендую сменить формат: перейдите в зону прототипирования.</div>
+              <div class="msg user">Спасибо, попробуем.</div>
+              <div class="msg agent"><div class="msg-label">Агент</div>Отличное решение. Не забудьте зафиксировать результаты в нарративе.</div>
+            </div>
+            <div class="composer"><input id="agentInput" placeholder="Спросить агента..." onkeydown="if(event.key==='Enter')sendAgentMsg()"/><button class="btn primary sm" onclick="sendAgentMsg()">↑</button></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== AI SESSION SCREEN ===== -->
+      <section class="screen" id="aiSession">
+        <div class="stack">
+          <button class="btn ghost left" onclick="go('agent')">← Назад к агенту</button>
+
+          <div class="ai-session-header">
+            <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:4px;">
+              <div class="session-title">🎙 ИИ-агент в пространстве</div>
+              <span class="badge" style="background:rgba(255,255,255,0.2);color:white;">Сессия активна</span>
+            </div>
+            <div class="session-sub">Фиксация диалогов · Анализ в реальном времени · Материалы</div>
+          </div>
+
+          <!-- Recording Indicator -->
+          <div class="recording-indicator">
+            <div class="rec-dot"></div>
+            <span class="rec-text">Запись активна</span>
+            <span class="rec-meta" id="sessionTimer">00:00:00</span>
+          </div>
+
+          <!-- AI Context -->
+          <div class="ai-context-card">
+            <h4>📍 Текущий контекст</h4>
+            <p>Фаза: <strong>Создание</strong> · Проект: <strong>Нейро-Интерфейс VR</strong></p>
+            <p style="margin-top:6px;">Команда работает в <strong>зоне прототипирования</strong>. Последнее действие: обсуждение конструкции перчатки с сенсорами.</p>
+          </div>
+
+          <!-- AI Suggestions -->
+          <div class="ai-suggestion">
+            <div class="sug-title">💡 Предложение агента</div>
+            <div class="sug-text">Заметил, что команда 15 минут обсуждает один аспект без продвижения. Рекомендую: Мария (дизайнер) может набросать схему на доске, пока Игорь (инженер) подготавливает материалы. Это позволит распараллелить работу.</div>
+          </div>
+          <div class="ai-suggestion">
+            <div class="sug-title">🔄 Предложение по роли</div>
+            <div class="sug-text">Анастасия (лидер) взяла на себя задачу программирования сенсоров. Возможно, стоит передать это Дмитрию (разработчику), а лидеру сфокусироваться на координации и подготовке к тестированию.</div>
+          </div>
+
+          <!-- Quick Actions -->
+          <div class="section-head"><h3 style="margin:0;">Быстрые действия</h3></div>
+          <div class="session-actions">
+            <div class="session-action" onclick="sessionAction('summary')">
+              <div class="sa-ico">📋</div>
+              <div class="sa-text">Создать конспект</div>
+            </div>
+            <div class="session-action" onclick="sessionAction('role')">
+              <div class="sa-ico">🔄</div>
+              <div class="sa-text">Предложить роли</div>
+            </div>
+            <div class="session-action" onclick="sessionAction('idea')">
+              <div class="sa-ico">💡</div>
+              <div class="sa-text">Найти аналогию</div>
+            </div>
+            <div class="session-action" onclick="sessionAction('trigger')">
+              <div class="sa-ico">⚡</div>
+              <div class="sa-text">Вызов команды</div>
+            </div>
+          </div>
+
+          <!-- Chat -->
+          <div class="card">
+            <div class="section-head"><h3 style="margin:0;">Чат сессии</h3><span class="badge blue">3 участника</span></div>
+            <div class="session-msg-list" id="sessionChat">
+              <div class="session-msg system">Сессия начата в 14:32 · Зона прототипирования</div>
+              <div class="session-msg ai"><div class="msg-label">Агент</div>Зафиксирую все решения и идеи в реальном времени. Если нужна помощь — просто напишите.</div>
+              <div class="session-msg user">Какие сенсоры лучше использовать для пальцев?</div>
+              <div class="session-msg ai"><div class="msg-label">Агент</div>Рекомендую ERM-моторы 10мм — они компактные и хорошо передают тактильную обратную связь. Аналоги: решение bHaptics использует похожие компоненты.</div>
+              <div class="session-msg user">Спасибо! Попробуем.</div>
+              <div class="session-msg system">Агент зафиксировал: выбор ERM-моторов 10мм · Добавлено в материалы</div>
+            </div>
+            <div class="session-composer">
+              <input id="sessionInput" placeholder="Спросить агента или команду..." onkeydown="if(event.key==='Enter')sendSessionMsg()"/>
+              <button class="btn primary sm" onclick="sendSessionMsg()">↑</button>
+            </div>
+          </div>
+
+          <!-- Stop Session -->
+          <button class="btn block" onclick="stopSession()" style="margin-top:8px;color:var(--danger);border-color:rgba(239,68,68,0.3);background:rgba(239,68,68,0.06);">⏹ Завершить сессию и сохранить</button>
+        </div>
+      </section>
+
+      <!-- NOTIFICATIONS -->
+      <section class="screen" id="notifications">
+        <div class="stack">
+          <div class="card">
+            <div class="section-head"><h3 style="margin:0;">Уведомления</h3><span class="badge blue">3 новых</span></div>
+            <div class="list" style="margin-top:8px;">
+              <div class="item" style="border-left:3px solid var(--accent);cursor:default;">
+                <div class="left"><strong>✦ Новый совет от агента</strong><div class="meta">Персональная рекомендация по вашей роли · 15 мин назад</div></div>
+              </div>
+              <div class="item" style="border-left:3px solid var(--gold);cursor:default;">
+                <div class="left"><strong>🏆 Новое достижение!</strong><div class="meta">Вы завершили фазу исследования. Бейдж "Исследователь".</div></div>
+              </div>
+              <div class="item" style="border-left:3px solid var(--warn);cursor:default;">
+                <div class="left"><strong>⚡ Вызов от агента</strong><div class="meta">Попробуйте построить физический макет · 1ч назад</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== PROFILE ===== -->
+      <section class="screen" id="profile">
+        <div class="card" style="padding:0;overflow:visible;">
+          <div class="profile-header">
+            <div class="profile-avatar">👤<div class="edit-badge" onclick="go('editProfile')">✎</div></div>
+            <div class="profile-name">Тихомирова Анастасия</div>
+            <div class="profile-bio">Студентка HSE, исследователь в области нейроинтерфейсов. Увлекаюсь UX-дизайном.</div>
+          </div>
+          <div class="profile-info">
+            <div class="profile-info-row"><span class="label">Email</span><span class="value">exs@mail.ru</span></div>
+            <div class="profile-info-row"><span class="label">Город</span><span class="value">Нижний Новгород</span></div>
+            <div class="profile-info-row"><span class="label">Никнейм</span><span class="value">exs01</span></div>
+            <div class="profile-info-row"><span class="label">Страна</span><span class="value">Россия</span></div>
+            <div class="profile-info-row"><span class="label">Обо мне</span><span class="value">Ищу команду для VR-проекта</span></div>
+          </div>
+        </div>
+        <div class="settings-list">
+          <div class="settings-item" onclick="go('settings')"><div class="left"><span class="ico">⚙</span><span class="label">Настройки</span></div><span class="arrow">›</span></div>
+          <div class="settings-item" onclick="go('editProfile')"><div class="left"><span class="ico">✎</span><span class="label">Редактировать профиль</span></div><span class="arrow">›</span></div>
+        </div>
+        <div style="margin-top:20px;"><button class="btn danger-btn block" onclick="doLogout()">Выйти из аккаунта</button></div>
+      </section>
+
+      <!-- ===== SETTINGS ===== -->
+      <section class="screen" id="settings">
+        <div class="stack">
+          <div class="card"><div class="section-head"><h3 style="margin:0;">Настройки</h3></div></div>
+          <div class="settings-list">
+            <div class="settings-item"><div class="left"><span class="ico">🔒</span><div><div class="label">Безопасность и вход</div></div></div><span class="arrow">›</span></div>
+            <div class="settings-item"><div class="left"><span class="ico">🔊</span><div><div class="label">Звук</div></div></div><span class="arrow">›</span></div>
+            <div class="settings-item"><div class="left"><span class="ico">🔔</span><div><div class="label">Push-уведомления</div></div></div><span class="arrow">›</span></div>
+            <div class="settings-item"><div class="left"><span class="ico">🌙</span><div><div class="label">Тёмная тема</div></div></div><span class="arrow">›</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== EDIT PROFILE ===== -->
+      <section class="screen" id="editProfile">
+        <div class="card">
+          <div style="text-align:center;padding:16px 0 12px;"><div class="profile-avatar" style="margin:0 auto 12px;width:80px;height:80px;font-size:30px;">👤</div></div>
+          <div class="field"><label>Имя</label><input id="editName" value="Анастасия" /></div>
+          <div class="field"><label>Фамилия</label><input id="editSurname" value="Тихомирова" /></div>
+          <div class="field"><label>Ник</label><input id="editNick" value="exs01" /></div>
+          <div class="field"><label>Email</label><input id="editEmail" value="exs@mail.ru" type="email" /></div>
+          <div class="field"><label>Страна</label><select id="editCountry"><option selected>Россия</option><option>Другая</option></select></div>
+          <div class="field"><label>Обо мне</label><textarea id="editBio" style="min-height:80px">Студентка HSE, исследователь...</textarea></div>
+          <div class="btn-row"><button class="btn primary block" onclick="saveProfile()">Сохранить</button></div>
+        </div>
+      </section>
+
+    </main>
+    <nav class="tabs">
+      <button class="tab active" data-screen="home" onclick="go('home')"><span class="ico">⌂</span><span class="txt">Главная</span></button>
+      <button class="tab" data-screen="myproject" onclick="go('myproject')"><span class="ico">🚀</span><span class="txt">Мой проект</span></button>
+      <button class="tab" data-screen="agent" onclick="go('agent')"><span class="ico">✦</span><span class="txt">Агент</span></button>
+      <button class="tab" data-screen="profile" onclick="go('profile')"><span class="ico">👤</span><span class="txt">Профиль</span></button>
+    </nav>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const meta = {
+      home: ['Главная'], marketplace: ['Проекты'], myproject: ['Мой проект'],
+      create: ['Новый проект'], work: ['Рабочий процесс'], agent: ['ИИ-агент'],
+      notifications: ['Уведомления'], profile: ['Профиль'], settings: ['Настройки'],
+      editProfile: ['Редактировать профиль'], projectDetail: ['Детали проекта'],
+      materialDetail: ['Материал'], aiSession: ['Сессия в пространстве']
+    };
+    const $ = id => document.getElementById(id);
+    const screens = document.querySelectorAll('.screen');
+    const tabs = document.querySelectorAll('.tab');
+    const titleEl = $('screenTitle');
+
+    function go(id) {
+      screens.forEach(s => s.classList.toggle('active', s.id === id));
+      tabs.forEach(t => t.classList.toggle('active', t.dataset.screen === id));
+      titleEl.textContent = meta[id] || id;
+      document.querySelector('.content').scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function goAuth(id) {
+      document.querySelectorAll('.auth-screen').forEach(s => s.classList.remove('active'));
+      $(id).classList.add('active');
+    }
+
+    function doLogin() {
+      showToast('Вход выполнен успешно','success');
+      setTimeout(() => {
+        document.querySelectorAll('.auth-screen').forEach(s => s.classList.remove('active'));
+        $('mainApp').style.display = '';
+        $('splash').classList.remove('active');
+      }, 600);
+    }
+    function doRegister() { goAuth('login'); }
+    function doForgot() { goAuth('login'); }
+    function doLogout() {
+      $('mainApp').style.display = 'none';
+      document.querySelectorAll('.auth-screen').forEach(s => s.classList.remove('active'));
+      goAuth('login');
+      showToast('Вы вышли из аккаунта','info');
+    }
+    function saveProfile() {
+      const name = $('editName').value.trim();
+      const surname = $('editSurname').value.trim();
+      const bio = $('editBio').value.trim();
+      document.querySelector('.profile-name').textContent = surname + ' ' + name;
+      document.querySelector('.profile-bio').textContent = bio;
+      showToast('Профиль обновлён','success');
+      setTimeout(() => go('profile'), 600);
+    }
+
+    // Project data
+    const projectData = [
+      { source: 'От: IT-Corp', sourceType: 'company', title: 'Оптимизация логистики склада', desc: 'Python, Аналитика данных.', skills: ['Python','SQL','Аналитика'], status: 'Открыто', fullDesc: 'Компания IT-Corp ищет команду для разработки системы оптимизации складской логистики.' },
+      { source: 'От: Студент', sourceType: 'student', title: 'Мобильное приложение для студентов', desc: 'Flutter, UI/UX, Бэкенд.', skills: ['Flutter','Firebase'], status: 'Исследование', fullDesc: 'Студент предлагает разработать мобильное приложение для расписания и заметок.' },
+      { source: 'От: EcoStart', sourceType: 'company', title: 'Система умного полива для теплиц', desc: 'Arduino, IoT, Мехатроника.', skills: ['C++','Hardware'], status: 'Срочно', fullDesc: 'EcoStart разрабатывает систему умного полива для тепличных хозяйств.' },
+      { source: 'От: Студент', sourceType: 'student', title: 'Геймификация обучения', desc: 'Геймдизайн, Педагогика.', skills: ['Геймдизайн','UX'], status: 'Креатив', fullDesc: 'Исследование возможностей геймификации в образовательном процессе.' }
+    ];
+
+    function openProjectDetail(idx) {
+      const p = projectData[idx];
+      $('detailSource').textContent = p.source;
+      $('detailTitle').textContent = p.title;
+      $('detailDesc').textContent = p.desc;
+      $('detailFullDesc').textContent = p.fullDesc;
+      $('detailSkills').innerHTML = p.skills.map(s => `<span class="skill-tag">${s}</span>`).join('');
+      $('detailStatus').textContent = p.status;
+      go('projectDetail');
+    }
+    function takeProject() { showToast('Проект добавлен в ваши!','success'); setTimeout(() => go('myproject'), 800); }
+    function createProject() {
+      const name = $('projName').value.trim();
+      if (!name) { showToast('Введите название','info'); return; }
+      const newCard = document.createElement('div');
+      newCard.className = 'project-card'; newCard.dataset.type = 'student';
+      newCard.onclick = function() { openProjectDetail(4); };
+      newCard.innerHTML = `<div class="project-header"><div class="project-source student">От: Студент</div><span class="badge blue">Новый</span></div><div class="project-title">${name}</div>`;
+      $('projectList').prepend(newCard);
+      projectData.push({ source: 'От: Студент', sourceType: 'student', title: name, desc: '', skills: [], status: 'Новый', fullDesc: '' });
+      showToast(`Проект «${name}» создан!`,'success');
+      setTimeout(() => go('marketplace'), 800);
+    }
+    function filterProjects(type, el) {
+      document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+      el.classList.add('active');
+      document.querySelectorAll('.project-card').forEach(card => {
+        card.style.display = (type === 'all' || card.dataset.type === type) ? '' : 'none';
+      });
+    }
+    function showProjectSection(section, el) {
+      document.querySelectorAll('.sub-tab').forEach(t => t.classList.remove('active'));
+      el.classList.add('active');
+      $('proj-progress').style.display = section === 'progress' ? '' : 'none';
+      $('proj-team').style.display = section === 'team' ? '' : 'none';
+      $('proj-materials').style.display = section === 'materials' ? '' : 'none';
+    }
+
+    // ===== MATERIAL DATA =====
+    const materialData = [
+      {
+        icon: 'meeting', iconEmoji: '📝', title: 'Конспект встречи от 15.01',
+        meta: 'Зафиксировано ИИ-агентом · 15 января 2025',
+        tags: ['Встреча', 'Фаза: Исследование'],
+        content: `
+          <h3>Тема: Формулировка проблемы проекта</h3>
+          <p>Команда собралась в активной зоне для обсуждения основной проблемы проекта. В ходе дискуссии были выявлены ключевые боли пользователей VR-систем.</p>
+          <div class="highlight">
+            <p><strong>Ключевой вывод:</strong> Отсутствие тактильной обратной связи в VR-интерфейсах является основным барьером для погружения пользователей.</p>
+          </div>
+          <h3>Обсуждаемые вопросы:</h3>
+          <ul>
+            <li>Какие типы тактильной обратной связи наиболее важны для пользователей?</li>
+            <li>Какие технологии существуют для реализации haptic feedback?</li>
+            <li>Как структурировать процесс исследования?</li>
+          </ul>
+          <h3>Принятые решения:</h3>
+          <ul>
+            <li>Провести 5 интервью с пользователями VR-систем</li>
+            <li>Изучить существующие решения в области haptic feedback</li>
+            <li>Сформировать гипотезы для тестирования</li>
+          </ul>
+          <p><strong>Следующий шаг:</strong> Подготовить гайд для интервью и назначить даты проведения.</p>
+        `
+      },
+      {
+        icon: 'doc', iconEmoji: '📄', title: 'Результаты интервью с пользователями',
+        meta: 'PDF · Загружено командой · 17 января 2025',
+        tags: ['Исследование', 'Пользователи'],
+        content: `
+          <h3>Результаты интервью: 5 респондентов</h3>
+          <p>Команда провела серию интервью с пользователями VR-систем для понимания их потребностей в тактильной обратной связи.</p>
+          <h3>Ключевые инсайты:</h3>
+          <ul>
+            <li><strong>80% респондентов</strong> отметили отсутствие тактильной обратной связи как главную проблему VR</li>
+            <li><strong>60%</strong> хотели бы чувствовать текстуры виртуальных объектов</li>
+            <li><strong>40%</strong> считают вибрацию недостаточной для полноценного погружения</li>
+          </ul>
+          <div class="highlight">
+            <p><strong>Цитата респондента:</strong> "Когда я трогаю виртуальный объект, я ожидаю чувствовать его, а не просто видеть анимацию. Без тактильности это как смотреть фильм без звука."</p>
+          </div>
+          <h3>Следующие шаги:</h3>
+          <p>На основе полученных данных команда переходит к генерации идей и прототипированию решений.</p>
+        `
+      },
+      {
+        icon: 'ai', iconEmoji: '✦', title: 'Анализ ИИ-агента: паттерны команды',
+        meta: 'Автоматический отчёт · Сгенерировано 18 января 2025',
+        tags: ['ИИ-агент', 'Аналитика'],
+        content: `
+          <h3>Анализ паттернов работы команды</h3>
+          <p>ИИ-агент проанализировал динамику работы команды за последние 7 дней и выявил следующие паттерны:</p>
+          <h3>Выявленные закономерности:</h3>
+          <ul>
+            <li>Команда 3 раза возвращалась к обсуждению одной и той же идеи без продвижения</li>
+            <li>Пик активности приходится на первые 2 часа сессии, затем эффективность снижается</li>
+            <li>Распределение активности внутри команды несбалансировано: лидер проекта выполняет 40% задач</li>
+          </ul>
+          <div class="highlight">
+            <p><strong>Рекомендация агента:</strong> Попробуйте сменить формат работы — перейдите от текстового обсуждения к физическому прототипированию. Это может раскрыть новые аспекты решения.</p>
+          </div>
+          <h3>Предложения по оптимизации:</h3>
+          <ul>
+            <li>Перераспределить задачи между участниками команды</li>
+            <li>Использовать технику "таймбоксинга" для сессий (макс. 2 часа)</li>
+            <li>Внедрить регулярные короткие синхронизации (15 мин)</li>
+          </ul>
+        `
+      },
+      {
+        icon: 'doc', iconEmoji: '🖼', title: 'Фото прототипа v1',
+        meta: 'Изображение · Загружено 18.01.2025',
+        tags: ['Прототип', 'Фаза: Создание'],
+        content: `
+          <h3>Прототип v1: Перчатка с сенсорами</h3>
+          <p>Команда создала первый физический прототип перчатки с тактильными сенсорами для VR-интерфейсов.</p>
+          <div class="highlight">
+            <p><strong>Описание прототипа:</strong> Перчатка оснащена 12 вибрационными моторами, расположенными на кончиках пальцев и ладони. Управление осуществляется через Arduino Nano.</p>
+          </div>
+          <h3>Технические характеристики:</h3>
+          <ul>
+            <li>12 вибрационных моторов (ERM)</li>
+            <li>Контроллер: Arduino Nano</li>
+            <li>Питание: Li-Po аккумулятор 3.7V</li>
+            <li>Вес: ~85 грамм</li>
+          </ul>
+          <h3>Полученная обратная связь:</h3>
+          <p>При тестировании прототипа пользователи отметили, что вибрация на кончиках пальцев наиболее эффективна для распознавания виртуальных объектов.</p>
+          <p><strong>Следующая итерация:</strong> Увеличить количество сенсоров и добавить обратную связь на ладонь.</p>
+        `
+      },
+      {
+        icon: 'meeting', iconEmoji: '📋', title: 'План тестирования',
+        meta: 'Документ · Совместное редактирование · 20 января 2025',
+        tags: ['Тестирование', 'Фаза: Проверка'],
+        content: `
+          <h3>План тестирования прототипа v1</h3>
+          <p>Документ описывает методологию тестирования прототипа перчатки с тактильными сенсорами.</p>
+          <h3>Цели тестирования:</h3>
+          <ul>
+            <li>Оценить точность распознавания виртуальных объектов</li>
+            <li>Измерить время реакции пользователя на тактильную обратную связь</li>
+            <li>Собрать субъективную оценку удобства использования</li>
+          </ul>
+          <h3>Методология:</h3>
+          <ul>
+            <li><strong>Участники:</strong> 10 пользователей VR-систем</li>
+            <li><strong>Формат:</strong> Индивидуальные сессии по 30 минут</li>
+            <li><strong>Метрики:</strong> Точность, время реакции, оценка по шкале SUS</li>
+          </ul>
+          <div class="highlight">
+            <p><strong>Критерий успеха:</strong> Точность распознавания ≥ 70%, средняя оценка SUS ≥ 68</p>
+          </div>
+        `
+      },
+      {
+        icon: 'ai', iconEmoji: '✦', title: 'Рекомендации по материалам',
+        meta: 'ИИ-агент · На основе анализа проекта · 19 января 2025',
+        tags: ['ИИ-агент', 'Рекомендации'],
+        content: `
+          <h3>Рекомендации от ИИ-агента по материалам проекта</h3>
+          <p>На основе анализа текущего состояния проекта и прогресса команды, ИИ-агент подготовил следующие рекомендации:</p>
+          <h3>Приоритетные материалы для изучения:</h3>
+          <ul>
+            <li>Исследования по тактильной обратной связи в VR (2020-2024)</li>
+            <li>Кейсы компаний: Meta, Sony, Valve в области haptic feedback</li>
+            <li>Технические руководства по Arduino и вибрационным моторам</li>
+          </ul>
+          <div class="highlight">
+            <p><strong>Совет:</strong> Рекомендуется изучить работу компании "bHaptics" — их решения в области тактильных костюмов могут дать полезные идеи для вашего проекта.</p>
+          </div>
+          <h3>Связанные материалы:</h3>
+          <p>Для углублённого изучения темы рекомендуем обратиться к разделу "Материалы от ИИ-агента", где подобрана релевантная подборка статей и примеров.</p>
+        `
+      },
+      {
+        icon: 'tip', iconEmoji: '💡', title: 'Совет по вашей роли: Лидер проекта',
+        meta: 'Персональная рекомендация · Для: Тихомирова А.',
+        tags: ['Совет', 'Роль'],
+        content: `
+          <h3>💡 Персональный совет по вашей роли</h3>
+          <p>ИИ-агент проанализировал вашу активность и роль в команде и подготовил персональную рекомендацию:</p>
+          <div class="highlight">
+            <p><strong>Как лидер проекта:</strong> Вы тратите слишком много времени на операционные задачи (сбор данных, организация встреч). Попробуйте делегировать сбор данных аналитику (Петрову А.), чтобы сосредоточиться на координации прототипирования и взаимодействии с экспертами.</p>
+          </div>
+          <h3>Конкретные шаги:</h3>
+          <ul>
+            <li>Делегируйте Петрову А. задачу по анализу данных интервью</li>
+            <li>Сосредоточьтесь на координации команды и взаимодействии с экспертами</li>
+            <li>Проведите короткую сессию (15 мин) для перераспределения задач</li>
+          </ul>
+          <h3>Полезные ресурсы:</h3>
+          <div class="link-item" onclick="go('agent')"><span class="link-ico">✦</span><span class="link-text">Обсудить рекомендацию с ИИ-агентом →</span></div>
+          <div class="link-item"><span class="link-ico">📖</span><span class="link-text">Статья: "Эффективное лидерство в инновационных командах"</span></div>
+        `
+      },
+      {
+        icon: 'tip', iconEmoji: '📈', title: 'Рекомендация по активности',
+        meta: 'Анализ активности · 20 января 2025',
+        tags: ['Активность', 'Совет'],
+        content: `
+          <h3>📈 Анализ вашей активности</h3>
+          <p>ИИ-агент заметил снижение вашей активности в проекте за последние 3 дня:</p>
+          <div class="highlight">
+            <p><strong>Обнаружено:</strong> Ваша активность снизилась на 30% по сравнению с предыдущей неделей. Количество идей и комментариев уменьшилось.</p>
+          </div>
+          <h3>Возможные причины:</h3>
+          <ul>
+            <li>Высокая когнитивная нагрузка от текущей задачи</li>
+            <li>Нехватка времени из-за других обязательств</li>
+            <li>Неопределённость в следующем шаге</li>
+          </ul>
+          <h3>Рекомендация:</h3>
+          <p>Попробуйте провести короткую сессию синхронизации с командой (15-20 мин), чтобы обсудить текущее состояние и определить следующие шаги.</p>
+          <div class="link-item" onclick="go('agent')"><span class="link-ico">✦</span><span class="link-text">Обсудить с ИИ-агентом →</span></div>
+        `
+      },
+      {
+        icon: 'tip', iconEmoji: '🔍', title: 'Глубже в тему: тактильные интерфейсы',
+        meta: 'Рекомендация по изучению · 21 января 2025',
+        tags: ['Обучение', 'Исследование'],
+        content: `
+          <h3>🔍 Углублённое изучение темы</h3>
+          <p>ИИ-агент рекомендует изучить кейсы тактильных интерфейсов в медицине — аналогии могут помочь в вашем проекте:</p>
+          <div class="highlight">
+            <p><strong>Почему это полезно:</strong> В хирургических симуляторах используются похожие технологии тактильной обратной связи. Изучение этих решений может дать новые идеи для вашего VR-проекта.</p>
+          </div>
+          <h3>Рекомендуемые материалы:</h3>
+          <ul>
+            <li>Исследование "Haptic Feedback in Surgical Simulation" (IEEE, 2023)</li>
+            <li>Кейс компании "Simbionix" — тактильные симуляторы для хирургов</li>
+            <li>Обзор технологий тактильной обратной связи в медицине</li>
+          </ul>
+          <h3>Как применить:</h3>
+          <p>Попробуйте адаптировать принципы из медицинских симуляторов для вашего VR-проекта. Например, использование зон различной интенсивности вибрации для передачи текстуры.</p>
+          <div class="link-item" onclick="go('agent')"><span class="link-ico">✦</span><span class="link-text">Попросить агента найти больше примеров →</span></div>
+        `
+      },
+      {
+        icon: 'ai', iconEmoji: '📊', title: 'Анализ паттернов команды',
+        meta: 'ИИ-агент · Автоматический отчёт · 18 января 2025',
+        tags: ['ИИ-агент', 'Аналитика'],
+        content: `
+          <h3>📊 Анализ паттернов команды</h3>
+          <p>ИИ-агент провёл глубокий анализ работы команды и выявил следующие паттерны:</p>
+          <div class="highlight">
+            <p><strong>Основная проблема:</strong> Команда систематически возвращается к одной идее (тактильная перчатка) без продвижения к тестированию. Это указывает на застревание в фазе прототипирования.</p>
+          </div>
+          <h3>Детальный анализ:</h3>
+          <ul>
+            <li><strong>Повторяющиеся действия:</strong> 3 обсуждения одной идеи без нового прототипа</li>
+            <li><strong>Время на задачу:</strong> Фаза "Создание" длится на 40% дольше, чем планировалось</li>
+            <li><strong>Командная динамика:</strong> 2 участника проявляют низкую активность</li>
+          </ul>
+          <h3>Рекомендация:</h3>
+          <p>Сменить формат работы — перейти от обсуждения к физическому тестированию прототипа. Провести сессию с реальными пользователями для получения обратной связи.</p>
+          <div class="link-item" onclick="go('agent')"><span class="link-ico">✦</span><span class="link-text">Обсудить анализ с ИИ-агентом →</span></div>
+        `
+      },
+      {
+        icon: 'ai', iconEmoji: '🎯', title: 'Общие рекомендации по проекту',
+        meta: 'ИИ-агент · Стратегические рекомендации · 20 января 2025',
+        tags: ['ИИ-агент', 'Стратегия'],
+        content: `
+          <h3>🎯 Общие рекомендации по проекту</h3>
+          <p>На основе анализа текущего состояния проекта ИИ-агент подготовил стратегические рекомендации:</p>
+          <div class="highlight">
+            <p><strong>Следующий логичный шаг:</strong> Тестирование прототипа с реальными пользователями. Подготовка к этому этапу займёт 2-3 дня.</p>
+          </div>
+          <h3>План действий:</h3>
+          <ul>
+            <li><strong>День 1:</strong> Подготовить сценарий тестирования и招募овать 5-7 пользователей</li>
+            <li><strong>День 2:</strong> Провести тестирование и собрать обратную связь</li>
+            <li><strong>День 3:</strong> Проанализировать результаты и определить следующую итерацию</li>
+          </ul>
+          <h3>Критерии успеха:</h3>
+          <ul>
+            <li>Получить обратную связь минимум от 5 пользователей</li>
+            <li>Выявить 3+ конкретных улучшения для прототипа</li>
+            <li>Определить готовность к следующей итерации</li>
+          </ul>
+          <div class="link-item" onclick="go('agent')"><span class="link-ico">✦</span><span class="link-text">Обсудить план с ИИ-агентом →</span></div>
+        `
+      },
+      {
+        icon: 'ai', iconEmoji: '✦', title: 'Подборка: тактильные интерфейсы',
+        meta: '5 статей и примеров · Сгенерировано агентом · 19 января 2025',
+        tags: ['ИИ-агент', 'Материалы'],
+        content: `
+          <h3>📚 Подборка материалов: тактильные интерфейсы</h3>
+          <p>ИИ-агент подготовил подборку релевантных материалов на основе анализа вашего проекта:</p>
+          <h3>Статьи и исследования:</h3>
+          <ul>
+            <li>"Haptic Feedback in Virtual Reality: A Comprehensive Review" (ACM, 2023)</li>
+            <li>"Designing Tactile Interfaces for Immersive Environments" (IEEE, 2024)</li>
+            <li>"The Future of Touch in VR" (MIT Technology Review)</li>
+          </ul>
+          <h3>Примеры решений:</h3>
+          <ul>
+            <li><strong>bHaptics TactSuit:</strong> Тактильный костюм для VR с 40 точками обратной связи</li>
+            <li><strong>Meta Quest Touch Plus:</strong> Контроллеры с улучшенной тактильной обратной связью</li>
+            <li><strong>Ultraleap:</strong> Технология тактильной обратной связи без перчаток</li>
+          </ul>
+          <div class="highlight">
+            <p><strong>Совет:</strong> Обратите внимание на решение Ultraleap — оно использует ультразвуковые волны для создания тактильных ощущений без контакта с кожей.</p>
+          </div>
+          <div class="link-item" onclick="go('agent')"><span class="link-ico">✦</span><span class="link-text">Попросить агента найти больше материалов →</span></div>
+        `
+      },
+      {
+        icon: 'ai', iconEmoji: '✦', title: 'Аналогии из других индустрий',
+        meta: '3 примера решения похожих проблем · 20 января 2025',
+        tags: ['ИИ-агент', 'Аналогии'],
+        content: `
+          <h3>🔗 Аналогии из других индустрий</h3>
+          <p>ИИ-агент нашёл решения похожих проблем в других индустриях, которые могут вдохновить вашу команду:</p>
+          <h3>1. Медицина: Хирургические симуляторы</h3>
+          <p>Компания "Simbionix" использует тактильную обратную связь для обучения хирургов. Принцип: зоны различной интенсивности вибрации передают текстуру тканей.</p>
+          <h3>2. Автомобильная промышленность: Рулевое управление</h3>
+          <p>Системы "Force Feedback" в рулевом управлении передают водителю информацию о дорожном покрытии через вибрацию. Аналогия: можно использовать для передачи текстуры виртуальных объектов.</p>
+          <h3>3. Игровая индустрия: Контроллеры PlayStation</h3>
+          <p>Контроллер DualSense использует адаптивные триггеры и тактильную обратную связь для создания ощущения различных поверхностей. Принцип: различная интенсивность и частота вибрации.</p>
+          <div class="highlight">
+            <p><strong>Как применить:</strong> Попробуйте адаптировать принцип адаптивных триггеров из PlayStation для вашей VR-перчатки — это может улучшить точность распознавания объектов.</p>
+          </div>
+          <div class="link-item" onclick="go('agent')"><span class="link-ico">✦</span><span class="link-text">Обсудить аналогии с ИИ-агентом →</span></div>
+        `
+      }
+    ];
+
+    function openMaterial(idx) {
+      const m = materialData[idx];
+      if (!m) return;
+      $('matDetailIcon').className = 'material-detail-icon ' + m.icon;
+      $('matDetailIcon').textContent = m.iconEmoji;
+      $('matDetailTitle').textContent = m.title;
+      $('matDetailMeta').textContent = m.meta;
+      $('matDetailContent').innerHTML = m.content;
+      $('matDetailTags').innerHTML = m.tags.map(t => `<span class="badge neutral">${t}</span>`).join('');
+      go('materialDetail');
+    }
+
+    // ===== AI SESSION FUNCTIONS =====
+    let sessionActive = false;
+    let sessionSeconds = 0;
+    let timerInterval = null;
+
+    function activateAgent() {
+      sessionActive = true;
+      sessionSeconds = 0;
+      showToast('Агент активирован для сессии', 'success');
+      setTimeout(() => {
+        go('aiSession');
+        startSessionTimer();
+      }, 500);
+    }
+
+    function startSessionTimer() {
+      // Clear existing timer if any
+      if (timerInterval) clearInterval(timerInterval);
+
+      timerInterval = setInterval(() => {
+        if (!sessionActive) return;
+        sessionSeconds++;
+        const h = Math.floor(sessionSeconds / 3600).toString().padStart(2, '0');
+        const m = Math.floor((sessionSeconds % 3600) / 60).toString().padStart(2, '0');
+        const s = (sessionSeconds % 60).toString().padStart(2, '0');
+        const timer = $('sessionTimer');
+        if (timer) timer.textContent = `${h}:${m}:${s}`;
+      }, 1000);
+    }
+
+    function sessionAction(type) {
+      const chat = $('sessionChat');
+      if (!chat) return;
+
+      const actions = {
+        summary: {
+          sys: 'Агент создаёт конспект текущей сессии...',
+          ai: 'Конспект сформирован! Зафиксированы 3 решения, 5 идей и 2 открытых вопроса. Материал добавлен в нарратив проекта.'
+        },
+        role: {
+          sys: 'Агент анализирует распределение ролей...',
+          ai: 'Рекомендация: Дмитрий (разработчик) может взять на себя программирование сенсоров, а Анастасия (лидер) — координацию и подготовку к тестированию.'
+        },
+        idea: {
+          sys: 'Агент ищет аналогии...',
+          ai: 'Нашёл аналогию: компания Simbionix использует похожий подход в хирургических симуляторах — зоны различной интенсивности вибрации передают текстуру тканей.'
+        },
+        trigger: {
+          sys: 'Агент генерирует вызов...',
+          ai: '⚡ Вызов для команды: Вы 15 минут обсуждаете один аспект без продвижения. Попробуйте распараллелить работу!'
+        }
+      };
+
+      const action = actions[type];
+      if (action) {
+        chat.innerHTML += `<div class="session-msg system">${action.sys}</div>`;
+        chat.scrollTop = chat.scrollHeight;
+
+        setTimeout(() => {
+          chat.innerHTML += `<div class="session-msg ai"><div class="msg-label">Агент</div>${action.ai}</div>`;
+          chat.scrollTop = chat.scrollHeight;
+        }, 1000);
+      }
+    }
+
+    function sendSessionMsg() {
+      const input = $('sessionInput');
+      const text = input.value.trim();
+      if (!text) return;
+
+      const chat = $('sessionChat');
+      chat.innerHTML += `<div class="session-msg user">${text}</div>`;
+      input.value = '';
+      chat.scrollTop = chat.scrollHeight;
+
+      // Simulate AI response
+      setTimeout(() => {
+        const responses = [
+          'Понял. Зафиксирую это в материалах. Рекомендую также рассмотреть альтернативные подходы.',
+          'Интересная мысль! Это напоминает подход, который использовала компания bHaptics. Хотите, найду больше информации?',
+          'Записал. Это может стать частью конспекта. Если нужна помощь с технической реализацией — обращайтесь.',
+          'Отличное наблюдение! Добавлю это в нарратив проекта. Заметил паттерн: команда часто возвращается к этой теме.'
+        ];
+        const resp = responses[Math.floor(Math.random() * responses.length)];
+        chat.innerHTML += `<div class="session-msg ai"><div class="msg-label">Агент</div>${resp}</div>`;
+        chat.scrollTop = chat.scrollHeight;
+      }, 1200);
+    }
+
+    function stopSession() {
+      sessionActive = false;
+      if (timerInterval) clearInterval(timerInterval);
+      showToast('Сессия завершена. Конспект сохранён в материалы.', 'success');
+      setTimeout(() => go('myproject'), 800);
+    }
+
+    const N8N_WEBHOOK_URL = 'https://adtikhomirova.app.n8n.cloud/webhook-test/innovation-agent-mvp';
+    async function sendAgentMsg() {
+      const input = document.getElementById('agentInput');
+      const text = input.value.trim();
+      if (!text) return;
+      const list = document.getElementById('agentMessages');
+      const userMsg = document.createElement('div');
+      userMsg.className = 'msg user';
+      userMsg.textContent = text;
+      list.appendChild(userMsg);
+      input.value = '';
+      list.scrollTop = list.scrollHeight;
+      const loadingMsg = document.createElement('div');
+      loadingMsg.className = 'msg agent';
+      loadingMsg.innerHTML = '<span class="msg-label">Агент</span><i>Анализирую контекст...</i>';
+      list.appendChild(loadingMsg);
+      list.scrollTop = list.scrollHeight;
+      try {
+        const response = await fetch(N8N_WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ sessionId: 'project-neuro-interface-01', message: text })
+        });
+        if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
+        const data = await response.json();
+        list.removeChild(loadingMsg);
+        const agentMsg = document.createElement('div');
+        agentMsg.className = 'msg agent';
+        const responseText = data.reply || data.output || "Нет ответа от агента";
+        agentMsg.innerHTML = `<div class="msg-label">Агент</div>${responseText.replace(/\n/g, '<br>')}`;
+        list.appendChild(agentMsg);
+      } catch (error) {
+        console.error('Ошибка подключения к n8n:', error);
+        list.removeChild(loadingMsg);
+        const errorMsg = document.createElement('div');
+        errorMsg.className = 'msg agent';
+        errorMsg.style.color = '#ef4444';
+        errorMsg.innerHTML = `<div class="msg-label">Ошибка</div>Не удалось связаться с ИИ-агентом.<br><small>${error.message}</small>`;
+        list.appendChild(errorMsg);
+      }
+      list.scrollTop = list.scrollHeight;
+    }
+
+    function showToast(text, type) {
+      const t = $('toast');
+      t.textContent = text;
+      t.className = 'toast show ' + (type || '');
+      setTimeout(() => { t.className = 'toast'; }, 2600);
+    }
+
+    setTimeout(() => { goAuth('login'); }, 2200);
+
+    window.go = go; window.goAuth = goAuth; window.doLogin = doLogin;
+    window.doRegister = doRegister; window.doForgot = doForgot; window.doLogout = doLogout;
+    window.saveProfile = saveProfile; window.createProject = createProject;
+    window.sendAgentMsg = sendAgentMsg; window.showToast = showToast;
+    window.openProjectDetail = openProjectDetail; window.takeProject = takeProject;
+    window.filterProjects = filterProjects; window.showProjectSection = showProjectSection;
+    window.openMaterial = openMaterial; window.activateAgent = activateAgent;
+    window.sessionAction = sessionAction; window.sendSessionMsg = sendSessionMsg;
+    window.stopSession = stopSession;
+  </script>
+</body>
+</html>
+
