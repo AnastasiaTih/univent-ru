@@ -1509,48 +1509,81 @@
       setTimeout(() => go('myproject'), 800);
     }
 
-    const N8N_WEBHOOK_URL = 'https://adtikhomirova.app.n8n.cloud/webhook-test/innovation-agent-mvp';
+    
+
+    // ===== ВСТАВЛЯТЬ СЮДА: ЗАМЕНИ СТАРУЮ sendAgentMsg =====
+    
+    // 1. Вставь сюда свой реальный URL из n8n (Production URL)
+    const N8N_WEBHOOK_URL = 'https://univent26.app.n8n.cloud/webhook/prototype-ai';
+
     async function sendAgentMsg() {
       const input = document.getElementById('agentInput');
       const text = input.value.trim();
       if (!text) return;
+
       const list = document.getElementById('agentMessages');
+
+      // 1. Отображаем сообщение пользователя
       const userMsg = document.createElement('div');
       userMsg.className = 'msg user';
       userMsg.textContent = text;
       list.appendChild(userMsg);
+
       input.value = '';
       list.scrollTop = list.scrollHeight;
+
+      // 2. Показываем индикатор загрузки (Агент думает...)
       const loadingMsg = document.createElement('div');
       loadingMsg.className = 'msg agent';
       loadingMsg.innerHTML = '<span class="msg-label">Агент</span><i>Анализирую контекст...</i>';
       list.appendChild(loadingMsg);
       list.scrollTop = list.scrollHeight;
+
       try {
+        // 3. Отправляем запрос в n8n
         const response = await fetch(N8N_WEBHOOK_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ sessionId: 'project-neuro-interface-01', message: text })
+          body: JSON.stringify({
+             // n8n (из твоего JSON) ожидает поле message
+             message: text,
+             userId: 'user-1' // Опционально
+          })
         });
-        if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
+
+        if (!response.ok) {
+          throw new Error(`Ошибка сети: ${response.status}`);
+        }
+
+        // 4. Получаем ответ (в твоем JSON ответ приходит в поле reply)
         const data = await response.json();
+        
+        // Удаляем индикатор загрузки
         list.removeChild(loadingMsg);
+
+        // 5. Отображаем ответ агента
         const agentMsg = document.createElement('div');
         agentMsg.className = 'msg agent';
-        const responseText = data.reply || data.output || "Нет ответа от агента";
+        // Используем data.reply, так как твой воркфлоу возвращает JSON с этим полем
+        const responseText = data.reply || "Получен пустой ответ от агента.";
         agentMsg.innerHTML = `<div class="msg-label">Агент</div>${responseText.replace(/\n/g, '<br>')}`;
+        
         list.appendChild(agentMsg);
+
       } catch (error) {
         console.error('Ошибка подключения к n8n:', error);
         list.removeChild(loadingMsg);
+        
         const errorMsg = document.createElement('div');
         errorMsg.className = 'msg agent';
         errorMsg.style.color = '#ef4444';
-        errorMsg.innerHTML = `<div class="msg-label">Ошибка</div>Не удалось связаться с ИИ-агентом.<br><small>${error.message}</small>`;
+        errorMsg.innerHTML = `<div class="msg-label">Ошибка</div>Не удалось связаться с ИИ. Проверь консоль браузера.`;
         list.appendChild(errorMsg);
       }
+      
       list.scrollTop = list.scrollHeight;
     }
+    // ===== КОНЕЦ ВСТАВКИ =====
 
     function showToast(text, type) {
       const t = $('toast');
