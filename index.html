@@ -1514,7 +1514,7 @@
     // ===== ВСТАВЛЯТЬ СЮДА: ЗАМЕНИ СТАРУЮ sendAgentMsg =====
     
     // 1. Вставь сюда свой реальный URL из n8n (Production URL)
-    const N8N_WEBHOOK_URL = 'https://univent26.app.n8n.cloud/webhook/prototype-ai';
+    const N8N_WEBHOOK_URL = 'https://univent26.app.n8n.cloud/webhook/prototype-ai'; 
 
     async function sendAgentMsg() {
       const input = document.getElementById('agentInput');
@@ -1523,7 +1523,7 @@
 
       const list = document.getElementById('agentMessages');
 
-      // 1. Отображаем сообщение пользователя
+      // 1. Показываем сообщение пользователя
       const userMsg = document.createElement('div');
       userMsg.className = 'msg user';
       userMsg.textContent = text;
@@ -1532,59 +1532,55 @@
       input.value = '';
       list.scrollTop = list.scrollHeight;
 
-      // 2. Показываем индикатор загрузки (Агент думает...)
+      // 2. Индикатор загрузки
       const loadingMsg = document.createElement('div');
       loadingMsg.className = 'msg agent';
-      loadingMsg.innerHTML = '<span class="msg-label">Агент</span><i>Анализирую контекст...</i>';
+      loadingMsg.innerHTML = '<span class="msg-label">Агент</span><i>Думаю...</i>';
       list.appendChild(loadingMsg);
       list.scrollTop = list.scrollHeight;
 
       try {
-        // 3. Отправляем запрос в n8n
+        // 3. Отправляем запрос (простой JSON)
         const response = await fetch(N8N_WEBHOOK_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-             // n8n (из твоего JSON) ожидает поле message
-             message: text,
-             userId: 'user-1' // Опционально
-          })
+          body: JSON.stringify({ message: text })
         });
 
         if (!response.ok) {
-          throw new Error(`Ошибка сети: ${response.status}`);
+          // Если n8n вернул ошибку (например, 500), показываем её
+          throw new Error(`Ошибка сервера: ${response.status}. Проверь, включен ли n8n и верен ли промпт.`);
         }
 
-        // 4. Получаем ответ (в твоем JSON ответ приходит в поле reply)
         const data = await response.json();
         
-        // Удаляем индикатор загрузки
+        // Удаляем загрузку
         list.removeChild(loadingMsg);
 
-        // 5. Отображаем ответ агента
+        // 4. Выводим ответ (берем поле reply или text)
         const agentMsg = document.createElement('div');
         agentMsg.className = 'msg agent';
-        // Используем data.reply, так как твой воркфлоу возвращает JSON с этим полем
-        const responseText = data.reply || "Получен пустой ответ от агента.";
+        const responseText = data.reply || data.text || data.output || "Получен пустой ответ.";
         agentMsg.innerHTML = `<div class="msg-label">Агент</div>${responseText.replace(/\n/g, '<br>')}`;
         
         list.appendChild(agentMsg);
 
       } catch (error) {
-        console.error('Ошибка подключения к n8n:', error);
+        console.error('Ошибка:', error);
         list.removeChild(loadingMsg);
         
+        // Показываем ошибку в чате
         const errorMsg = document.createElement('div');
         errorMsg.className = 'msg agent';
         errorMsg.style.color = '#ef4444';
-        errorMsg.innerHTML = `<div class="msg-label">Ошибка</div>Не удалось связаться с ИИ. Проверь консоль браузера.`;
+        errorMsg.innerHTML = `<div class="msg-label">Ошибка</div>${error.message}`;
         list.appendChild(errorMsg);
       }
       
       list.scrollTop = list.scrollHeight;
     }
-    // ===== КОНЕЦ ВСТАВКИ =====
 
+    
     function showToast(text, type) {
       const t = $('toast');
       t.textContent = text;
