@@ -1516,70 +1516,56 @@
     // 1. Вставь сюда свой реальный URL из n8n (Production URL)
     const N8N_WEBHOOK_URL = 'https://univent26.app.n8n.cloud/webhook/prototype-ai'; 
 
-    async function sendAgentMsg() {
-      const input = document.getElementById('agentInput');
-      const text = input.value.trim();
-      if (!text) return;
+async function sendAgentMsg() {
+  const input = document.getElementById('agentInput');
+  const text = input.value.trim();
+  if (!text) return;
 
-      const list = document.getElementById('agentMessages');
+  const list = document.getElementById('agentMessages');
 
-      // 1. Показываем сообщение пользователя
-      const userMsg = document.createElement('div');
-      userMsg.className = 'msg user';
-      userMsg.textContent = text;
-      list.appendChild(userMsg);
+  // Сообщение пользователя
+  const userMsg = document.createElement('div');
+  userMsg.className = 'msg user';
+  userMsg.textContent = text;
+  list.appendChild(userMsg);
 
-      input.value = '';
-      list.scrollTop = list.scrollHeight;
+  input.value = '';
+  list.scrollTop = list.scrollHeight;
 
-      // 2. Индикатор загрузки
-      const loadingMsg = document.createElement('div');
-      loadingMsg.className = 'msg agent';
-      loadingMsg.innerHTML = '<span class="msg-label">Агент</span><i>Думаю...</i>';
-      list.appendChild(loadingMsg);
-      list.scrollTop = list.scrollHeight;
+  // Индикатор загрузки
+  const loadingMsg = document.createElement('div');
+  loadingMsg.className = 'msg agent';
+  loadingMsg.innerHTML = '<span class="msg-label">Агент</span><i>Печатает...</i>';
+  list.appendChild(loadingMsg);
 
-      try {
-        // 3. Отправляем запрос (простой JSON)
-        const response = await fetch(N8N_WEBHOOK_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: text })
-        });
+  try {
+    const response = await fetch(N8N_WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: text })
+    });
 
-        if (!response.ok) {
-          // Если n8n вернул ошибку (например, 500), показываем её
-          throw new Error(`Ошибка сервера: ${response.status}. Проверь, включен ли n8n и верен ли промпт.`);
-        }
+    if (!response.ok) throw new Error(`Ошибка: ${response.status}`);
 
-        const data = await response.json();
-        
-        // Удаляем загрузку
-        list.removeChild(loadingMsg);
+    const data = await response.json();
+    list.removeChild(loadingMsg);
 
-        // 4. Выводим ответ (берем поле reply или text)
-        const agentMsg = document.createElement('div');
-        agentMsg.className = 'msg agent';
-        const responseText = data.reply || data.text || data.output || "Получен пустой ответ.";
-        agentMsg.innerHTML = `<div class="msg-label">Агент</div>${responseText.replace(/\n/g, '<br>')}`;
-        
-        list.appendChild(agentMsg);
+    const agentMsg = document.createElement('div');
+    agentMsg.className = 'msg agent';
+    agentMsg.innerHTML = `<div class="msg-label">Агент</div>${data.reply}`;
+    list.appendChild(agentMsg);
 
-      } catch (error) {
-        console.error('Ошибка:', error);
-        list.removeChild(loadingMsg);
-        
-        // Показываем ошибку в чате
-        const errorMsg = document.createElement('div');
-        errorMsg.className = 'msg agent';
-        errorMsg.style.color = '#ef4444';
-        errorMsg.innerHTML = `<div class="msg-label">Ошибка</div>${error.message}`;
-        list.appendChild(errorMsg);
-      }
-      
-      list.scrollTop = list.scrollHeight;
-    }
-
+  } catch (error) {
+    list.removeChild(loadingMsg);
+    const errorMsg = document.createElement('div');
+    errorMsg.className = 'msg agent';
+    errorMsg.style.color = '#ef4444';
+    errorMsg.innerHTML = `<div class="msg-label">Ошибка</div>${error.message}`;
+    list.appendChild(errorMsg);
+  }
+  
+  list.scrollTop = list.scrollHeight;
+}
     
     function showToast(text, type) {
       const t = $('toast');
