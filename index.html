@@ -1509,64 +1509,58 @@
       setTimeout(() => go('myproject'), 800);
     }
 
-    
+    const N8N_WEBHOOK_URL = 'https://univent26.app.n8n.cloud/webhook/prototype-ai';
+    async function sendAgentMsg() {
+      const input = document.getElementById('agentInput');
+      const text = input.value.trim();
+      if (!text) return;
+      const list = document.getElementById('agentMessages');
+      const userMsg = document.createElement('div');
+      userMsg.className = 'msg user';
+      userMsg.textContent = text;
+      list.appendChild(userMsg);
+      input.value = '';
+      list.scrollTop = list.scrollHeight;
+      const loadingMsg = document.createElement('div');
+      loadingMsg.className = 'msg agent';
+      loadingMsg.innerHTML = '<span class="msg-label">Агент</span><i>Анализирую контекст...</i>';
+      list.appendChild(loadingMsg);
+      list.scrollTop = list.scrollHeight;
+      try {
+        const response = await fetch(N8N_WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ sessionId: 'project-neuro-interface-01', message: text })
+        });
+        if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
 
-    // ===== ВСТАВЛЯТЬ СЮДА: ЗАМЕНИ СТАРУЮ sendAgentMsg =====
-    
-    // 1. Вставь сюда свой реальный URL из n8n (Production URL)
-    const N8N_WEBHOOK_URL = 'https://univent26.app.n8n.cloud/webhook/prototype-ai'; 
+        const contentType = response.headers.get('content-type') || '';
+        let data;
+        if (contentType.includes('application/json')) {
+          data = await response.json();
+        } else {
+          const textResponse = await response.text();
+          data = { reply: textResponse };
+        }
 
-async function sendAgentMsg() {
-  const input = document.getElementById('agentInput');
-  const text = input.value.trim();
-  if (!text) return;
+        list.removeChild(loadingMsg);
+        const agentMsg = document.createElement('div');
+        agentMsg.className = 'msg agent';
+        const responseText = data.reply || data.output || data.message || "Нет ответа от агента";
+        agentMsg.innerHTML = `<div class="msg-label">Агент</div>${String(responseText).replace(/\n/g, '<br>')}`;
+        list.appendChild(agentMsg);
+      } catch (error) {
+        console.error('Ошибка подключения к n8n:', error);
+        list.removeChild(loadingMsg);
+        const errorMsg = document.createElement('div');
+        errorMsg.className = 'msg agent';
+        errorMsg.style.color = '#ef4444';
+        errorMsg.innerHTML = `<div class="msg-label">Ошибка</div>Не удалось связаться с ИИ-агентом.<br><small>${error.message}</small>`;
+        list.appendChild(errorMsg);
+      }
+      list.scrollTop = list.scrollHeight;
+    }
 
-  const list = document.getElementById('agentMessages');
-
-  // Сообщение пользователя
-  const userMsg = document.createElement('div');
-  userMsg.className = 'msg user';
-  userMsg.textContent = text;
-  list.appendChild(userMsg);
-
-  input.value = '';
-  list.scrollTop = list.scrollHeight;
-
-  // Индикатор загрузки
-  const loadingMsg = document.createElement('div');
-  loadingMsg.className = 'msg agent';
-  loadingMsg.innerHTML = '<span class="msg-label">Агент</span><i>Печатает...</i>';
-  list.appendChild(loadingMsg);
-
-  try {
-    const response = await fetch(N8N_WEBHOOK_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: text })
-    });
-
-    if (!response.ok) throw new Error(`Ошибка: ${response.status}`);
-
-    const data = await response.json();
-    list.removeChild(loadingMsg);
-
-    const agentMsg = document.createElement('div');
-    agentMsg.className = 'msg agent';
-    agentMsg.innerHTML = `<div class="msg-label">Агент</div>${data.reply}`;
-    list.appendChild(agentMsg);
-
-  } catch (error) {
-    list.removeChild(loadingMsg);
-    const errorMsg = document.createElement('div');
-    errorMsg.className = 'msg agent';
-    errorMsg.style.color = '#ef4444';
-    errorMsg.innerHTML = `<div class="msg-label">Ошибка</div>${error.message}`;
-    list.appendChild(errorMsg);
-  }
-  
-  list.scrollTop = list.scrollHeight;
-}
-    
     function showToast(text, type) {
       const t = $('toast');
       t.textContent = text;
