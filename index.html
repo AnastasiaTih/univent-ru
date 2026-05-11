@@ -3018,9 +3018,537 @@
     }
 
     renderSessionPhotoPreview();
+
+  // ===== Added enhancements: lighter session UI + audio + auto-analysis =====
+  let sessionAudioRecorder = null;
+  let sessionAudioStream = null;
+  let sessionAudioChunks = [];
+  let sessionSpeechRecognition = null;
+  let sessionSpeechDebounce = null;
+  let sessionSpeechBuffer = '';
+
+  function ensureSessionContextCard() {
+    const sessionScreen = byId('aiSession');
+    if (!sessionScreen) return;
+    const contextCard = sessionScreen.querySelector('.ai-context-card');
+    if (!contextCard) return;
+
+    const projectLine = state.context.type === 'project'
+      ? `Компания: <strong>${state.context.company || '—'}</strong>${state.context.university ? ` · Университет: <strong>${state.context.university}</strong>` : ''}`
+      : state.context.type === 'material'
+        ? `Материал: <strong>${state.context.materialTitle || state.context.title || '—'}</strong>`
+        : 'Физическая сессия · фиксация диалога и артефактов';
+
+    const mediaLine = [];
+    if (state.session.photo) mediaLine.push(`Фото: <strong>${state.session.photo.fileName || 'session-photo'}</strong>`);
+    if (state.session.audio) mediaLine.push(`Аудио: <strong>${state.session.audio.fileName || 'session-audio.webm'}</strong>`);
+    if (state.session.audioTranscript) mediaLine.push(`Транскрипт: <strong>${short(state.session.audioTranscript, 120)}</strong>`);
+
+    contextCard.innerHTML = `
+      <h4>📍 Текущий контекст</h4>
+      <p>Фаза: <strong>${state.context.phase || 'Создание'}</strong> · Проект: <strong>${state.context.title || 'Главная'}</strong></p>
+      <p style="margin-top:6px;">${projectLine}</p>
+      <p style="margin-top:6px;">Последнее действие: <strong>${state.session.lastAction || 'ожидание запуска'}</strong></p>
+      ${mediaLine.length ? `<p style="margin-top:6px;">${mediaLine.join(' · ')}</p>` : ''}
+      <div class="project-skills" style="margin-top:10px;">${(state.context.tags || []).slice(0, 4).map(tag => `<span class="skill-tag">${tag}</span>`).join('')}</div>
+      <div class="btn-row" style="margin-top:12px;">
+        <button class="btn sm" id="sessionSaveArtifactBtn">📥 Сохранить материал</button>
+        <button class="btn sm" id="sessionAskAgentBtn">💡 Спросить агента</button>
+      </div>
+    `;
+
+    const saveBtn = byId('sessionSaveArtifactBtn');
+    if (saveBtn) {
+      saveBtn.onclick = () => {
+        const transcriptText = state.session.transcript.map((item) => `${item.role === 'ai' ? 'Агент' : 'Участник'}: ${item.text}`).join('\n');
+        const summary = [state.session.audioTranscript, transcriptText, state.context.summary || state.context.title || ''].filter(Boolean).join('\n\n');
+        saveSessionArtifact(summary || 'Материал сессии', {
+          title: `Материал сессии · ${formatDate()}`,
+          meta: `Сохранено вручную · ${state.context.title || 'Контекст'}`,
+          tags: ['Сессия', state.context.phase || 'Создание']
+        });
+      };
+    }
+
+    const askBtn = byId('sessionAskAgentBtn');
+    if (askBtn) {
+      askBtn.onclick = () => {
+        go('agent');
+        const input = byId('agentInput');
+        if (input) {
+          input.value = state.context.suggestedPrompt || 'Проанализируй текущий контекст и предложи следующий шаг.';
+          input.focus();
+        }
+      };
+    }
+  }
+
+  function injectSessionMediaControls() {
+    const panel = document.querySelector('#aiSession .ai-photo-panel');
+    if (!panel) return;
+
+    const row = panel.querySelector('.photo-input-row');
+    if (row) {
+      row.innerHTML = `
+        <button class="btn sm" id="sessionPhotoPickBtn">📷 Фото</button>
+        <button class="btn sm" id="sessionAudioToggleBtn">🎙 Запись звука</button>
+      `;
+      const photoBtn = byId('sessionPhotoPickBtn');
+      if (photoBtn) photoBtn.onclick = () => openSessionPhotoPicker();
+      const audioBtn = byId('sessionAudioToggleBtn');
+      if (audioBtn) audioBtn.onclick = () => toggleSessionAudioRecording();
+    }
+
+    let status = byId('sessionAudioStatus');
+    if (!status) {
+      status = document.createElement('div');
+      status.className = 'ai-status';
+      status.id = 'sessionAudioStatus';
+      panel.appendChild(status);
+    }
+    status.innerHTML = `
+      <div class="ai-status-dot" id="sessionAudioStatusDot"></div>
+      <span class="txt" id="sessionAudioStatusText">Микрофон не активен</span>
+      <span class="meta" id="sessionAudioStatusMeta">Нажмите, чтобы начать запись</span>
+    `;
+
+    let live = byId('sessionAudioLive');
+    if (!live) {
+      live = document.createElement('div');
+      live.id = 'sessionAudioLive';
+      live.className = 'ai-suggestion';
+      live.style.marginTop = '10px';
+      live.innerHTML = '<div class="sug-title">🎧 Живой транскрипт</div><div class="sug-text" id="sessionAudioLiveText">Пока нет распознанного текста.</div>';
+      status.insertAdjacentElement('afterend', live);
+    }
+  }
+
+  function updateSessionAudioUI(active, statusText, metaText, liveText) {
+    const dot = byId('sessionAudioStatusDot');
+    const text = byId('sessionAudioStatusText');
+    const meta = byId('sessionAudioStatusMeta');
+    const btn = byId('sessionAudioToggleBtn');
+    const live = byId('sessionAudioLiveText');
+
+    if (dot) dot.classList.toggle('active', Boolean(active));
+    if (text) text.textContent = statusText || (active ? 'Запись звука активна' : 'Микрофон не активен');
+    if (meta) meta.textContent = metaText || (active ? 'Распознаю речь в реальном времени' : 'Нажмите, чтобы начать запись');
+    if (live && typeof liveText === 'string') live.textContent = liveText || 'Пока нет распознанного текста.';
+
+    if (btn) {
+      btn.classList.toggle('red-btn', Boolean(active));
+      btn.textContent = active ? '⏹ Стоп' : '🎙 Запись звука';
+    }
+  }
+
+  function buildEnhancedPayload(message, action, extra = {}) {
+    const payload = makePayload(message, action, extra);
+    const includeAudio = Boolean(extra.includeAudio || action === 'audio' || action === 'session_audio');
+    const includePhoto = Boolean(extra.includePhoto || state.session.photo);
+
+    payload.context = {
+      ...payload.context,
+      audioTranscript: state.session.audioTranscript || '',
+      activeMedia: {
+        photo: Boolean(state.session.photo),
+        audio: Boolean(state.session.audio)
+      }
+    };
+
+    payload.audioTranscript = state.session.audioTranscript || '';
+    payload.researchMode = Boolean(extra.researchMode);
+
+    if (includePhoto && state.session.photo) {
+      payload.photo = {
+        attached: true,
+        fileName: state.session.photo.fileName,
+        mimeType: state.session.photo.mimeType,
+        dataUrl: state.session.photo.dataUrl,
+        width: state.session.photo.width,
+        height: state.session.photo.height,
+        capturedAt: state.session.photo.capturedAt,
+        note: state.session.photo.note
+      };
+      payload.session.photo = payload.photo;
+    }
+
+    if (includeAudio && state.session.audio) {
+      payload.audio = {
+        attached: true,
+        fileName: state.session.audio.fileName,
+        mimeType: state.session.audio.mimeType,
+        dataUrl: state.session.audio.dataUrl,
+        capturedAt: state.session.audio.capturedAt,
+        duration: state.session.audio.duration || 0,
+        transcript: state.session.audio.transcript || ''
+      };
+      payload.session.audio = payload.audio;
+      payload.audioTranscript = state.session.audio.transcript || state.session.audioTranscript || '';
+      payload.context.audioTranscript = payload.audioTranscript;
+    }
+
+    return payload;
+  }
+
+  async function handleSessionPhotoChange(file) {
+    if (!file) return;
+    try {
+      const processed = await fileToDataUrl(file);
+      state.session.photo = {
+        fileName: file.name || 'session-photo.jpg',
+        mimeType: processed.mimeType,
+        dataUrl: processed.dataUrl,
+        width: processed.width,
+        height: processed.height,
+        capturedAt: new Date().toLocaleString('ru-RU'),
+        note: 'Фото сессии'
+      };
+      state.session.lastAction = 'добавлено фото';
+      renderSessionPhotoPreview();
+      ensureSessionContextCard();
+      updateSessionAudioUI(Boolean(sessionAudioRecorder), sessionAudioRecorder ? 'Запись активна' : 'Микрофон не активен', 'Фото добавлено и отправлено на анализ');
+      addSessionMessage(byId('sessionChat'), 'system', `📷 Фото добавлено: ${file.name || 'session-photo.jpg'} · агент анализирует контекст`);
+      showToast('Фото добавлено в сессию', 'success');
+      await sessionAction('photo');
+    } catch (error) {
+      showToast(`Фото не удалось добавить: ${error.message}`, 'info');
+    }
+  }
+
+  function queueLiveTranscript(text) {
+    const chunk = String(text || '').trim();
+    if (!chunk) return;
+    sessionSpeechBuffer = sessionSpeechBuffer ? `${sessionSpeechBuffer} ${chunk}` : chunk;
+    clearTimeout(sessionSpeechDebounce);
+    sessionSpeechDebounce = setTimeout(() => {
+      const payloadText = sessionSpeechBuffer.trim();
+      sessionSpeechBuffer = '';
+      if (payloadText) sendSessionLiveTranscript(payloadText);
+    }, 1200);
+  }
+
+  async function sendSessionLiveTranscript(text) {
+    const chat = byId('sessionChat');
+    if (!chat) return;
+    const clean = String(text || '').trim();
+    if (!clean) return;
+
+    state.session.transcript.push({ role: 'user', text: clean, live: true });
+    addSessionMessage(chat, 'user', `🎤 ${clean}`);
+    state.session.lastAction = 'живой транскрипт';
+    ensureSessionContextCard();
+
+    try {
+      const data = await callAgent(buildEnhancedPayload(clean, 'session_live', {
+        sourceScreen: 'session',
+        project: state.context.type === 'project' ? state.context : {},
+        material: state.context.type === 'material' ? state.context : {},
+        history: getChatHistory(chat, 8),
+        includePhoto: true,
+        includeAudio: false
+      }));
+
+      const reply = data.reply || data.output || data.message || 'Нет ответа от агента';
+      addSessionMessage(chat, 'ai', reply);
+      state.session.transcript.push({ role: 'ai', text: reply, live: true });
+      if (data.sessionArtifact) {
+        saveSessionArtifact(reply, data.sessionArtifact);
+      }
+    } catch (error) {
+      addSessionMessage(chat, 'system', `Не удалось получить ответ на живой транскрипт: ${error.message}`);
+    }
+  }
+
+  function createSpeechRecognition() {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) return null;
+
+    const recognition = new SpeechRecognition();
+    recognition.lang = 'ru-RU';
+    recognition.continuous = true;
+    recognition.interimResults = true;
+    recognition.maxAlternatives = 1;
+    return recognition;
+  }
+
+  async function toggleSessionAudioRecording() {
+    if (sessionAudioRecorder && sessionAudioRecorder.state === 'recording') {
+      await stopSessionAudioRecording();
+      return;
+    }
+    await startSessionAudioRecording();
+  }
+
+  async function startSessionAudioRecording() {
+    if (!navigator.mediaDevices?.getUserMedia) {
+      showToast('Запись звука недоступна в этом браузере', 'info');
+      return;
+    }
+
+    try {
+      sessionAudioStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      sessionAudioChunks = [];
+      state.session.audioTranscript = '';
+      updateSessionAudioUI(true, 'Запись звука активна', 'Распознаю речь в реальном времени', 'Ожидание первой фразы…');
+
+      sessionAudioRecorder = new MediaRecorder(sessionAudioStream);
+      sessionAudioRecorder.ondataavailable = (event) => {
+        if (event.data && event.data.size > 0) sessionAudioChunks.push(event.data);
+      };
+      sessionAudioRecorder.onstop = async () => {
+        try {
+          const blob = new Blob(sessionAudioChunks, { type: sessionAudioRecorder.mimeType || 'audio/webm' });
+          const dataUrl = await new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onerror = () => reject(new Error('Не удалось прочитать аудиофайл'));
+            reader.onload = () => resolve(String(reader.result || ''));
+            reader.readAsDataURL(blob);
+          });
+
+          state.session.audio = {
+            fileName: `session-audio-${Date.now()}.webm`,
+            mimeType: blob.type || 'audio/webm',
+            dataUrl,
+            capturedAt: new Date().toLocaleString('ru-RU'),
+            duration: state.session.seconds || 0,
+            transcript: state.session.audioTranscript || '',
+            note: 'Аудиозапись сессии'
+          };
+          state.session.lastAction = 'аудиозапись завершена';
+          ensureSessionContextCard();
+          updateSessionAudioUI(false, 'Аудио сохранено', 'Агент анализирует запись', state.session.audioTranscript || 'Транскрипт отсутствует');
+          await sessionAction('audio');
+        } catch (error) {
+          addSessionMessage(byId('sessionChat'), 'system', `Аудиозапись сохранена частично: ${error.message}`);
+        } finally {
+          if (sessionAudioStream) {
+            sessionAudioStream.getTracks().forEach((track) => track.stop());
+          }
+          sessionAudioStream = null;
+          sessionAudioRecorder = null;
+        }
+      };
+      sessionAudioRecorder.start();
+
+      sessionSpeechRecognition = createSpeechRecognition();
+      if (sessionSpeechRecognition) {
+        sessionSpeechRecognition.onresult = (event) => {
+          let finalChunk = '';
+          for (let i = event.resultIndex; i < event.results.length; i += 1) {
+            const result = event.results[i];
+            const text = String(result[0]?.transcript || '').trim();
+            if (!text) continue;
+            if (result.isFinal) finalChunk += (finalChunk ? ' ' : '') + text;
+            else updateSessionAudioUI(true, 'Запись звука активна', 'Слышу речь и распознаю текст', text);
+          }
+          if (finalChunk) queueLiveTranscript(finalChunk);
+        };
+        sessionSpeechRecognition.onerror = () => {
+          updateSessionAudioUI(true, 'Запись звука активна', 'Микрофон работает, но распознавание речи недоступно', state.session.audioTranscript || '');
+        };
+        sessionSpeechRecognition.onend = () => {
+          if (sessionAudioRecorder && sessionAudioRecorder.state === 'recording') {
+            try { sessionSpeechRecognition.start(); } catch {}
+          }
+        };
+        try { sessionSpeechRecognition.start(); } catch {}
+      }
+
+      updateSessionAudioUI(true, 'Запись звука активна', 'Распознаю речь в реальном времени', 'Скажите что-нибудь, чтобы агент увидел контекст.');
+      showToast('Запись звука начата', 'success');
+    } catch (error) {
+      updateSessionAudioUI(false, 'Микрофон не активен', error.message, 'Проверьте разрешения браузера');
+      showToast(`Не удалось начать запись: ${error.message}`, 'info');
+    }
+  }
+
+  async function stopSessionAudioRecording() {
+    if (sessionSpeechRecognition) {
+      try { sessionSpeechRecognition.onend = null; sessionSpeechRecognition.stop(); } catch {}
+      sessionSpeechRecognition = null;
+    }
+
+    if (!sessionAudioRecorder || sessionAudioRecorder.state !== 'recording') {
+      updateSessionAudioUI(false, 'Микрофон не активен', 'Нажмите, чтобы начать запись');
+      return;
+    }
+
+    try {
+      sessionAudioRecorder.stop();
+      updateSessionAudioUI(false, 'Останавливаем запись…', 'Сохраняем звук и транскрипт');
+    } catch (error) {
+      updateSessionAudioUI(false, 'Микрофон не активен', error.message);
+      if (sessionAudioStream) sessionAudioStream.getTracks().forEach((track) => track.stop());
+    }
+  }
+
+  async function sessionAction(type) {
+    const chat = byId('sessionChat');
+    if (!chat) return;
+
+    state.session.lastAction =
+      type === 'summary' ? 'создание конспекта'
+      : type === 'role' ? 'анализ ролей'
+      : type === 'idea' ? 'поиск аналогии'
+      : type === 'photo' ? 'анализ фото'
+      : type === 'audio' ? 'анализ аудиозаписи'
+      : 'вызов команды';
+
+    const actionPrompts = {
+      summary: 'Сформируй короткий конспект с тезисами, решениями, открытыми вопросами и следующим шагом.',
+      role: 'Предложи перераспределение ролей и коротко объясни, почему это полезно.',
+      idea: 'Найди 2–3 аналогии из других индустрий и объясни, как перенести их в наш проект.',
+      trigger: 'Сформулируй мягкий вызов команде, если обсуждение зациклилось.',
+      photo: 'Проанализируй прикреплённое фото сессии: опиши, что видно, какие элементы прототипа или записи заметны, какие риски и идеи появляются, и что делать дальше.',
+      audio: 'Проанализируй аудиозапись физической сессии по транскрипту и дай рекомендации по следующему шагу, ролям и возможным рискам.'
+    };
+
+    addSessionMessage(chat, 'system', `Запрос: ${actionPrompts[type] || 'Задача агента'}${state.session.photo ? ` · фото: ${state.session.photo.fileName}` : ''}`);
+
+    try {
+      const data = await callAgent(buildEnhancedPayload(actionPrompts[type] || 'Сформируй полезную рекомендацию.', type === 'summary' ? 'session_summary' : (type === 'audio' ? 'session_note' : type), {
+        sourceScreen: 'session',
+        project: state.context.type === 'project' ? state.context : {},
+        material: state.context.type === 'material' ? state.context : {},
+        history: getChatHistory(chat, 8),
+        includePhoto: true,
+        includeAudio: type === 'audio'
+      }));
+
+      const reply = data.reply || data.output || data.message || 'Нет ответа от агента';
+      addSessionMessage(chat, 'ai', reply);
+
+      if (type === 'summary' && (data.sessionArtifact || data.reply)) {
+        saveSessionArtifact(reply, data.sessionArtifact || {});
+      }
+      if (type === 'audio' && data.sessionArtifact) {
+        saveSessionArtifact(reply, data.sessionArtifact);
+      }
+      if (type === 'photo' && data.sessionArtifact) {
+        saveSessionArtifact(reply, data.sessionArtifact);
+      }
+    } catch (error) {
+      addSessionMessage(chat, 'system', `Не удалось получить ответ агента: ${error.message}`);
+    }
+  }
+
+  async function sendSessionMsg() {
+    const input = byId('sessionInput');
+    const text = input?.value.trim();
+    if (!text) return;
+
+    const chat = byId('sessionChat');
+    addSessionMessage(chat, 'user', text);
+    if (input) input.value = '';
+    state.session.transcript.push({ role: 'user', text });
+    state.session.lastAction = 'сообщение в сессии';
+    ensureSessionContextCard();
+
+    try {
+      const data = await callAgent(buildEnhancedPayload(text, 'session_live', {
+        sourceScreen: 'session',
+        project: state.context.type === 'project' ? state.context : {},
+        material: state.context.type === 'material' ? state.context : {},
+        history: getChatHistory(chat, 8),
+        includePhoto: true,
+        includeAudio: false
+      }));
+
+      const reply = data.reply || data.output || data.message || 'Нет ответа от агента';
+      addSessionMessage(chat, 'ai', reply);
+      state.session.transcript.push({ role: 'ai', text: reply });
+
+      if (data.sessionArtifact) {
+        saveSessionArtifact(reply, data.sessionArtifact);
+      }
+    } catch (error) {
+      addSessionMessage(chat, 'system', `Не удалось связаться с ИИ-агентом: ${error.message}`);
+    }
+  }
+
+  async function sendAgentMsg() {
+    const input = byId('agentInput');
+    const text = input?.value.trim();
+    if (!text) return;
+
+    const list = byId('agentMessages');
+    addUserMessage(list, text);
+    if (input) input.value = '';
+
+    const loadingMsg = document.createElement('div');
+    loadingMsg.className = 'msg agent';
+    loadingMsg.innerHTML = '<span class="msg-label">Агент</span><i>Анализирую контекст...</i>';
+    list.appendChild(loadingMsg);
+    list.scrollTop = list.scrollHeight;
+
+    const history = getChatHistory(list, 6);
+
+    try {
+      const data = await callAgent(buildEnhancedPayload(text, 'chat', {
+        sourceScreen: 'agent',
+        history,
+        project: state.context.type === 'project' ? state.context : {},
+        material: state.context.type === 'material' ? state.context : {},
+        includePhoto: false,
+        includeAudio: false
+      }));
+
+      loadingMsg.remove();
+      const reply = data.reply || data.output || data.message || 'Нет ответа от агента';
+      addAgentMessage(list, reply);
+
+      if (Array.isArray(data.recommendations) && data.recommendations.length) {
+        const recCards = all('.rec-card', byId('agent'));
+        recCards.forEach((card, idx) => {
+          const rec = data.recommendations[idx];
+          if (!rec) return;
+          const p = card.querySelector('p');
+          if (p) p.textContent = rec;
+        });
+      }
+
+      if (data.sessionArtifact) {
+        saveSessionArtifact(reply, data.sessionArtifact);
+      }
+
+      state.session.lastAction = 'диалог с агентом';
+    } catch (error) {
+      loadingMsg.remove();
+      addAgentMessage(list, `Не удалось связаться с ИИ-агентом.\n${error.message}`);
+    }
+  }
+
+  function enhancePrototypeUI() {
+    injectDetailButtons();
+    renderSavedArtifacts();
+    updateAgentContextCard();
+    ensureSessionContextCard();
+    injectSessionMediaControls();
+    renderSessionPhotoPreview();
+
+    const materialAgentBtn = document.querySelector('#materialDetail button.btn.primary.block');
+    if (materialAgentBtn) {
+      materialAgentBtn.onclick = () => openMaterialInAgent();
+    }
+
+    const projectAgentBtn = document.querySelector('#myproject .btn-row .btn');
+    if (projectAgentBtn) {
+      projectAgentBtn.onclick = () => openProjectInAgent();
+    }
+
+    const askBtn = byId('sessionAskAgentBtn');
+    if (askBtn) {
+      askBtn.onclick = () => {
+        go('agent');
+        const input = byId('agentInput');
+        if (input) {
+          input.value = state.context.suggestedPrompt || 'Проанализируй текущий контекст и предложи следующий шаг.';
+          input.focus();
+        }
+      };
+    }
+  }
+
+  enhancePrototypeUI();
+
 })();
-</script>
-
-</body>
-</html>
-
