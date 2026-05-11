@@ -401,6 +401,139 @@
     .challenge-card p { font-size: 12px; color: var(--text-2); line-height: 1.6; margin-bottom: 10px; }
     .challenge-card .reward { font-size: 11px; color: var(--good); font-weight: 600; }
 
+
+    .icon-btn.toggle-active { border-color: var(--accent); color: var(--accent); background: rgba(59,130,246,0.08); }
+    body.wide-chat .app,
+    body.wide-chat .auth-screen {
+      width: min(980px, 100vw);
+    }
+    body.wide-chat .content {
+      padding-left: 18px;
+      padding-right: 18px;
+    }
+    body.wide-chat .msg,
+    body.wide-chat .session-msg {
+      max-width: 96%;
+    }
+    body.wide-chat .msg-list,
+    body.wide-chat .session-msg-list {
+      max-height: 460px;
+    }
+    .ai-session-header {
+      padding: 20px;
+      background: linear-gradient(135deg, rgba(59,130,246,0.12), rgba(99,102,241,0.10));
+      border: 1px solid rgba(99,102,241,0.15);
+      border-radius: var(--radius);
+      margin-bottom: 14px;
+    }
+    .session-sub { font-size: 12px; color: var(--text-2); line-height: 1.5; }
+    .ai-context-card {
+      padding: 16px;
+      background: var(--panel);
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius-sm);
+      margin-bottom: 14px;
+    }
+    .ai-context-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 8px; color: var(--text); }
+    .ai-context-card p { font-size: 12.5px; color: var(--text-2); line-height: 1.55; }
+    .ai-suggestion {
+      padding: 14px;
+      background: rgba(99,102,241,0.06);
+      border: 1px solid rgba(99,102,241,0.12);
+      border-radius: var(--radius-sm);
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+    .ai-suggestion .sug-title { font-size: 13px; font-weight: 700; color: var(--accent-2); margin-bottom: 4px; }
+    .ai-suggestion .sug-text { font-size: 12px; color: var(--text-2); line-height: 1.55; }
+    .session-actions {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .session-action {
+      padding: 12px;
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius-sm);
+      background: var(--bg-2);
+      cursor: pointer;
+      transition: transform .15s, background .15s, border-color .15s;
+      display: grid;
+      gap: 6px;
+      justify-items: start;
+    }
+    .session-action:active { transform: scale(0.98); background: rgba(0,0,0,0.03); }
+    .session-action .sa-ico { font-size: 18px; }
+    .session-action .sa-text { font-size: 12px; font-weight: 600; color: var(--text); line-height: 1.35; }
+    .session-msg-list {
+      display: grid;
+      gap: 8px;
+      max-height: 300px;
+      overflow-y: auto;
+      padding-right: 2px;
+    }
+    .session-msg {
+      padding: 11px 13px;
+      border-radius: 14px;
+      font-size: 13px;
+      line-height: 1.5;
+      max-width: 90%;
+    }
+    .session-msg.ai { background: var(--panel-2); border: 1px solid var(--stroke); justify-self: start; color: var(--text-2); }
+    .session-msg.user { background: var(--accent); color: white; justify-self: end; }
+    .session-msg.system { background: rgba(0,0,0,0.04); color: var(--muted); justify-self: center; font-size: 11.5px; text-align: center; border: 1px dashed var(--stroke-2); }
+    .session-msg .msg-label { font-size: 9px; font-weight: 600; color: var(--accent); margin-bottom: 3px; text-transform: uppercase; }
+    .session-composer {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin-top: 12px;
+    }
+    .session-composer input {
+      flex: 1;
+      min-width: 0;
+      color: var(--text);
+      background: var(--bg-2);
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      font: 13px inherit;
+      outline: none;
+    }
+    .ai-photo-panel {
+      padding: 16px;
+      background: var(--panel);
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius);
+      margin-bottom: 14px;
+    }
+    .ai-photo-panel h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+    .ai-photo-panel p { font-size: 12px; color: var(--text-2); line-height: 1.55; }
+    .photo-input-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+    .photo-input { display: none; }
+    .photo-preview {
+      display: none;
+      align-items: center;
+      gap: 12px;
+      margin-top: 12px;
+      padding: 12px;
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius-sm);
+      background: var(--bg-2);
+    }
+    .photo-preview.active { display: flex; }
+    .photo-preview img {
+      width: 88px;
+      height: 88px;
+      object-fit: cover;
+      border-radius: 14px;
+      border: 1px solid var(--stroke);
+      flex-shrink: 0;
+    }
+    .photo-preview .meta { font-size: 11px; color: var(--muted); line-height: 1.45; }
+    .photo-preview .name { font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+
     @media (min-width: 860px) {
       body { display: grid; place-items: center; }
       .app, .auth-screen {
@@ -460,6 +593,7 @@
       <div class="topbar-actions">
         <button class="icon-btn has-badge" onclick="go('notifications')">🔔</button>
         <button class="icon-btn" onclick="go('agent')">✦</button>
+        <button class="icon-btn" id="wideChatToggleBtn" onclick="toggleWideChat()" title="Развернуть чат">⤢</button>
       </div>
     </header>
     <main class="content">
@@ -772,6 +906,10 @@
               <div class="toggle-row"><div class="label-group"><strong>Фоновый режим</strong><div class="meta">Считывает контекст</div></div><div class="switch on" onclick="this.classList.toggle('on')"></div></div>
               <div class="toggle-row"><div class="label-group"><strong>Проактивный режим</strong><div class="meta">Даёт подсказки</div></div><div class="switch on" onclick="this.classList.toggle('on')"></div></div>
             </div>
+            <div class="btn-row" style="margin-top:14px;">
+              <button class="btn sm" onclick="toggleWideChat()">⤢ Развернуть чат</button>
+              <button class="btn sm" onclick="focusAgentInput()">✦ К вопросу</button>
+            </div>
           </div>
 
           <!-- AI Activation for physical space -->
@@ -846,7 +984,7 @@
               <div class="msg user">Спасибо, попробуем.</div>
               <div class="msg agent"><div class="msg-label">Агент</div>Отличное решение. Не забудьте зафиксировать результаты в нарративе.</div>
             </div>
-            <div class="composer"><input id="agentInput" placeholder="Спросить агента..." onkeydown="if(event.key==='Enter')sendAgentMsg()"/><button class="btn primary sm" onclick="sendAgentMsg()">↑</button></div>
+            <div class="composer"><input id="agentInput" placeholder="Спросить агента с учётом контекста..." onkeydown="if(event.key==='Enter')sendAgentMsg()"/><button class="btn primary sm" onclick="sendAgentMsg()">↑</button></div>
           </div>
         </div>
       </section>
@@ -876,6 +1014,7 @@
             <h4>📍 Текущий контекст</h4>
             <p>Фаза: <strong>Создание</strong> · Проект: <strong>Нейро-Интерфейс VR</strong></p>
             <p style="margin-top:6px;">Команда работает в <strong>зоне прототипирования</strong>. Последнее действие: обсуждение конструкции перчатки с сенсорами.</p>
+            <p style="margin-top:6px;">Фото и аудиозаметки можно добавлять прямо в ходе очной сессии, чтобы агент видел весь контекст работы.</p>
           </div>
 
           <!-- AI Suggestions -->
@@ -886,6 +1025,24 @@
           <div class="ai-suggestion">
             <div class="sug-title">🔄 Предложение по роли</div>
             <div class="sug-text">Анастасия (лидер) взяла на себя задачу программирования сенсоров. Возможно, стоит передать это Дмитрию (разработчику), а лидеру сфокусироваться на координации и подготовке к тестированию.</div>
+          </div>
+
+          <div class="ai-photo-panel">
+            <h4>📷 Фото из сессии</h4>
+            <p>Сделайте фото доски, макета, схемы или артефакта. Фото будет сохранено как часть сессии и передано агенту для анализа.</p>
+            <input class="photo-input" type="file" id="sessionPhotoInput" accept="image/*" capture="environment" />
+            <div class="photo-input-row">
+              <button class="btn sm" onclick="openSessionPhotoPicker()">📷 Сделать фото</button>
+              <button class="btn sm" onclick="clearSessionPhoto()">🗑 Удалить</button>
+              <button class="btn sm" onclick="sessionAction('photo')">✦ Проанализировать фото</button>
+            </div>
+            <div class="photo-preview" id="sessionPhotoPreview">
+              <img id="sessionPhotoPreviewImg" alt="Фото сессии" />
+              <div>
+                <div class="name" id="sessionPhotoPreviewName">Фото не выбрано</div>
+                <div class="meta" id="sessionPhotoPreviewMeta">Сделайте снимок или загрузите файл с устройства.</div>
+              </div>
+            </div>
           </div>
 
           <!-- Quick Actions -->
@@ -921,7 +1078,7 @@
               <div class="session-msg system">Агент зафиксировал: выбор ERM-моторов 10мм · Добавлено в материалы</div>
             </div>
             <div class="session-composer">
-              <input id="sessionInput" placeholder="Спросить агента или команду..." onkeydown="if(event.key==='Enter')sendSessionMsg()"/>
+              <input id="sessionInput" placeholder="Спросить агента, команду или описать фото..." onkeydown="if(event.key==='Enter')sendSessionMsg()"/>
               <button class="btn primary sm" onclick="sendSessionMsg()">↑</button>
             </div>
           </div>
@@ -1580,6 +1737,1290 @@
     window.sessionAction = sessionAction; window.sendSessionMsg = sendSessionMsg;
     window.stopSession = stopSession;
   </script>
+
+<script>
+(function () {
+  const AGENT_WEBHOOK_URL = 'https://univent26.app.n8n.cloud/webhook/prototype-ai';
+  const byId = (id) => document.getElementById(id);
+  const all = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+
+  const hasProjectData = typeof projectData !== 'undefined';
+  const hasMaterialData = typeof materialData !== 'undefined';
+  const projectStore = hasProjectData ? projectData : [];
+  const materialStore = hasMaterialData ? materialData : [];
+
+  const storageKey = 'prototype_saved_session_artifacts_v2';
+
+  const state = {
+    context: {
+      type: 'dashboard',
+      title: 'Главная',
+      summary: 'Выберите проект, материал или сессию, чтобы передать контекст ИИ-агенту.',
+      phase: 'Исследование',
+      source: 'Платформа',
+      sourceType: 'dashboard',
+      tags: ['Фаза: Исследование', 'Фаза: Создание', 'Фаза: Проверка'],
+      suggestedPrompt: 'Подскажи следующий шаг для текущего контекста.'
+    },
+    contextIntroKey: '',
+    session: {
+      active: false,
+      seconds: 0,
+      timer: null,
+      transcript: [],
+      location: 'Зона прототипирования',
+      lastAction: 'ожидание запуска',
+      photo: null
+    },
+    mode: {
+      background: true,
+      proactive: true
+    },
+    ui: {
+      wideChat: true
+    }
+  };
+
+  function stripHtml(value) {
+    return String(value ?? '')
+      .replace(/<[^>]*>/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  function short(value, max = 240) {
+    const text = String(value ?? '').trim();
+    if (text.length <= max) return text;
+    return text.slice(0, max - 1).trimEnd() + '…';
+  }
+
+  function toDataUrlMime(fileType = '') {
+    if (!fileType) return 'image/jpeg';
+    if (fileType === 'image/png' || fileType === 'image/webp' || fileType === 'image/gif') return fileType;
+    return 'image/jpeg';
+  }
+
+  function applyWideChatState() {
+    document.body.classList.toggle('wide-chat', Boolean(state.ui.wideChat));
+    const btn = byId('wideChatToggleBtn');
+    if (btn) {
+      btn.classList.toggle('toggle-active', Boolean(state.ui.wideChat));
+      btn.title = state.ui.wideChat ? 'Свернуть чат' : 'Развернуть чат';
+      btn.textContent = state.ui.wideChat ? '⤡' : '⤢';
+    }
+  }
+
+  function toggleWideChat(force) {
+    state.ui.wideChat = typeof force === 'boolean' ? force : !state.ui.wideChat;
+    try {
+      localStorage.setItem('prototype_wide_chat', state.ui.wideChat ? '1' : '0');
+    } catch {}
+    applyWideChatState();
+  }
+
+  function focusAgentInput() {
+    go('agent');
+    const input = byId('agentInput');
+    if (input) input.focus();
+  }
+
+  function focusSessionInput() {
+    go('aiSession');
+    const input = byId('sessionInput');
+    if (input) input.focus();
+  }
+
+  async function fileToDataUrl(file, maxSide = 1280, quality = 0.82) {
+    const originalMime = file.type || 'image/jpeg';
+    const targetMime = toDataUrlMime(originalMime);
+    const readerResult = await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onerror = () => reject(new Error('Не удалось прочитать файл'));
+      reader.onload = () => resolve(reader.result);
+      reader.readAsDataURL(file);
+    });
+
+    const src = String(readerResult || '');
+    if (!src.startsWith('data:image/')) return { dataUrl: src, mimeType: targetMime, width: 0, height: 0 };
+
+    const img = await new Promise((resolve, reject) => {
+      const image = new Image();
+      image.onload = () => resolve(image);
+      image.onerror = () => reject(new Error('Не удалось загрузить изображение'));
+      image.src = src;
+    });
+
+    const scale = Math.min(1, maxSide / Math.max(img.width || maxSide, img.height || maxSide));
+    const canvas = document.createElement('canvas');
+    canvas.width = Math.max(1, Math.round((img.width || maxSide) * scale));
+    canvas.height = Math.max(1, Math.round((img.height || maxSide) * scale));
+    const ctx = canvas.getContext('2d');
+    if (!ctx) throw new Error('Canvas недоступен');
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    const dataUrl = canvas.toDataURL(targetMime, targetMime === 'image/png' ? undefined : quality);
+    return { dataUrl, mimeType: targetMime, width: canvas.width, height: canvas.height };
+  }
+
+  function renderSessionPhotoPreview() {
+    const preview = byId('sessionPhotoPreview');
+    const img = byId('sessionPhotoPreviewImg');
+    const name = byId('sessionPhotoPreviewName');
+    const meta = byId('sessionPhotoPreviewMeta');
+    if (!preview || !img || !name || !meta) return;
+
+    if (!state.session.photo) {
+      preview.classList.remove('active');
+      img.removeAttribute('src');
+      name.textContent = 'Фото не выбрано';
+      meta.textContent = 'Сделайте снимок или загрузите файл с устройства.';
+      return;
+    }
+
+    preview.classList.add('active');
+    img.src = state.session.photo.dataUrl;
+    name.textContent = state.session.photo.fileName || 'Фото сессии';
+    meta.textContent = `${state.session.photo.mimeType || 'image'} · ${state.session.photo.width || '?'}×${state.session.photo.height || '?'} · ${state.session.photo.capturedAt || ''}`;
+  }
+
+  async function handleSessionPhotoChange(file) {
+    if (!file) return;
+    try {
+      const processed = await fileToDataUrl(file);
+      state.session.photo = {
+        fileName: file.name || 'session-photo.jpg',
+        mimeType: processed.mimeType,
+        dataUrl: processed.dataUrl,
+        width: processed.width,
+        height: processed.height,
+        capturedAt: new Date().toLocaleString('ru-RU'),
+        note: 'Фото сессии'
+      };
+      state.session.lastAction = 'добавлено фото';
+      renderSessionPhotoPreview();
+      ensureSessionContextCard();
+      showToast('Фото добавлено в сессию', 'success');
+    } catch (error) {
+      showToast(`Фото не удалось добавить: ${error.message}`, 'info');
+    }
+  }
+
+  function openSessionPhotoPicker() {
+    const input = byId('sessionPhotoInput');
+    if (input) input.click();
+  }
+
+  function clearSessionPhoto() {
+    state.session.photo = null;
+    const input = byId('sessionPhotoInput');
+    if (input) input.value = '';
+    renderSessionPhotoPreview();
+    ensureSessionContextCard();
+    showToast('Фото удалено', 'info');
+  }
+
+
+  function formatDate(iso = new Date().toISOString()) {
+    try {
+      return new Intl.DateTimeFormat('ru-RU', { day: '2-digit', month: 'long', year: 'numeric' }).format(new Date(iso));
+    } catch {
+      return new Date(iso).toLocaleDateString('ru-RU');
+    }
+  }
+
+  function summarizeProject(p) {
+    const chunks = [p.title];
+    if (p.company) chunks.push(`компания: ${p.company}`);
+    if (p.university) chunks.push(`университет: ${p.university}`);
+    if (p.case) chunks.push(`кейс: ${p.case}`);
+    if (p.phase) chunks.push(`фаза: ${p.phase}`);
+    return chunks.filter(Boolean).join(' · ');
+  }
+
+  function makeContextKey(ctx) {
+    return [ctx.type || 'general', ctx.title || '', ctx.company || '', ctx.university || '', ctx.materialTitle || ''].join('|');
+  }
+
+  function normalizeContext(input = {}) {
+    const photo = input.photo || input.sessionPhoto || null;
+    const ctx = {
+      type: input.type || 'dashboard',
+      title: input.title || 'Главная',
+      summary: input.summary || 'Выберите контекст для агента.',
+      phase: input.phase || 'Создание',
+      source: input.source || 'Платформа',
+      sourceType: input.sourceType || input.type || 'dashboard',
+      company: input.company || '',
+      university: input.university || '',
+      case: input.case || '',
+      materialTitle: input.materialTitle || '',
+      materialMeta: input.materialMeta || '',
+      materialContent: input.materialContent || '',
+      materialIndex: input.materialIndex ?? null,
+      projectIndex: input.projectIndex ?? null,
+      tags: Array.isArray(input.tags) ? input.tags.slice(0, 4) : [],
+      suggestedPrompt: input.suggestedPrompt || '',
+      location: input.location || state.session.location,
+      lastAction: input.lastAction || state.session.lastAction,
+      photoAttached: Boolean(photo && (photo.dataUrl || photo.fileName || photo.mimeType)),
+      photoName: photo?.fileName || '',
+      photoMimeType: photo?.mimeType || '',
+      photoNote: photo?.note || '',
+      photoCapturedAt: photo?.capturedAt || ''
+    };
+
+    if (!ctx.tags.length) {
+      if (ctx.type === 'project') {
+        ctx.tags = [ctx.company ? `Компания: ${ctx.company}` : 'Проект', `Фаза: ${ctx.phase}`];
+      } else if (ctx.type === 'material') {
+        ctx.tags = ['Материал', `Фаза: ${ctx.phase}`];
+      } else if (ctx.type === 'session') {
+        ctx.tags = ['Сессия', `Локация: ${ctx.location}`];
+      } else {
+        ctx.tags = ['Фаза: Исследование', 'Фаза: Создание', 'Фаза: Проверка'];
+      }
+    }
+
+    if (!ctx.suggestedPrompt) {
+      if (ctx.type === 'project') {
+        ctx.suggestedPrompt = 'Разбери этот кейс и предложи следующий логичный шаг.';
+      } else if (ctx.type === 'material') {
+        ctx.suggestedPrompt = 'Объясни, как этот материал помогает проекту, и предложи аналогии.';
+      } else if (ctx.type === 'session') {
+        ctx.suggestedPrompt = 'Сформируй конспект сессии и зафиксируй решения.';
+      } else {
+        ctx.suggestedPrompt = 'Подскажи следующий шаг для текущего контекста.';
+      }
+    }
+    return ctx;
+  }
+
+  function buildTips(ctx) {
+    const projectLine = ctx.type === 'project' ? summarizeProject(ctx) : 'Текущий проект без уточнённого кейса';
+    const materialLine = ctx.type === 'material'
+      ? `${ctx.materialTitle}${ctx.materialMeta ? ` · ${ctx.materialMeta}` : ''}`
+      : 'Материал ещё не выбран';
+
+    return [
+      {
+        title: '💡 Совет по вашей роли',
+        text: ctx.type === 'project'
+          ? `В этом кейсе лучше удерживать фокус на координации и делегировании. ${projectLine}.`
+          : ctx.type === 'session' && ctx.photoAttached
+            ? 'В сессии уже есть фото: попросите агента быстро разметить увиденное и превратить его в короткий список решений.'
+            : 'Сфокусируйтесь на координации команды и передавайте агенту часть анализа и фиксации контекста.'
+      },
+      {
+        title: '📈 Рекомендация по работе',
+        text: ctx.type === 'session'
+          ? 'Сессия активна. Зафиксируйте короткое резюме после каждого смыслового шага, чтобы не терять решения.'
+          : `Если обсуждение зациклилось, переключитесь на визуальную фиксацию или прототипирование. ${materialLine}.`
+      },
+      {
+        title: '🔍 Глубже в тему',
+        text: ctx.type === 'material'
+          ? 'Попросите агента найти 2–3 аналогии из других индустрий и объяснить, как перенести принципы в ваш проект.'
+          : ctx.type === 'session' && ctx.photoAttached
+            ? 'Фото из сессии можно использовать как опорный артефакт для вопроса: что видно, что улучшить и какой следующий шаг?'
+            : 'Агент может подобрать смежные кейсы из других индустрий и показать, какие решения можно адаптировать.'
+      }
+    ];
+  }
+
+  function buildRecommendations(ctx) {
+    const base = [];
+    if (ctx.type === 'project') {
+      base.push(
+        `📊 Сверить требования кейса: ${ctx.company || ctx.source || 'заказчик'}`,
+        `🎓 Уточнить университетский/командный контекст: ${ctx.university || 'нет данных'}`,
+        '➡️ Предложить следующий шаг по фазе'
+      );
+    } else if (ctx.type === 'material') {
+      base.push(
+        '📋 Создать краткий конспект этого материала',
+        '🔎 Найти связанные артефакты и решения',
+        '💡 Попросить агента объяснить аналогии'
+      );
+    } else if (ctx.type === 'session') {
+      base.push(
+        '📋 Сформировать конспект физической сессии',
+        '🔄 Предложить роли и распределение задач',
+        ctx.photoAttached ? '📷 Проанализировать фото сессии' : '💾 Сохранить материал сессии в проект'
+      );
+    } else {
+      base.push(
+        '💡 Уточнить контекст для более точного совета',
+        '📋 Сформировать конспект',
+        '➡️ Предложить следующий шаг'
+      );
+    }
+    return base.slice(0, 3);
+  }
+
+  function buildMaterials(ctx) {
+    return [
+      {
+        title: ctx.type === 'project' ? `Кейс: ${ctx.title}` : 'Подборка: материалы по текущему контексту',
+        meta: ctx.type === 'project' ? summarizeProject(ctx) : 'Связанные материалы и артефакты',
+      },
+      {
+        title: ctx.type === 'material'
+          ? `Продолжить обсуждение: ${ctx.materialTitle}`
+          : ctx.type === 'session' && ctx.photoAttached
+            ? `Фото сессии: ${ctx.photoName || 'без названия'}`
+            : 'Аналогии и смежные примеры',
+        meta: ctx.type === 'material'
+          ? 'Открыть контекст материала в чате'
+          : ctx.type === 'session' && ctx.photoAttached
+            ? 'Показать фото агенту и получить разбор'
+            : 'Попросить агента найти больше примеров',
+      }
+    ];
+  }
+
+  function ensureAgentContextCard() {
+    const agentScreen = byId('agent');
+    if (!agentScreen || byId('dynamicAgentContextCard')) return;
+    const firstCard = agentScreen.querySelector('.card');
+    if (!firstCard) return;
+
+    firstCard.insertAdjacentHTML(
+      'afterend',
+      `
+      <div class="card" id="dynamicAgentContextCard">
+        <div class="section-head">
+          <h3 style="margin:0;">Контекст для агента</h3>
+          <span class="badge blue" id="dynamicAgentBadge">Готов</span>
+        </div>
+        <div id="dynamicAgentSummary" style="font-size:13px;line-height:1.6;color:var(--text-2);">
+          Выберите проект, материал или сессию, и я подстрою ответ под этот контекст.
+        </div>
+        <div class="project-skills" id="dynamicAgentTags" style="margin-top:10px;"></div>
+        <div class="btn-row" style="margin-top:12px;">
+          <button class="btn sm" id="dynamicAgentPromptBtn">💡 Спросить по контексту</button>
+          <button class="btn sm" id="dynamicAgentSessionBtn">🎙 В сессию</button>
+        </div>
+      </div>
+      `
+    );
+  }
+
+  function updateAgentDynamicCards() {
+    const agentScreen = byId('agent');
+    if (!agentScreen) return;
+
+    const tips = buildTips(state.context);
+    const recs = buildRecommendations(state.context);
+    const mats = buildMaterials(state.context);
+
+    const tipCards = all('.tip-card', agentScreen);
+    tipCards.forEach((card, idx) => {
+      const tip = tips[idx];
+      if (!tip) return;
+      card.innerHTML = `<h4>${tip.title}</h4><p>${tip.text}</p>`;
+      card.style.cursor = 'pointer';
+      card.onclick = () => {
+        openAgentContext({
+          ...state.context,
+          suggestedPrompt: idx === 0
+            ? 'Сформулируй совет по моей роли с учётом текущего контекста.'
+            : idx === 1
+              ? 'Проверь динамику команды и предложи рабочую рекомендацию.'
+              : 'Подбери аналогии и объясни, как перенести их в проект.'
+        }, { openAgent: true, seedIntro: false });
+        byId('agentInput')?.focus();
+      };
+    });
+
+    const recCards = all('.rec-card', agentScreen);
+    recCards.forEach((card, idx) => {
+      const text = recs[idx];
+      if (!text) return;
+      const title = idx === 0 ? '📊 Анализ паттернов команды' : '🎯 Следующий логичный шаг';
+      card.innerHTML = `<h4>${title}</h4><p>${text}</p>`;
+      card.style.cursor = 'pointer';
+      card.onclick = () => {
+        openAgentContext({
+          ...state.context,
+          suggestedPrompt: idx === 0
+            ? 'Проанализируй паттерны команды: асимметрия, простои, зацикливание на идее.'
+            : 'Какой следующий логичный шаг сейчас для этого проекта?'
+        }, { openAgent: true, seedIntro: false });
+      };
+    });
+
+    const materialCards = all('.material-item', agentScreen);
+    materialCards.forEach((card, idx) => {
+      const item = mats[idx];
+      if (!item) return;
+      const info = card.querySelector('.material-info');
+      if (info) {
+        info.innerHTML = `<strong>${item.title}</strong><div class="meta">${item.meta}</div>`;
+      }
+      card.style.cursor = 'pointer';
+      card.onclick = () => {
+        openAgentContext({
+          ...state.context,
+          suggestedPrompt: idx === 0
+            ? 'Создай краткий конспект текущего контекста.'
+            : 'Найди 2–3 аналогии из других индустрий и объясни применимость.'
+        }, { openAgent: true, seedIntro: false });
+      };
+    });
+  }
+
+  function updateAgentContextCard() {
+    ensureAgentContextCard();
+    const badge = byId('dynamicAgentBadge');
+    const summary = byId('dynamicAgentSummary');
+    const tags = byId('dynamicAgentTags');
+    const promptBtn = byId('dynamicAgentPromptBtn');
+    const sessionBtn = byId('dynamicAgentSessionBtn');
+    const input = byId('agentInput');
+
+    if (badge) {
+      badge.textContent = state.context.type === 'project'
+        ? 'Проект'
+        : state.context.type === 'material'
+          ? 'Материал'
+          : state.context.type === 'session'
+            ? 'Сессия'
+            : 'Общий';
+    }
+
+    if (summary) {
+      const projectLine = state.context.type === 'project' ? summarizeProject(state.context) : '';
+      const materialLine = state.context.type === 'material'
+        ? `${state.context.materialTitle}${state.context.materialMeta ? ` · ${state.context.materialMeta}` : ''}`
+        : '';
+      const sessionLine = state.context.type === 'session'
+        ? `Локация: ${state.session.location} · Последнее действие: ${state.session.lastAction}`
+        : '';
+      summary.innerHTML = [
+        state.context.summary,
+        projectLine ? `<div style="margin-top:8px;"><strong>Проект:</strong> ${projectLine}</div>` : '',
+        materialLine ? `<div style="margin-top:8px;"><strong>Материал:</strong> ${materialLine}</div>` : '',
+        sessionLine ? `<div style="margin-top:8px;"><strong>Сессия:</strong> ${sessionLine}</div>` : ''
+      ].filter(Boolean).join('');
+    }
+
+    if (tags) {
+      tags.innerHTML = (state.context.tags || []).map(tag => `<span class="skill-tag">${tag}</span>`).join('');
+    }
+
+    if (input) {
+      input.placeholder = state.context.suggestedPrompt || 'Спросить агента...';
+    }
+
+    if (promptBtn) {
+      promptBtn.onclick = () => {
+        const target = byId('agentInput');
+        if (target) target.value = state.context.suggestedPrompt || '';
+        go('agent');
+        target?.focus();
+      };
+    }
+
+    if (sessionBtn) {
+      sessionBtn.onclick = () => activateAgent();
+    }
+
+    updateAgentDynamicCards();
+  }
+
+  function ensureSessionContextCard() {
+    const sessionScreen = byId('aiSession');
+    if (!sessionScreen) return;
+    const contextCard = sessionScreen.querySelector('.ai-context-card');
+    if (!contextCard) return;
+
+    contextCard.innerHTML = `
+      <h4>📍 Текущий контекст</h4>
+      <p>Фаза: <strong>${state.context.phase || 'Создание'}</strong> · Проект: <strong>${state.context.title || 'Проект'}</strong></p>
+      <p style="margin-top:6px;">
+        ${state.context.type === 'project'
+          ? `${state.context.company ? `Компания: <strong>${state.context.company}</strong>` : ''}${state.context.university ? ` · Университет: <strong>${state.context.university}</strong>` : ''}`
+          : state.context.type === 'material'
+            ? `Материал: <strong>${state.context.materialTitle || 'без названия'}</strong>`
+            : 'Сессия готова к записи и фиксации решений.'}
+      </p>
+      <p style="margin-top:6px;">Последнее действие: <strong>${state.session.lastAction || 'ожидание запуска'}</strong></p>
+      ${state.session.photo ? `<p style="margin-top:6px;">Фото: <strong>${state.session.photo.fileName || 'session-photo'}</strong> · ${state.session.photo.mimeType || 'image'}</p>` : ''}
+      <div class="project-skills" style="margin-top:10px;">
+        ${(state.context.tags || []).slice(0, 4).map(tag => `<span class="skill-tag">${tag}</span>`).join('')}
+      </div>
+      <div class="btn-row" style="margin-top:12px;">
+        <button class="btn sm" id="sessionSaveArtifactBtn">📥 Сохранить материал</button>
+        <button class="btn sm" id="sessionAskAgentBtn">💡 Спросить агента</button>
+      </div>
+      <div class="btn-row" style="margin-top:10px;">
+        <button class="btn sm" id="sessionPhotoAskBtn">📷 Показать фото агенту</button>
+        <button class="btn sm" id="sessionPhotoClearBtn">🗑 Удалить фото</button>
+      </div>
+    `;
+
+    const saveBtn = byId('sessionSaveArtifactBtn');
+    const askBtn = byId('sessionAskAgentBtn');
+    const photoAskBtn = byId('sessionPhotoAskBtn');
+    const photoClearBtn = byId('sessionPhotoClearBtn');
+    if (saveBtn) saveBtn.onclick = () => sessionAction('summary');
+    if (askBtn) askBtn.onclick = () => {
+      go('agent');
+      const input = byId('agentInput');
+      if (input) input.value = state.context.suggestedPrompt || 'Попроси агента помочь по текущей сессии.';
+      input?.focus();
+    };
+    if (photoAskBtn) photoAskBtn.onclick = () => sessionAction('photo');
+    if (photoClearBtn) photoClearBtn.onclick = () => clearSessionPhoto();
+
+    const suggestions = all('.ai-suggestion', sessionScreen);
+    if (suggestions[0]) {
+      const titleEl = suggestions[0].querySelector('.sug-title');
+      const textEl = suggestions[0].querySelector('.sug-text');
+      if (titleEl) titleEl.textContent = '💡 Предложение агента';
+      if (textEl) {
+        textEl.textContent = state.context.type === 'session'
+          ? (state.session.photo
+            ? 'Сессия уже активна. У вас есть фото артефакта — попросите агента быстро разобрать его и выделить следующий шаг.'
+            : 'Сессия уже активна. Зафиксируйте ключевые реплики и завершайте каждый смысловой блок коротким выводом.')
+          : `Следующий шаг для ${state.context.title || 'проекта'}: ${state.context.suggestedPrompt}`;
+      }
+      suggestions[0].onclick = () => {
+        go('agent');
+        const input = byId('agentInput');
+        if (input) input.value = state.context.suggestedPrompt || 'Сформулируй следующий шаг.';
+      };
+    }
+
+    if (suggestions[1]) {
+      const titleEl = suggestions[1].querySelector('.sug-title');
+      const textEl = suggestions[1].querySelector('.sug-text');
+      if (titleEl) titleEl.textContent = '🔄 Предложение по роли';
+      if (textEl) {
+        textEl.textContent = state.context.type === 'project'
+          ? `Рекомендуется распределить роли с учётом кейса: ${state.context.company || state.context.source || 'заказчик'} и этапа ${state.context.phase}.`
+          : 'Агент может подсказать, кому лучше делегировать текущий участок работы.';
+      }
+      suggestions[1].onclick = () => {
+        go('agent');
+        const input = byId('agentInput');
+        if (input) input.value = 'Предложи роли и делегирование задач с учётом текущего контекста.';
+      };
+    }
+
+    const chat = byId('sessionChat');
+    if (chat && !chat.dataset.contextIntro) {
+      chat.dataset.contextIntro = '1';
+      chat.insertAdjacentHTML(
+        'afterbegin',
+        `<div class="session-msg system">Контекст загружен: ${stripHtml(state.context.title || 'Проект')} · ${state.context.type === 'material' ? 'материал' : state.context.type === 'project' ? 'проект' : 'сессия'}</div>`
+      );
+    }
+  }
+
+  function appendAgentIntroIfNeeded() {
+    const list = byId('agentMessages');
+    if (!list) return;
+    const key = makeContextKey(state.context);
+    if (state.contextIntroKey === key) return;
+    state.contextIntroKey = key;
+    const existingIntro = list.querySelector('[data-context-intro="1"]');
+    if (existingIntro) existingIntro.remove();
+    list.insertAdjacentHTML(
+      'afterbegin',
+      `<div class="msg agent" data-context-intro="1"><div class="msg-label">Агент</div>Контекст загружен: ${stripHtml(state.context.title || 'Главная')}. Я уже учитываю его в ответах.</div>`
+    );
+  }
+
+  function applyModeState() {
+    const agentScreen = byId('agent');
+    if (!agentScreen) return;
+    const toggles = all('.switch', agentScreen);
+    if (toggles[0]) state.mode.background = toggles[0].classList.contains('on');
+    if (toggles[1]) state.mode.proactive = toggles[1].classList.contains('on');
+  }
+
+  async function callAgent(payload) {
+    const response = await fetch(AGENT_WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
+
+    const contentType = response.headers.get('content-type') || '';
+    if (contentType.includes('application/json')) {
+      return await response.json();
+    }
+
+    const text = await response.text();
+    return { reply: text };
+  }
+
+  function getChatHistory(listEl, limit = 6) {
+    if (!listEl) return [];
+    return all('.msg, .session-msg', listEl)
+      .slice(-limit)
+      .map((node) => ({
+        role: node.classList.contains('user') ? 'user' : 'assistant',
+        text: stripHtml(node.innerText || node.textContent || '')
+      }))
+      .filter((m) => m.text);
+  }
+
+  function makePayload(message, action, extra = {}) {
+    applyModeState();
+    const usePhoto = Boolean(state.session.photo && (state.context.type === 'session' || extra.includePhoto));
+    return {
+      sessionId: 'project-neuro-interface-01',
+      message: String(message ?? '').trim(),
+      action,
+      sourceScreen: extra.sourceScreen || 'agent',
+      entryPoint: extra.entryPoint || state.context.sourceType || 'dashboard',
+      context: {
+        ...state.context,
+        mode: {
+          background: state.mode.background,
+          proactive: state.mode.proactive
+        },
+        sessionActive: state.session.active,
+        lastAction: state.session.lastAction,
+        photoAttached: usePhoto,
+        photoName: state.session.photo?.fileName || '',
+        photoMimeType: state.session.photo?.mimeType || '',
+        photoCapturedAt: state.session.photo?.capturedAt || ''
+      },
+      project: extra.project || state.context,
+      material: extra.material || {},
+      session: {
+        active: state.session.active,
+        location: state.session.location,
+        lastAction: state.session.lastAction,
+        transcript: state.session.transcript.slice(),
+        photo: usePhoto && state.session.photo ? {
+          attached: true,
+          fileName: state.session.photo.fileName,
+          mimeType: state.session.photo.mimeType,
+          dataUrl: state.session.photo.dataUrl,
+          width: state.session.photo.width,
+          height: state.session.photo.height,
+          capturedAt: state.session.photo.capturedAt,
+          note: state.session.photo.note
+        } : null
+      },
+      photo: usePhoto && state.session.photo ? {
+        attached: true,
+        fileName: state.session.photo.fileName,
+        mimeType: state.session.photo.mimeType,
+        dataUrl: state.session.photo.dataUrl,
+        width: state.session.photo.width,
+        height: state.session.photo.height,
+        capturedAt: state.session.photo.capturedAt,
+        note: state.session.photo.note
+      } : null,
+      history: extra.history || [],
+      timestamp: new Date().toISOString()
+    };
+  }
+
+  function formatReplyToHTML(text) {
+    return String(text ?? '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/\n/g, '<br>');
+  }
+
+  function addAgentMessage(list, text) {
+    const msg = document.createElement('div');
+    msg.className = 'msg agent';
+    msg.innerHTML = `<div class="msg-label">Агент</div>${formatReplyToHTML(text)}`;
+    list.appendChild(msg);
+    list.scrollTop = list.scrollHeight;
+  }
+
+  function addUserMessage(list, text) {
+    const msg = document.createElement('div');
+    msg.className = 'msg user';
+    msg.textContent = text;
+    list.appendChild(msg);
+    list.scrollTop = list.scrollHeight;
+  }
+
+  function addSessionMessage(list, type, text) {
+    const msg = document.createElement('div');
+    msg.className = `session-msg ${type}`;
+    if (type === 'ai') {
+      msg.innerHTML = `<div class="msg-label">Агент</div>${formatReplyToHTML(text)}`;
+    } else {
+      msg.textContent = text;
+    }
+    list.appendChild(msg);
+    list.scrollTop = list.scrollHeight;
+  }
+
+  function updateSessionTimer() {
+    const timer = byId('sessionTimer');
+    if (!timer) return;
+    const h = String(Math.floor(state.session.seconds / 3600)).padStart(2, '0');
+    const m = String(Math.floor((state.session.seconds % 3600) / 60)).padStart(2, '0');
+    const s = String(state.session.seconds % 60).padStart(2, '0');
+    timer.textContent = `${h}:${m}:${s}`;
+  }
+
+  function startSessionTimer() {
+    if (state.session.timer) clearInterval(state.session.timer);
+    state.session.timer = setInterval(() => {
+      if (!state.session.active) return;
+      state.session.seconds += 1;
+      updateSessionTimer();
+    }, 1000);
+  }
+
+  function stopSessionTimer() {
+    if (state.session.timer) clearInterval(state.session.timer);
+    state.session.timer = null;
+  }
+
+  function renderSavedArtifacts() {
+    const raw = localStorage.getItem(storageKey);
+    if (!raw || !hasMaterialData) return;
+    let items = [];
+    try {
+      items = JSON.parse(raw);
+    } catch {
+      return;
+    }
+    if (!Array.isArray(items) || !items.length) return;
+
+    const materialsBlock = byId('proj-materials');
+    const listContainer = materialsBlock ? (materialsBlock.querySelector('.material-item')?.parentElement || materialsBlock) : null;
+
+    items.forEach((artifact) => {
+      if (!artifact || !artifact.id) return;
+      if (materialStore.some((m) => m && m.id === artifact.id)) return;
+      materialStore.push(artifact);
+
+      if (listContainer) {
+        const index = materialStore.length - 1;
+        const item = document.createElement('div');
+        item.className = 'material-item';
+        item.dataset.savedArtifactId = artifact.id;
+        item.onclick = () => openMaterial(index);
+        item.innerHTML = `
+          <div class="material-icon ${artifact.icon || 'ai'}">${artifact.iconEmoji || '✦'}</div>
+          <div class="material-info">
+            <strong>${artifact.title}</strong>
+            <div class="meta">${artifact.meta || 'Сохранено из сессии'}</div>
+          </div>
+        `;
+        listContainer.appendChild(item);
+      }
+    });
+  }
+
+  function saveArtifactToStorage(artifact) {
+    const existing = (() => {
+      try {
+        return JSON.parse(localStorage.getItem(storageKey) || '[]');
+      } catch {
+        return [];
+      }
+    })();
+
+    const next = [...existing, artifact];
+    localStorage.setItem(storageKey, JSON.stringify(next));
+  }
+
+  function appendArtifactToMaterials(artifact) {
+    if (!hasMaterialData) return;
+    materialStore.push(artifact);
+    const index = materialStore.length - 1;
+
+    const materialsBlock = byId('proj-materials');
+    const listContainer = materialsBlock ? (materialsBlock.querySelector('.material-item')?.parentElement || materialsBlock) : null;
+    if (!listContainer) return;
+
+    const item = document.createElement('div');
+    item.className = 'material-item';
+    item.dataset.savedArtifactId = artifact.id || String(Date.now());
+    item.onclick = () => openMaterial(index);
+    item.innerHTML = `
+      <div class="material-icon ${artifact.icon || 'ai'}">${artifact.iconEmoji || '✦'}</div>
+      <div class="material-info">
+        <strong>${artifact.title}</strong>
+        <div class="meta">${artifact.meta || 'Сохранено из сессии'}</div>
+      </div>
+    `;
+    listContainer.appendChild(item);
+  }
+
+  function saveSessionArtifact(summaryText, extra = {}) {
+    const artifact = {
+      id: `session-${Date.now()}`,
+      icon: 'meeting',
+      iconEmoji: '📝',
+      title: extra.title || `Конспект сессии · ${formatDate()}`,
+      meta: extra.meta || `Сохранено из физического пространства · ${state.context.title || 'Проект'}`,
+      tags: extra.tags || ['Сессия', state.context.phase || 'Создание'],
+      content: extra.content || `
+        <h3>Конспект физической сессии</h3>
+        <p>${formatReplyToHTML(summaryText)}</p>
+        <div class="highlight">
+          <p><strong>Контекст:</strong> ${formatReplyToHTML(state.context.summary || state.context.title || 'Проект')}</p>
+        </div>
+      `,
+      source: 'Сохранено агентом'
+    };
+    saveArtifactToStorage(artifact);
+    appendArtifactToMaterials(artifact);
+    showToast('Материал сессии сохранён в проект', 'success');
+    return artifact;
+  }
+
+  function openAgentContext(ctx = {}, options = {}) {
+    state.context = normalizeContext(ctx);
+    if (options.sessionLocation) state.session.location = options.sessionLocation;
+    if (options.sessionLastAction) state.session.lastAction = options.sessionLastAction;
+    updateAgentContextCard();
+    ensureSessionContextCard();
+    renderSessionPhotoPreview();
+    if (options.openAgent) go('agent');
+    if (options.prefill) {
+      const input = byId('agentInput');
+      if (input) input.value = options.prefill;
+    }
+    if (options.seedIntro !== false) {
+      appendAgentIntroIfNeeded();
+    }
+    applyWideChatState();
+  }
+
+  function openProjectInAgent() {
+    const input = byId('agentInput');
+    openAgentContext(state.context, {
+      openAgent: true,
+      prefill: 'Разбери этот проект: что важно в кейсе, какие риски и какой следующий шаг?'
+    });
+    applyWideChatState();
+    input?.focus();
+  }
+
+  function openMaterialInAgent() {
+    const input = byId('agentInput');
+    openAgentContext(state.context, {
+      openAgent: true,
+      prefill: 'Объясни, как этот материал связан с проектом, и дай 2–3 аналогии.'
+    });
+    applyWideChatState();
+    input?.focus();
+  }
+
+  function renderCurrentScreenSpecificUI(id) {
+    if (id === 'agent') {
+      updateAgentContextCard();
+      appendAgentIntroIfNeeded();
+      injectDetailButtons();
+    }
+    if (id === 'aiSession') {
+      ensureSessionContextCard();
+      renderSessionPhotoPreview();
+      startSessionTimer();
+      injectDetailButtons();
+    }
+    if (id === 'materialDetail' || id === 'projectDetail') {
+      injectDetailButtons();
+    }
+  }
+
+  function injectDetailButtons() {
+    const projectPrimary = document.querySelector('#projectDetail .btn.primary.block');
+    if (projectPrimary && !byId('projectAgentBtn')) {
+      projectPrimary.insertAdjacentHTML('afterend', `<button class="btn block" id="projectAgentBtn" onclick="openProjectInAgent()">✦ Обсудить проект с агентом</button>`);
+    }
+
+    const materialPrimary = document.querySelector('#materialDetail .btn.primary.block');
+    if (materialPrimary && !byId('materialAgentBtn')) {
+      materialPrimary.insertAdjacentHTML('afterend', `<button class="btn block" id="materialAgentBtn" onclick="openMaterialInAgent()">✦ Обсудить материал с агентом</button>`);
+    }
+  }
+
+  function go(id) {
+    const screens = document.querySelectorAll('.screen');
+    const tabs = document.querySelectorAll('.tab');
+    const titleEl = byId('screenTitle');
+    const titleMap = {
+      home: 'Главная',
+      marketplace: 'Проекты',
+      myproject: 'Мой проект',
+      create: 'Новый проект',
+      work: 'Рабочий процесс',
+      agent: 'ИИ-агент',
+      notifications: 'Уведомления',
+      profile: 'Профиль',
+      settings: 'Настройки',
+      editProfile: 'Редактировать профиль',
+      projectDetail: 'Детали проекта',
+      materialDetail: 'Материал',
+      aiSession: 'Сессия в пространстве'
+    };
+
+    screens.forEach((screen) => screen.classList.toggle('active', screen.id === id));
+    tabs.forEach((tab) => tab.classList.toggle('active', tab.dataset.screen === id));
+    if (titleEl) titleEl.textContent = titleMap[id] || id;
+
+    const content = document.querySelector('.content');
+    if (content) content.scrollTo({ top: 0, behavior: 'smooth' });
+
+    if (id === 'agent' || id === 'aiSession') {
+      state.ui.wideChat = true;
+      try { localStorage.setItem('prototype_wide_chat', '1'); } catch {}
+      applyWideChatState();
+    } else {
+      applyWideChatState();
+    }
+
+    renderCurrentScreenSpecificUI(id);
+  }
+
+  function openProjectDetailLocal(idx) {
+    const p = projectStore?.[idx];
+    if (!p) return;
+
+    byId('detailSource').textContent = p.sourceDisplay || p.source || 'Проект';
+    byId('detailTitle').textContent = p.title || 'Проект';
+    byId('detailDesc').textContent = p.desc || '';
+    byId('detailFullDesc').textContent = p.fullDesc || '';
+    byId('detailSkills').innerHTML = (p.skills || []).map((s) => `<span class="skill-tag">${s}</span>`).join('');
+    byId('detailStatus').textContent = p.status || 'Открыто';
+
+    openAgentContext({
+      type: 'project',
+      title: p.title || 'Проект',
+      summary: p.fullDesc || p.desc || 'Проект выбран из маркетплейса.',
+      phase: p.phase || 'Исследование',
+      source: p.source || 'Маркетплейс',
+      sourceType: p.sourceType || 'project',
+      company: p.company || '',
+      university: p.university || '',
+      case: p.case || p.desc || '',
+      projectIndex: idx,
+      tags: [
+        p.company ? `Компания: ${p.company}` : `Источник: ${p.source || 'Маркетплейс'}`,
+        p.university ? `Университет: ${p.university}` : `Фаза: ${p.phase || 'Исследование'}`,
+        ...(p.skills || []).slice(0, 2)
+      ],
+      suggestedPrompt: p.company
+        ? `Разбери кейс компании ${p.company} и предложи следующий шаг.`
+        : `Разбери этот проект и предложи следующий шаг.`
+    }, { seedIntro: true });
+
+    go('projectDetail');
+  }
+
+  function openMaterialLocal(idx) {
+    const m = materialStore?.[idx];
+    if (!m) return;
+
+    byId('matDetailIcon').className = `material-detail-icon ${m.icon || 'ai'}`;
+    byId('matDetailIcon').textContent = m.iconEmoji || '✦';
+    byId('matDetailTitle').textContent = m.title || 'Материал';
+    byId('matDetailMeta').textContent = m.meta || '';
+    byId('matDetailContent').innerHTML = m.content || '<p>Материал пуст.</p>';
+    byId('matDetailTags').innerHTML = (m.tags || []).map((t) => `<span class="badge neutral">${t}</span>`).join('');
+
+    openAgentContext({
+      type: 'material',
+      title: m.title || 'Материал',
+      summary: short(stripHtml(m.content || m.meta || m.title || ''), 360),
+      phase: m.phase || 'Исследование',
+      source: m.source || 'Сохранено в проекте',
+      sourceType: 'material',
+      materialTitle: m.title || 'Материал',
+      materialMeta: m.meta || '',
+      materialContent: m.content || '',
+      materialIndex: idx,
+      tags: m.tags || ['Материал', 'Контекст'],
+      suggestedPrompt: 'Объясни, как этот материал связан с текущим проектом, и дай практическую аналогию.'
+    }, { seedIntro: true });
+
+    go('materialDetail');
+  }
+
+  function takeProject() {
+    showToast('Проект добавлен в ваши!', 'success');
+    setTimeout(() => go('myproject'), 700);
+  }
+
+  function createProject() {
+    const name = byId('projName')?.value.trim();
+    if (!name) {
+      showToast('Введите название', 'info');
+      return;
+    }
+    const newCard = document.createElement('div');
+    newCard.className = 'project-card';
+    newCard.dataset.type = 'student';
+    newCard.onclick = function () { openProjectDetailLocal(4); };
+    newCard.innerHTML = `
+      <div class="project-header"><div class="project-source student">От: Студент</div><span class="badge blue">Новый</span></div>
+      <div class="project-title">${name}</div>
+    `;
+    byId('projectList')?.prepend(newCard);
+    if (hasProjectData) {
+      projectStore.push({
+        source: 'От: Студент',
+        sourceDisplay: 'От: Студент',
+        sourceType: 'student',
+        title: name,
+        company: '',
+        university: 'Университетский кейс',
+        case: name,
+        phase: 'Создание',
+        desc: '',
+        skills: [],
+        status: 'Новый',
+        fullDesc: ''
+      });
+    }
+    showToast(`Проект «${name}» создан!`, 'success');
+    setTimeout(() => go('marketplace'), 700);
+  }
+
+  function filterProjects(type, el) {
+    document.querySelectorAll('.filter-tab').forEach((t) => t.classList.remove('active'));
+    if (el) el.classList.add('active');
+    document.querySelectorAll('.project-card').forEach((card) => {
+      card.style.display = (type === 'all' || card.dataset.type === type) ? '' : 'none';
+    });
+  }
+
+  function showProjectSection(section, el) {
+    document.querySelectorAll('.sub-tab').forEach((t) => t.classList.remove('active'));
+    if (el) el.classList.add('active');
+    byId('proj-progress').style.display = section === 'progress' ? '' : 'none';
+    byId('proj-team').style.display = section === 'team' ? '' : 'none';
+    byId('proj-materials').style.display = section === 'materials' ? '' : 'none';
+  }
+
+  function activateAgent() {
+    state.session.active = true;
+    state.session.seconds = 0;
+    state.session.transcript = [];
+    state.session.lastAction = 'сессия активирована';
+    updateSessionTimer();
+    startSessionTimer();
+    renderSessionPhotoPreview();
+    showToast('Агент активирован для сессии', 'success');
+    go('aiSession');
+    const chat = byId('sessionChat');
+    if (chat) {
+      addSessionMessage(chat, 'system', `Сессия начата · ${state.session.location}`);
+    }
+  }
+
+  async function sendAgentMsg() {
+    const input = byId('agentInput');
+    const text = input?.value.trim();
+    if (!text) return;
+
+    const list = byId('agentMessages');
+    addUserMessage(list, text);
+    if (input) input.value = '';
+
+    const loadingMsg = document.createElement('div');
+    loadingMsg.className = 'msg agent';
+    loadingMsg.innerHTML = '<span class="msg-label">Агент</span><i>Анализирую контекст...</i>';
+    list.appendChild(loadingMsg);
+    list.scrollTop = list.scrollHeight;
+
+    const history = getChatHistory(list, 6);
+
+    try {
+      const data = await callAgent(makePayload(text, 'chat', {
+        sourceScreen: 'agent',
+        history,
+        project: state.context.type === 'project' ? state.context : {},
+        material: state.context.type === 'material' ? state.context : {}
+      }));
+
+      loadingMsg.remove();
+      const reply = data.reply || data.output || data.message || 'Нет ответа от агента';
+      addAgentMessage(list, reply);
+
+      if (Array.isArray(data.recommendations) && data.recommendations.length) {
+        const recCards = all('.rec-card', byId('agent'));
+        recCards.forEach((card, idx) => {
+          const rec = data.recommendations[idx];
+          if (!rec) return;
+          const p = card.querySelector('p');
+          if (p) p.textContent = rec;
+        });
+      }
+
+      if (data.sessionArtifact) {
+        saveSessionArtifact(reply, data.sessionArtifact);
+      }
+
+      state.session.lastAction = 'диалог с агентом';
+    } catch (error) {
+      loadingMsg.remove();
+      addAgentMessage(list, `Не удалось связаться с ИИ-агентом.\n${error.message}`);
+    }
+  }
+
+  async function sessionAction(type) {
+    const chat = byId('sessionChat');
+    if (!chat) return;
+
+    state.session.lastAction =
+      type === 'summary' ? 'создание конспекта'
+      : type === 'role' ? 'анализ ролей'
+      : type === 'idea' ? 'поиск аналогии'
+      : type === 'photo' ? 'анализ фото'
+      : 'вызов команды';
+
+    const actionPrompts = {
+      summary: 'Сформируй короткий конспект с тезисами, решениями, открытыми вопросами и следующим шагом.',
+      role: 'Предложи перераспределение ролей и коротко объясни, почему это полезно.',
+      idea: 'Найди 2–3 аналогии из других индустрий и объясни, как перенести их в наш проект.',
+      trigger: 'Сформулируй мягкий вызов команде, если обсуждение зациклилось.',
+      photo: 'Проанализируй прикреплённое фото сессии: опиши, что видно, какие элементы прототипа или записи заметны, какие риски и идеи появляются, и что делать дальше.'
+    };
+
+    addSessionMessage(chat, 'system', `Запрос: ${actionPrompts[type] || 'Задача агента'}${state.session.photo ? ` · фото: ${state.session.photo.fileName}` : ''}`);
+
+    try {
+      const data = await callAgent(makePayload(actionPrompts[type] || 'Сформируй полезную рекомендацию.', type === 'summary' ? 'session_summary' : type, {
+        sourceScreen: 'session',
+        project: state.context.type === 'project' ? state.context : {},
+        material: state.context.type === 'material' ? state.context : {},
+        history: getChatHistory(chat, 8),
+        includePhoto: true
+      }));
+
+      addSessionMessage(chat, 'ai', data.reply || data.output || data.message || 'Нет ответа от агента');
+      if (type === 'summary' && (data.sessionArtifact || data.reply)) {
+        saveSessionArtifact(data.reply || data.output || 'Конспект сессии', data.sessionArtifact || {});
+      }
+    } catch (error) {
+      addSessionMessage(chat, 'system', `Не удалось получить ответ агента: ${error.message}`);
+    }
+  }
+
+  async function sendSessionMsg() {
+    const input = byId('sessionInput');
+    const text = input?.value.trim();
+    if (!text) return;
+
+    const chat = byId('sessionChat');
+    addSessionMessage(chat, 'user', text);
+    if (input) input.value = '';
+    state.session.transcript.push({ role: 'user', text });
+    state.session.lastAction = 'сообщение в сессии';
+
+    try {
+      const data = await callAgent(makePayload(text, 'session_live', {
+        sourceScreen: 'session',
+        project: state.context.type === 'project' ? state.context : {},
+        material: state.context.type === 'material' ? state.context : {},
+        history: getChatHistory(chat, 8),
+        includePhoto: true
+      }));
+
+      addSessionMessage(chat, 'ai', data.reply || data.output || data.message || 'Нет ответа от агента');
+      state.session.transcript.push({ role: 'ai', text: data.reply || data.output || data.message || '' });
+    } catch (error) {
+      addSessionMessage(chat, 'system', `Не удалось связаться с ИИ-агентом: ${error.message}`);
+    }
+  }
+
+  async function stopSession() {
+    const chat = byId('sessionChat');
+    state.session.active = false;
+    stopSessionTimer();
+
+    try {
+      const transcript = state.session.transcript.slice();
+      const data = await callAgent(makePayload('Сессия завершается. Сформируй итоговый конспект, зафиксируй решения и открытые вопросы.', 'session_end', {
+        sourceScreen: 'session',
+        project: state.context.type === 'project' ? state.context : {},
+        material: state.context.type === 'material' ? state.context : {},
+        history: getChatHistory(chat, 12),
+        session: { ...state.session, transcript },
+        includePhoto: true
+      }));
+
+      const summary = data.reply || data.output || data.message || 'Сессия завершена.';
+      addSessionMessage(chat, 'system', 'Сессия завершена · конспект сохранён в материалы');
+      addSessionMessage(chat, 'ai', summary);
+      saveSessionArtifact(summary, data.sessionArtifact || {});
+      showToast('Сессия завершена. Материал сохранён.', 'success');
+    } catch (error) {
+      addSessionMessage(chat, 'system', `Сессия завершена, но агент не ответил: ${error.message}`);
+      showToast('Сессия завершена', 'info');
+    }
+
+    setTimeout(() => go('myproject'), 700);
+  }
+
+  function renderProfileToAgentContext() {
+    const profile = document.querySelector('.profile-name')?.textContent?.trim() || '';
+    if (!profile) return;
+    state.context = normalizeContext({
+      ...state.context,
+      summary: `Профиль пользователя: ${profile}. Выберите проект, материал или сессию для продолжения.`,
+      type: state.context.type || 'dashboard'
+    });
+  }
+
+  // expose overrides
+  window.go = go;
+  window.openProjectDetail = openProjectDetailLocal;
+  window.openMaterial = openMaterialLocal;
+  window.takeProject = takeProject;
+  window.createProject = createProject;
+  window.filterProjects = filterProjects;
+  window.showProjectSection = showProjectSection;
+  window.activateAgent = activateAgent;
+  window.sessionAction = sessionAction;
+  window.sendSessionMsg = sendSessionMsg;
+  window.stopSession = stopSession;
+  window.sendAgentMsg = sendAgentMsg;
+  window.openProjectInAgent = openProjectInAgent;
+  window.openMaterialInAgent = openMaterialInAgent;
+  window.showToast = window.showToast || function (text) {
+    const t = byId('toast');
+    if (!t) return;
+    t.textContent = text;
+    t.className = 'toast show';
+    setTimeout(() => { t.className = 'toast'; }, 2600);
+  };
+
+  injectDetailButtons();
+  renderSavedArtifacts();
+  ensureSessionContextCard();
+  updateAgentContextCard();
+  renderProfileToAgentContext();
+  openAgentContext(state.context, { seedIntro: false });
+    const wideStored = localStorage.getItem('prototype_wide_chat');
+    if (wideStored !== null) state.ui.wideChat = wideStored !== '0';
+    applyWideChatState();
+
+    const sessionPhotoInput = byId('sessionPhotoInput');
+    if (sessionPhotoInput) {
+      sessionPhotoInput.addEventListener('change', (event) => {
+        const file = event.target.files && event.target.files[0];
+        if (file) handleSessionPhotoChange(file);
+      });
+    }
+
+    renderSessionPhotoPreview();
+})();
+</script>
+
 </body>
 </html>
 
