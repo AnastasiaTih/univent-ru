@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Единая инновационная среда</title>
+  <title>Unified Innovation Ecosystem</title>
   <link href="https://cdn.fontsource.org/fonts/inter/400.css" rel="stylesheet">
   <link href="https://cdn.fontsource.org/fonts/inter/500.css" rel="stylesheet">
   <link href="https://cdn.fontsource.org/fonts/inter/600.css" rel="stylesheet">
@@ -546,7 +546,6 @@
 </head>
 <body>
 
-  <!-- ===== SPLASH ===== -->
   <div class="auth-screen active" id="splash">
     <div class="auth-content">
       <div class="auth-logo">
@@ -558,12 +557,11 @@
           <circle cx="22" cy="18" r="2" fill="white"/><circle cx="34" cy="18" r="2" fill="white"/><circle cx="28" cy="24" r="2" fill="white"/>
         </svg>
       </div>
-      <div class="auth-title">Единая<br>инновационная среда</div>
+      <div class="auth-title">Unified<br>Innovation Ecosystem</div>
       <div class="auth-subtitle" style="margin-top:12px;">Phygital Innovation Ecosystem</div>
     </div>
   </div>
 
-  <!-- ===== LOGIN ===== -->
   <div class="auth-screen" id="login">
     <div class="auth-content">
       <div class="auth-logo-small">
@@ -574,596 +572,561 @@
           <circle cx="22" cy="18" r="2" fill="white"/><circle cx="34" cy="18" r="2" fill="white"/>
         </svg>
       </div>
-      <div class="auth-title" style="font-size:20px;">Вход в систему</div>
-      <div class="auth-subtitle">Введите данные для доступа к платформе</div>
-      <div class="auth-field"><label>Email</label><input id="loginEmail" type="email" value="exs@mail.ru" /></div>
-      <div class="auth-field"><label>Пароль</label><input id="loginPass" type="password" value="••••••••" /></div>
-      <button class="auth-btn red" onclick="doLogin()">Войти</button>
-      <div class="auth-link">Нет аккаунта? Зарегистрироваться</div>
-      <div class="auth-link" style="margin-top:8px;">Забыли пароль?</div>
+      <div class="auth-title" style="font-size:20px;">System Login</div>
+      <div class="auth-subtitle">Enter your credentials to access the platform</div>
+      <div class="auth-field"><label>Email</label><input id="loginEmail" type="email" value="exs@mail.com" /></div>
+      <div class="auth-field"><label>Password</label><input id="loginPass" type="password" value="••••••••" /></div>
+      <button class="auth-btn red" onclick="doLogin()">Log in</button>
+      <div class="auth-link">No account? Register</div>
+      <div class="auth-link" style="margin-top:8px;">Forgot password?</div>
     </div>
   </div>
-  <div class="auth-screen" id="register"><div class="auth-content"><div class="auth-logo-small"><svg viewBox="0 0 56 56" fill="none"><rect x="4" y="4" width="48" height="48" rx="12" fill="white" fill-opacity="0.2"/><circle cx="28" cy="20" r="10" stroke="white" stroke-width="2.5" fill="none"/><path d="M28 30v12" stroke="white" stroke-width="2.5" stroke-linecap="round"/><circle cx="22" cy="18" r="2" fill="white"/><circle cx="34" cy="18" r="2" fill="white"/></svg></div><div class="auth-title" style="font-size:20px;">Регистрация</div><button class="auth-btn red" onclick="goAuth('login')">Назад</button></div></div>
-  <div class="auth-screen" id="forgot"><div class="auth-content"><div class="auth-logo-small"><svg viewBox="0 0 56 56" fill="none"><rect x="4" y="4" width="48" height="48" rx="12" fill="white" fill-opacity="0.2"/><circle cx="28" cy="20" r="10" stroke="white" stroke-width="2.5" fill="none"/><path d="M28 30v12" stroke="white" stroke-width="2.5" stroke-linecap="round"/><circle cx="22" cy="18" r="2" fill="white"/><circle cx="34" cy="18" r="2" fill="white"/></svg></div><div class="auth-title" style="font-size:20px;">Восстановление</div><button class="auth-btn red" onclick="goAuth('login')">Назад</button></div></div>
+  <div class="auth-screen" id="register"><div class="auth-content"><div class="auth-logo-small"><svg viewBox="0 0 56 56" fill="none"><rect x="4" y="4" width="48" height="48" rx="12" fill="white" fill-opacity="0.2"/><circle cx="28" cy="20" r="10" stroke="white" stroke-width="2.5" fill="none"/><path d="M28 30v12" stroke="white" stroke-width="2.5" stroke-linecap="round"/><circle cx="22" cy="18" r="2" fill="white"/><circle cx="34" cy="18" r="2" fill="white"/></svg></div><div class="auth-title" style="font-size:20px;">Registration</div><button class="auth-btn red" onclick="goAuth('login')">Back</button></div></div>
+  <div class="auth-screen" id="forgot"><div class="auth-content"><div class="auth-logo-small"><svg viewBox="0 0 56 56" fill="none"><rect x="4" y="4" width="48" height="48" rx="12" fill="white" fill-opacity="0.2"/><circle cx="28" cy="20" r="10" stroke="white" stroke-width="2.5" fill="none"/><path d="M28 30v12" stroke="white" stroke-width="2.5" stroke-linecap="round"/><circle cx="22" cy="18" r="2" fill="white"/><circle cx="34" cy="18" r="2" fill="white"/></svg></div><div class="auth-title" style="font-size:20px;">Recovery</div><button class="auth-btn red" onclick="goAuth('login')">Back</button></div></div>
 
-  <!-- ===== MAIN APP ===== -->
   <div class="app" id="mainApp" style="display:none;">
     <header class="topbar">
-      <div class="topbar-left"><h1 id="screenTitle">Главная</h1></div>
+      <div class="topbar-left"><h1 id="screenTitle">Home</h1></div>
       <div class="topbar-actions">
         <button class="icon-btn has-badge" onclick="go('notifications')">🔔</button>
         <button class="icon-btn" onclick="go('agent')">✦</button>
-        <button class="icon-btn" id="wideChatToggleBtn" onclick="toggleWideChat()" title="Развернуть чат">⤢</button>
+        <button class="icon-btn" id="wideChatToggleBtn" onclick="toggleWideChat()" title="Expand chat">⤢</button>
       </div>
     </header>
     <main class="content">
 
-      <!-- HOME -->
       <section class="screen active" id="home">
         <div class="stack">
-          <!-- Progress & Gamification -->
           <div class="card">
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
               <div style="display:flex;align-items:center;gap:10px;">
                 <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,#f59e0b,#d97706);display:grid;place-items:center;font-size:20px;">⭐</div>
                 <div>
-                  <div class="level-badge"><span class="star">⭐</span><span class="level-text">Уровень 3</span></div>
-                  <div class="muted" style="font-size:10px;margin-top:3px;">Исследователь</div>
+                  <div class="level-badge"><span class="star">⭐</span><span class="level-text">Level 3</span></div>
+                  <div class="muted" style="font-size:10px;margin-top:3px;">Explorer</div>
                 </div>
               </div>
               <div style="text-align:right;">
                 <div style="font-size:18px;font-weight:800;color:var(--text);">650</div>
-                <div class="muted" style="font-size:10px;">очков опыта</div>
+                <div class="muted" style="font-size:10px;">experience points</div>
               </div>
             </div>
             <div class="progress-track"><div class="progress-fill" style="width:65%"></div></div>
             <div style="display:flex;justify-content:space-between;margin-top:6px;">
-              <span class="muted" style="font-size:10px;">До уровня 4: Исследователь</span>
+              <span class="muted" style="font-size:10px;">To Level 4: Researcher</span>
               <span class="muted" style="font-size:10px;">350 / 1000 XP</span>
             </div>
           </div>
 
-          <!-- Achievements -->
           <div class="card">
-            <div class="section-head"><h3 style="margin:0;">Достижения</h3><span class="badge gold">3 из 12</span></div>
+            <div class="section-head"><h3 style="margin:0;">Achievements</h3><span class="badge gold">3 of 12</span></div>
             <div class="achievements-scroll">
               <div class="achievement">
                 <div class="ach-icon">🔍</div>
-                <div class="ach-name">Первый шаг</div>
-                <div class="ach-desc">Проведено интервью</div>
+                <div class="ach-name">First Step</div>
+                <div class="ach-desc">Interview conducted</div>
               </div>
               <div class="achievement">
                 <div class="ach-icon">💡</div>
-                <div class="ach-name">Генератор идей</div>
-                <div class="ach-desc">10+ идей</div>
+                <div class="ach-name">Idea Generator</div>
+                <div class="ach-desc">10+ ideas</div>
               </div>
               <div class="achievement">
                 <div class="ach-icon">🔧</div>
-                <div class="ach-name">Создатель</div>
-                <div class="ach-desc">Прототип собран</div>
+                <div class="ach-name">Creator</div>
+                <div class="ach-desc">Prototype built</div>
               </div>
               <div class="achievement locked">
                 <div class="ach-icon">🏆</div>
-                <div class="ach-name">Тестировщик</div>
-                <div class="ach-desc">5 тестов</div>
+                <div class="ach-name">Tester</div>
+                <div class="ach-desc">5 tests</div>
               </div>
               <div class="achievement locked">
                 <div class="ach-icon">🤝</div>
-                <div class="ach-name">Командный игрок</div>
-                <div class="ach-desc">Помощь команде</div>
+                <div class="ach-name">Team Player</div>
+                <div class="ach-desc">Helped team</div>
               </div>
             </div>
           </div>
 
           <div style="margin-top:4px;">
-            <h3 style="margin-bottom:12px;">Действия</h3>
-            <div class="action-card" onclick="go('myproject')"><div class="action-icon">🚀</div><div class="action-info"><h4>Мой проект</h4><p>Нейро-Интерфейс VR · Фаза: Создание</p></div></div>
-            <div class="action-card" onclick="go('marketplace')"><div class="action-icon">🏢</div><div class="action-info"><h4>Выбрать проект</h4><p>Задачи от компаний и студентов</p></div></div>
-            <div class="action-card primary" onclick="go('create')"><div class="action-icon">✨</div><div class="action-info"><h4>Создать проект</h4><p>Сформулируйте свою задачу или идею</p></div></div>
+            <h3 style="margin-bottom:12px;">Actions</h3>
+            <div class="action-card" onclick="go('myproject')"><div class="action-icon">🚀</div><div class="action-info"><h4>My Project</h4><p>Neuro-Interface VR · Phase: Creation</p></div></div>
+            <div class="action-card" onclick="go('marketplace')"><div class="action-icon">🏢</div><div class="action-info"><h4>Select Project</h4><p>Tasks from companies and students</p></div></div>
+            <div class="action-card primary" onclick="go('create')"><div class="action-icon">✨</div><div class="action-info"><h4>Create Project</h4><p>Formulate your task or idea</p></div></div>
           </div>
 
-          <!-- Challenge from AI -->
           <div class="challenge-card">
-            <h4>⚡ Вызов от агента</h4>
-            <p>Вы трижды обращались к одной идее текстом. Попробуйте построить физический макет в активной зоне — это может раскрыть новые аспекты решения.</p>
-            <div class="reward">🎯 Награда: +50 XP + бейдж "Экспериментатор"</div>
+            <h4>⚡ Challenge from Agent</h4>
+            <p>You have brought up the same idea in text three times. Try building a physical model in the active zone — this may reveal new aspects of the solution.</p>
+            <div class="reward">🎯 Reward: +50 XP + "Experimenter" badge</div>
           </div>
         </div>
       </section>
 
-      <!-- MY PROJECT -->
       <section class="screen" id="myproject">
         <div class="stack">
           <div class="card">
             <div style="display:flex;justify-content:space-between;align-items:start;gap:10px;">
-              <div><h3 style="font-size:16px;">Нейро-Интерфейс VR</h3><div class="muted" style="font-size:11px;margin-top:2px;">Open Format · 5 участников</div></div>
-              <span class="badge blue">Фаза: Создание</span>
+              <div><h3 style="font-size:16px;">Neuro-Interface VR</h3><div class="muted" style="font-size:11px;margin-top:2px;">Open Format · 5 participants</div></div>
+              <span class="badge blue">Phase: Creation</span>
             </div>
             <div class="progress-track"><div class="progress-fill" style="width:65%"></div></div>
           </div>
           <div class="sub-tabs">
-            <div class="sub-tab active" onclick="showProjectSection('progress', this)">Прогресс</div>
-            <div class="sub-tab" onclick="showProjectSection('team', this)">Команда</div>
-            <div class="sub-tab" onclick="showProjectSection('materials', this)">Материалы</div>
+            <div class="sub-tab active" onclick="showProjectSection('progress', this)">Progress</div>
+            <div class="sub-tab" onclick="showProjectSection('team', this)">Team</div>
+            <div class="sub-tab" onclick="showProjectSection('materials', this)">Materials</div>
           </div>
           <div id="proj-progress" class="card">
-            <h3>Нарратив прогресса</h3>
+            <h3>Progress Narrative</h3>
             <div class="story-timeline" style="margin-top:12px;">
-              <div class="story-item done"><div class="story-dot"></div><h5>Проблема сформулирована</h5><p>Определено, что в VR не хватает тактильной обратной связи.</p></div>
-              <div class="story-item done"><div class="story-dot"></div><h5>Исследование проведено</h5><p>Интервью с 5 пользователями подтвердили гипотезу.</p></div>
-              <div class="story-item"><div class="story-dot"></div><h5>Прототипирование</h5><p>Сборка макета перчатки с сенсорами.</p></div>
-              <div class="story-item wait"><div class="story-dot"></div><h5>Тестирование</h5><p>Ожидает начала.</p></div>
+              <div class="story-item done"><div class="story-dot"></div><h5>Problem formulated</h5><p>Determined that VR lacks haptic feedback.</p></div>
+              <div class="story-item done"><div class="story-dot"></div><h5>Research conducted</h5><p>Interviews with 5 users confirmed the hypothesis.</p></div>
+              <div class="story-item"><div class="story-dot"></div><h5>Prototyping</h5><p>Assembling a glove model with sensors.</p></div>
+              <div class="story-item wait"><div class="story-dot"></div><h5>Testing</h5><p>Awaiting start.</p></div>
             </div>
           </div>
           <div id="proj-team" class="card" style="display:none;">
-            <h3>Команда</h3>
+            <h3>Team</h3>
             <div style="margin-top:12px;">
-              <div class="team-member"><div class="team-avatar">👤</div><div class="team-info"><strong>Тихомирова Анастасия</strong><div class="role">Лидер проекта</div><div class="task">Координация, UX-исследование</div></div></div>
-              <div class="team-member"><div class="team-avatar">👨‍</div><div class="team-info"><strong>Козлов Дмитрий</strong><div class="role">Разработчик</div><div class="task">Программирование сенсоров</div></div></div>
-              <div class="team-member"><div class="team-avatar">🎨</div><div class="team-info"><strong>Иванова Мария</strong><div class="role">Дизайнер</div><div class="task">Прототипирование, 3D-модели</div></div></div>
-              <div class="team-member"><div class="team-avatar">📊</div><div class="team-info"><strong>Петров Алексей</strong><div class="role">Аналитик</div><div class="task">Обработка данных, тестирование</div></div></div>
-              <div class="team-member"><div class="team-avatar">🔧</div><div class="team-info"><strong>Сидоров Игорь</strong><div class="role">Инженер</div><div class="task">Сборка прототипа, электроника</div></div></div>
+              <div class="team-member"><div class="team-avatar">👤</div><div class="team-info"><strong>Anastasia Tikhomirova</strong><div class="role">Project Leader</div><div class="task">Coordination, UX Research</div></div></div>
+              <div class="team-member"><div class="team-avatar">👨‍</div><div class="team-info"><strong>Dmitry Kozlov</strong><div class="role">Developer</div><div class="task">Sensor programming</div></div></div>
+              <div class="team-member"><div class="team-avatar">🎨</div><div class="team-info"><strong>Maria Ivanova</strong><div class="role">Designer</div><div class="task">Prototyping, 3D models</div></div></div>
+              <div class="team-member"><div class="team-avatar">📊</div><div class="team-info"><strong>Alexey Petrov</strong><div class="role">Analyst</div><div class="task">Data processing, testing</div></div></div>
+              <div class="team-member"><div class="team-avatar">🔧</div><div class="team-info"><strong>Igor Sidorov</strong><div class="role">Engineer</div><div class="task">Prototype assembly, electronics</div></div></div>
             </div>
           </div>
           <div id="proj-materials" class="card" style="display:none;">
-            <h3>Материалы и документы</h3>
+            <h3>Materials and Documents</h3>
             <div style="margin-top:12px;">
-              <div class="material-item" onclick="openMaterial(0)"><div class="material-icon meeting">📝</div><div class="material-info"><strong>Конспект встречи от 15.01</strong><div class="meta">Зафиксировано ИИ-агентом · 12 мин чтения</div></div></div>
-              <div class="material-item" onclick="openMaterial(1)"><div class="material-icon doc">📄</div><div class="material-info"><strong>Результаты интервью с пользователями</strong><div class="meta">PDF · Загружено командой</div></div></div>
-              <div class="material-item" onclick="openMaterial(2)"><div class="material-icon ai">✦</div><div class="material-info"><strong>Анализ ИИ-агента: паттерны команды</strong><div class="meta">Автоматический отчёт · Сгенерировано</div></div></div>
-              <div class="material-item" onclick="openMaterial(3)"><div class="material-icon doc">🖼</div><div class="material-info"><strong>Фото прототипа v1</strong><div class="meta">Изображение · Загружено 18.01</div></div></div>
-              <div class="material-item" onclick="openMaterial(4)"><div class="material-icon meeting">📋</div><div class="material-info"><strong>План тестирования</strong><div class="meta">Документ · Совместное редактирование</div></div></div>
-              <div class="material-item" onclick="openMaterial(5)"><div class="material-icon ai">✦</div><div class="material-info"><strong>Рекомендации по материалам</strong><div class="meta">ИИ-агент · На основе анализа проекта</div></div></div>
+              <div class="material-item" onclick="openMaterial(0)"><div class="material-icon meeting">📝</div><div class="material-info"><strong>Meeting Notes Jan 15</strong><div class="meta">Captured by AI Agent · 12 min read</div></div></div>
+              <div class="material-item" onclick="openMaterial(1)"><div class="material-icon doc">📄</div><div class="material-info"><strong>User Interview Results</strong><div class="meta">PDF · Uploaded by team</div></div></div>
+              <div class="material-item" onclick="openMaterial(2)"><div class="material-icon ai">✦</div><div class="material-info"><strong>AI Agent Analysis: Team Patterns</strong><div class="meta">Auto-report · Generated</div></div></div>
+              <div class="material-item" onclick="openMaterial(3)"><div class="material-icon doc">🖼</div><div class="material-info"><strong>Prototype v1 Photo</strong><div class="meta">Image · Uploaded Jan 18</div></div></div>
+              <div class="material-item" onclick="openMaterial(4)"><div class="material-icon meeting">📋</div><div class="material-info"><strong>Testing Plan</strong><div class="meta">Document · Collaborative editing</div></div></div>
+              <div class="material-item" onclick="openMaterial(5)"><div class="material-icon ai">✦</div><div class="material-info"><strong>Material Recommendations</strong><div class="meta">AI Agent · Based on project analysis</div></div></div>
             </div>
           </div>
           <div class="btn-row" style="padding:0 2px;">
-            <button class="btn" style="flex:1;" onclick="go('agent')">✦ Агент</button>
-            <button class="btn primary" style="flex:1;" onclick="go('work')">⚡ Работа</button>
+            <button class="btn" style="flex:1;" onclick="go('agent')">✦ Agent</button>
+            <button class="btn primary" style="flex:1;" onclick="go('work')">⚡ Work</button>
           </div>
         </div>
       </section>
 
-      <!-- MARKETPLACE -->
       <section class="screen" id="marketplace">
         <div class="stack">
           <div class="card">
-            <div class="section-head"><h3 style="margin:0;">Доступные проекты</h3></div>
+            <div class="section-head"><h3 style="margin:0;">Available Projects</h3></div>
             <div class="filter-tabs">
-              <div class="filter-tab active" onclick="filterProjects('all', this)">Все</div>
-              <div class="filter-tab" onclick="filterProjects('company', this)">От компаний</div>
-              <div class="filter-tab" onclick="filterProjects('student', this)">От студентов</div>
+              <div class="filter-tab active" onclick="filterProjects('all', this)">All</div>
+              <div class="filter-tab" onclick="filterProjects('company', this)">From Companies</div>
+              <div class="filter-tab" onclick="filterProjects('student', this)">From Students</div>
             </div>
           </div>
           <div id="projectList">
             <div class="project-card" data-type="company" onclick="openProjectDetail(0)">
-              <div class="project-header"><div class="project-source company">От: IT-Corp</div><span class="badge neutral">Открыто</span></div>
-              <div class="project-title">Оптимизация логистики склада</div>
-              <div class="project-meta">Python, Аналитика данных. Разработка алгоритма маршрутизации.</div>
-              <div class="project-skills"><span class="skill-tag">Python</span><span class="skill-tag">SQL</span><span class="skill-tag">Аналитика</span></div>
+              <div class="project-header"><div class="project-source company">From: IT-Corp</div><span class="badge neutral">Open</span></div>
+              <div class="project-title">Warehouse Logistics Optimization</div>
+              <div class="project-meta">Python, Data Analytics. Development of a routing algorithm.</div>
+              <div class="project-skills"><span class="skill-tag">Python</span><span class="skill-tag">SQL</span><span class="skill-tag">Analytics</span></div>
             </div>
             <div class="project-card" data-type="student" onclick="openProjectDetail(1)">
-              <div class="project-header"><div class="project-source student">От: Студент</div><span class="badge blue">Исследование</span></div>
-              <div class="project-title">Мобильное приложение для студентов</div>
-              <div class="project-meta">Flutter, UI/UX, Бэкенд. Приложение для расписания и заметок.</div>
+              <div class="project-header"><div class="project-source student">From: Student</div><span class="badge blue">Research</span></div>
+              <div class="project-title">Mobile App for Students</div>
+              <div class="project-meta">Flutter, UI/UX, Backend. App for schedules and notes.</div>
               <div class="project-skills"><span class="skill-tag">Flutter</span><span class="skill-tag">Firebase</span></div>
             </div>
             <div class="project-card" data-type="company" onclick="openProjectDetail(2)">
-              <div class="project-header"><div class="project-source company">От: EcoStart</div><span class="badge warn">Срочно</span></div>
-              <div class="project-title">Система умного полива для теплиц</div>
-              <div class="project-meta">Arduino, IoT, Мехатроника. Автоматизация полива.</div>
+              <div class="project-header"><div class="project-source company">From: EcoStart</div><span class="badge warn">Urgent</span></div>
+              <div class="project-title">Smart Irrigation System for Greenhouses</div>
+              <div class="project-meta">Arduino, IoT, Mechatronics. Irrigation automation.</div>
               <div class="project-skills"><span class="skill-tag">C++</span><span class="skill-tag">Hardware</span></div>
             </div>
             <div class="project-card" data-type="student" onclick="openProjectDetail(3)">
-              <div class="project-header"><div class="project-source student">От: Студент</div><span class="badge purple">Креатив</span></div>
-              <div class="project-title">Геймификация обучения</div>
-              <div class="project-meta">Геймдизайн, Педагогика. Игровая механика для вовлечённости.</div>
-              <div class="project-skills"><span class="skill-tag">Геймдизайн</span><span class="skill-tag">UX</span></div>
+              <div class="project-header"><div class="project-source student">From: Student</div><span class="badge purple">Creative</span></div>
+              <div class="project-title">Gamification of Learning</div>
+              <div class="project-meta">Game Design, Pedagogy. Game mechanics for engagement.</div>
+              <div class="project-skills"><span class="skill-tag">Game Design</span><span class="skill-tag">UX</span></div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- PROJECT DETAIL -->
       <section class="screen" id="projectDetail">
         <div class="stack">
-          <button class="btn ghost left" onclick="go('marketplace')">← Назад к проектам</button>
+          <button class="btn ghost left" onclick="go('marketplace')">← Back to projects</button>
           <div class="project-detail-header">
             <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:8px;">
-              <span class="badge" style="background:rgba(255,255,255,0.2);color:white;" id="detailSource">От: IT-Corp</span>
-              <span class="badge" style="background:rgba(255,255,255,0.2);color:white;" id="detailStatus">Открыто</span>
+              <span class="badge" style="background:rgba(255,255,255,0.2);color:white;" id="detailSource">From: IT-Corp</span>
+              <span class="badge" style="background:rgba(255,255,255,0.2);color:white;" id="detailStatus">Open</span>
             </div>
-            <h2 id="detailTitle">Оптимизация логистики склада</h2>
-            <p id="detailDesc">Необходимы компетенции: Python, Аналитика данных.</p>
+            <h2 id="detailTitle">Warehouse Logistics Optimization</h2>
+            <p id="detailDesc">Required competencies: Python, Data Analytics.</p>
           </div>
           <div class="card">
-            <h3>Необходимые компетенции</h3>
-            <div class="project-skills" id="detailSkills" style="margin-top:8px;"><span class="skill-tag">Python</span><span class="skill-tag">SQL</span><span class="skill-tag">Аналитика</span></div>
+            <h3>Required Competencies</h3>
+            <div class="project-skills" id="detailSkills" style="margin-top:8px;"><span class="skill-tag">Python</span><span class="skill-tag">SQL</span><span class="skill-tag">Analytics</span></div>
           </div>
           <div class="card">
-            <h3>О проекте</h3>
-            <div class="muted" style="font-size:13px;line-height:1.6;margin-top:8px;" id="detailFullDesc">Описание проекта...</div>
+            <h3>About the Project</h3>
+            <div class="muted" style="font-size:13px;line-height:1.6;margin-top:8px;" id="detailFullDesc">Project description...</div>
           </div>
-          <button class="btn primary block" onclick="takeProject()">Взять проект</button>
+          <button class="btn primary block" onclick="takeProject()">Take Project</button>
         </div>
       </section>
 
-      <!-- CREATE -->
       <section class="screen" id="create">
         <div class="stack">
           <div class="card">
-            <div class="section-head"><h3 style="margin:0;">Создать проект</h3><span class="badge blue">Open Format</span></div>
+            <div class="section-head"><h3 style="margin:0;">Create Project</h3><span class="badge blue">Open Format</span></div>
             <div class="form">
-              <div class="field"><label>Название</label><input id="projName" placeholder="Введите название..." /></div>
-              <div class="field"><label>Формулировка проблемы</label><textarea id="projProblem" placeholder="Какую проблему вы хотите решить?"></textarea></div>
-              <div class="field"><label>Необходимые компетенции</label><input placeholder="Например: Дизайн, Программирование" /></div>
-              <div class="btn-row"><button class="btn primary block" onclick="createProject()">Начать</button></div>
+              <div class="field"><label>Title</label><input id="projName" placeholder="Enter title..." /></div>
+              <div class="field"><label>Problem Statement</label><textarea id="projProblem" placeholder="What problem do you want to solve?"></textarea></div>
+              <div class="field"><label>Required Competencies</label><input placeholder="Example: Design, Programming" /></div>
+              <div class="btn-row"><button class="btn primary block" onclick="createProject()">Start</button></div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- WORK -->
       <section class="screen" id="work">
         <div class="stack">
           <div class="card">
             <div style="display:flex;justify-content:space-between;align-items:start;gap:10px;">
-              <div><h3 style="font-size:16px;" id="workTitle">Нейро-Интерфейс VR</h3><div class="muted" style="font-size:11px;margin-top:2px;">Open Format · 5 участников</div></div>
-              <span class="badge blue">Фаза: Создание</span>
+              <div><h3 style="font-size:16px;" id="workTitle">Neuro-Interface VR</h3><div class="muted" style="font-size:11px;margin-top:2px;">Open Format · 5 participants</div></div>
+              <span class="badge blue">Phase: Creation</span>
             </div>
             <div class="progress-track"><div class="progress-fill" style="width:65%"></div></div>
           </div>
           <div class="card">
-            <div class="section-head"><h3 style="margin:0;">Фазы цикла</h3></div>
+            <div class="section-head"><h3 style="margin:0;">Cycle Phases</h3></div>
             <div class="timeline" style="margin-top:12px;">
-              <div class="tl-item"><div class="tl-dot done">1</div><div class="tl-box"><div style="display:flex;justify-content:space-between;align-items:center;"><strong style="font-size:13px;">Исследование</strong><span class="badge good">готово</span></div><div class="meta">Сбор данных, интервью</div></div></div>
-              <div class="tl-item"><div class="tl-dot current">2</div><div class="tl-box" style="border-color:rgba(59,130,246,0.2);"><div style="display:flex;justify-content:space-between;align-items:center;"><strong style="font-size:13px;">Создание</strong><span class="badge blue">в процессе</span></div><div class="meta">Генерация, прототипирование</div></div></div>
-              <div class="tl-item"><div class="tl-dot future">3</div><div class="tl-box"><div style="display:flex;justify-content:space-between;align-items:center;"><strong style="font-size:13px;">Проверка</strong><span class="badge outline">ожидает</span></div><div class="meta">Тестирование, рефлексия</div></div></div>
+              <div class="tl-item"><div class="tl-dot done">1</div><div class="tl-box"><div style="display:flex;justify-content:space-between;align-items:center;"><strong style="font-size:13px;">Research</strong><span class="badge good">done</span></div><div class="meta">Data collection, interviews</div></div></div>
+              <div class="tl-item"><div class="tl-dot current">2</div><div class="tl-box" style="border-color:rgba(59,130,246,0.2);"><div style="display:flex;justify-content:space-between;align-items:center;"><strong style="font-size:13px;">Creation</strong><span class="badge blue">in progress</span></div><div class="meta">Generation, prototyping</div></div></div>
+              <div class="tl-item"><div class="tl-dot future">3</div><div class="tl-box"><div style="display:flex;justify-content:space-between;align-items:center;"><strong style="font-size:13px;">Validation</strong><span class="badge outline">pending</span></div><div class="meta">Testing, reflection</div></div></div>
             </div>
           </div>
           <div class="btn-row" style="padding:0 2px;">
-            <button class="btn" style="flex:1;" onclick="go('agent')">✦ Агент</button>
-            <button class="btn" style="flex:1;" onclick="go('myproject')">🚀 Мой проект</button>
-            <button class="btn primary" style="flex:1;" onclick="go('validation')">→ Проверка</button>
+            <button class="btn" style="flex:1;" onclick="go('agent')">✦ Agent</button>
+            <button class="btn" style="flex:1;" onclick="go('myproject')">🚀 My Project</button>
+            <button class="btn primary" style="flex:1;" onclick="go('validation')">→ Validation</button>
           </div>
         </div>
       </section>
 
-      <!-- VALIDATION -->
       <section class="screen" id="validation">
         <div class="stack">
           <div class="card">
-            <div class="section-head"><h3 style="margin:0;">Валидация решения</h3><span class="badge blue">open format</span></div>
-            <div class="muted" style="font-size:12px;line-height:1.55;margin-bottom:14px;">Валидация через пользователей, экспертов и компании как партнёров.</div>
-            <div class="kpis"><div class="kpi"><div class="val" style="color:var(--accent);">12</div><div class="lbl">сценариев</div></div><div class="kpi"><div class="val" style="color:var(--accent-2);">3</div><div class="lbl">эксперта</div></div><div class="kpi"><div class="val" style="color:var(--good);">1</div><div class="lbl">партнёр</div></div></div>
+            <div class="section-head"><h3 style="margin:0;">Solution Validation</h3><span class="badge blue">open format</span></div>
+            <div class="muted" style="font-size:12px;line-height:1.55;margin-bottom:14px;">Validation through users, experts, and company partners.</div>
+            <div class="kpis"><div class="kpi"><div class="val" style="color:var(--accent);">12</div><div class="lbl">scenarios</div></div><div class="kpi"><div class="val" style="color:var(--accent-2);">3</div><div class="lbl">experts</div></div><div class="kpi"><div class="val" style="color:var(--good);">1</div><div class="lbl">partner</div></div></div>
           </div>
           <div class="card">
-            <div class="section-head"><h3 style="margin:0;">Каналы валидации</h3></div>
+            <div class="section-head"><h3 style="margin:0;">Validation Channels</h3></div>
             <div class="list">
-              <div class="item" style="cursor:default;"><div class="left"><strong>👥 Тест с пользователями</strong><div class="meta">Понимаемость и удобство</div></div><div class="right"><span class="badge blue">ожидает</span></div></div>
-              <div class="item" style="cursor:default;"><div class="left"><strong>🎓 Экспертная обратная связь</strong><div class="meta">Реалистичность решения</div></div><div class="right"><span class="badge good">готово</span></div></div>
-              <div class="item" style="cursor:default;"><div class="left"><strong>🏢 Апробация в компании</strong><div class="meta">Пилотное использование</div></div><div class="right"><span class="badge warn">по договорённости</span></div></div>
+              <div class="item" style="cursor:default;"><div class="left"><strong>👥 User Testing</strong><div class="meta">Comprehensibility and usability</div></div><div class="right"><span class="badge blue">pending</span></div></div>
+              <div class="item" style="cursor:default;"><div class="left"><strong>🎓 Expert Feedback</strong><div class="meta">Realism of the solution</div></div><div class="right"><span class="badge good">done</span></div></div>
+              <div class="item" style="cursor:default;"><div class="left"><strong>🏢 Company Approbation</strong><div class="meta">Pilot usage</div></div><div class="right"><span class="badge warn">by agreement</span></div></div>
             </div>
           </div>
           <div class="card" style="border-left:3px solid var(--good);">
-            <div class="section-head"><h3 style="margin:0;">Готовность к переходу</h3><span class="badge good">почти готова</span></div>
-            <button class="btn primary block" onclick="showToast('Критерии готовности зафиксированы','success')">Зафиксировать готовность</button>
+            <div class="section-head"><h3 style="margin:0;">Readiness for Transition</h3><span class="badge good">almost ready</span></div>
+            <button class="btn primary block" onclick="showToast('Readiness criteria locked in','success')">Lock in Readiness</button>
           </div>
         </div>
       </section>
 
-      <!-- ===== MATERIAL DETAIL ===== -->
       <section class="screen" id="materialDetail">
         <div class="stack">
-          <button class="btn ghost left" onclick="go('myproject'); showProjectSection('materials', document.querySelectorAll('.sub-tab')[2]);">← Назад к материалам</button>
+          <button class="btn ghost left" onclick="go('myproject'); showProjectSection('materials', document.querySelectorAll('.sub-tab')[2]);">← Back to materials</button>
 
           <div class="material-detail-header" id="matDetailHeader">
             <div class="material-detail-icon meeting" id="matDetailIcon">📝</div>
             <div class="material-detail-info">
-              <h2 id="matDetailTitle">Конспект встречи от 15.01</h2>
-              <div class="meta" id="matDetailMeta">Зафиксировано ИИ-агентом · 15 января 2025</div>
+              <h2 id="matDetailTitle">Meeting Notes Jan 15</h2>
+              <div class="meta" id="matDetailMeta">Captured by AI Agent · January 15, 2025</div>
             </div>
           </div>
 
-          <!-- Tags -->
           <div style="display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap;" id="matDetailTags">
-            <span class="badge neutral">Встреча</span><span class="badge blue">Фаза: Исследование</span>
+            <span class="badge neutral">Meeting</span><span class="badge blue">Phase: Research</span>
           </div>
 
-          <!-- Content area -->
           <div class="material-content" id="matDetailContent">
-            <!-- Dynamic content -->
-          </div>
+            </div>
 
-          <!-- Related materials -->
           <div class="card" id="matRelatedCard">
-            <div class="section-head"><h3 style="margin:0;">Связанные материалы</h3></div>
+            <div class="section-head"><h3 style="margin:0;">Related Materials</h3></div>
             <div style="margin-top:10px;">
-              <div class="material-item" onclick="openMaterial(2)"><div class="material-icon ai">✦</div><div class="material-info"><strong>Анализ ИИ-агента: паттерны команды</strong><div class="meta">Автоматический отчёт</div></div></div>
+              <div class="material-item" onclick="openMaterial(2)"><div class="material-icon ai">✦</div><div class="material-info"><strong>AI Agent Analysis: Team Patterns</strong><div class="meta">Auto-report</div></div></div>
             </div>
           </div>
 
-          <!-- AI Agent chat link -->
           <div class="card" style="border-left:3px solid var(--accent);">
-            <div class="section-head"><h3 style="margin:0;">Есть вопросы?</h3></div>
-            <div style="font-size:13px;color:var(--text-2);line-height:1.55;margin-bottom:12px;">Обсудите этот материал с ИИ-агентом: уточните детали, задайте вопрос или попросите разъяснить рекомендацию.</div>
-            <button class="btn primary block" onclick="go('agent')">✦ Задать вопрос агенту</button>
+            <div class="section-head"><h3 style="margin:0;">Have questions?</h3></div>
+            <div style="font-size:13px;color:var(--text-2);line-height:1.55;margin-bottom:12px;">Discuss this material with the AI Agent: clarify details, ask a question, or ask to explain a recommendation.</div>
+            <button class="btn primary block" onclick="go('agent')">✦ Ask Agent a Question</button>
           </div>
         </div>
       </section>
 
-      <!-- ===== AGENT SCREEN ===== -->
       <section class="screen" id="agent">
         <div class="stack">
           <div class="card">
             <div class="agent-header" style="display:grid;grid-template-columns:64px 1fr;gap:14px;align-items:center;">
               <div style="width:64px;height:64px;border-radius:22px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:grid;place-items:center;font-size:26px;color:white;">✦</div>
               <div>
-                <h3 style="font-size:16px;margin-bottom:4px;">ИИ-агент проекта</h3>
-                <div class="muted" style="font-size:11px;">Советник · Память · Аналитика</div>
+                <h3 style="font-size:16px;margin-bottom:4px;">Project AI Agent</h3>
+                <div class="muted" style="font-size:11px;">Advisor · Memory · Analytics</div>
               </div>
             </div>
             <div class="stack" style="margin-top:14px;">
-              <div class="toggle-row"><div class="label-group"><strong>Фоновый режим</strong><div class="meta">Считывает контекст</div></div><div class="switch on" onclick="this.classList.toggle('on')"></div></div>
-              <div class="toggle-row"><div class="label-group"><strong>Проактивный режим</strong><div class="meta">Даёт подсказки</div></div><div class="switch on" onclick="this.classList.toggle('on')"></div></div>
+              <div class="toggle-row"><div class="label-group"><strong>Background Mode</strong><div class="meta">Reads context</div></div><div class="switch on" onclick="this.classList.toggle('on')"></div></div>
+              <div class="toggle-row"><div class="label-group"><strong>Proactive Mode</strong><div class="meta">Provides hints</div></div><div class="switch on" onclick="this.classList.toggle('on')"></div></div>
             </div>
             <div class="btn-row" style="margin-top:14px;">
-              <button class="btn sm" onclick="toggleWideChat()">⤢ Развернуть чат</button>
-              <button class="btn sm" onclick="focusAgentInput()">✦ К вопросу</button>
+              <button class="btn sm" onclick="toggleWideChat()">⤢ Expand Chat</button>
+              <button class="btn sm" onclick="focusAgentInput()">✦ To Question</button>
             </div>
           </div>
 
-          <!-- AI Activation for physical space -->
           <div class="ai-activation-card">
-            <h3>🎙 Активация для физической сессии</h3>
-            <p>ИИ-агент будет фиксировать диалоги, предлагать смену ролей при трудностях и собирать все материалы автоматически.</p>
+            <h3>🎙 Activation for Physical Session</h3>
+            <p>The AI Agent will capture dialogues, suggest role changes during difficulties, and automatically compile all materials.</p>
 
-            <!-- Status Indicator -->
             <div class="ai-status">
               <div class="ai-status-dot active"></div>
-              <span class="txt">Готов к работе</span>
-              <span class="meta">Ожидание запуска</span>
+              <span class="txt">Ready for work</span>
+              <span class="meta">Awaiting start</span>
             </div>
 
-            <div class="ai-feature"><span class="ico">🎤</span><span class="txt">Фиксация диалогов в реальном времени</span></div>
-            <div class="ai-feature"><span class="ico">🔄</span><span class="txt">Предложения по смене ролей при трудностях</span></div>
-            <div class="ai-feature"><span class="ico">📋</span><span class="txt">Автоматическое создание конспектов</span></div>
-            <div class="ai-feature"><span class="ico">💡</span><span class="txt">Подсказки и аналогии во время работы</span></div>
+            <div class="ai-feature"><span class="ico">🎤</span><span class="txt">Real-time dialogue capture</span></div>
+            <div class="ai-feature"><span class="ico">🔄</span><span class="txt">Suggestions for role changes during difficulties</span></div>
+            <div class="ai-feature"><span class="ico">📋</span><span class="txt">Automatic creation of notes</span></div>
+            <div class="ai-feature"><span class="ico">💡</span><span class="txt">Hints and analogies during work</span></div>
             <div style="margin-top:14px;">
-              <button class="btn primary block" onclick="activateAgent()">Запустить агент на сессии</button>
+              <button class="btn primary block" onclick="activateAgent()">Start Agent for Session</button>
             </div>
           </div>
 
-          <!-- Personal tips for user -->
           <div class="card">
-            <div class="section-head"><h3 style="margin:0;">Персональные советы для вас</h3><span class="badge warn">3 новых</span></div>
+            <div class="section-head"><h3 style="margin:0;">Personal Tips for You</h3><span class="badge warn">3 new</span></div>
             <div style="margin-top:10px;">
               <div class="tip-card" onclick="openMaterial(6)">
-                <h4>💡 Совет по вашей роли</h4>
-                <p>Как лидер проекта, попробуйте делегировать сбор данных аналитику, чтобы сосредоточиться на координации прототипирования.</p>
+                <h4>💡 Tip on your role</h4>
+                <p>As the project leader, try delegating data collection to the analyst so you can focus on prototyping coordination.</p>
               </div>
               <div class="tip-card" onclick="openMaterial(7)">
-                <h4>📈 Рекомендация по работе</h4>
-                <p>Ваша активность снизилась на 30% за последние 3 дня. Попробуйте провести короткую сессию синхронизации с командой.</p>
+                <h4>📈 Work recommendation</h4>
+                <p>Your activity has decreased by 30% over the last 3 days. Try conducting a short sync session with the team.</p>
               </div>
               <div class="tip-card" onclick="openMaterial(8)">
-                <h4>🔍 Глубже в тему</h4>
-                <p>Рекомендуем изучить кейсы тактильных интерфейсов в медицине — аналогии могут помочь в вашем проекте.</p>
+                <h4>🔍 Deeper into the topic</h4>
+                <p>We recommend studying cases of haptic interfaces in medicine — analogies can help in your project.</p>
               </div>
             </div>
           </div>
 
-          <!-- AI recommendations and conclusions -->
           <div class="card">
-            <div class="section-head"><h3 style="margin:0;">Рекомендации и выводы ИИ</h3></div>
+            <div class="section-head"><h3 style="margin:0;">Recommendations and AI Conclusions</h3></div>
             <div style="margin-top:10px;">
               <div class="rec-card" onclick="openMaterial(9)">
-                <h4>📊 Анализ паттернов команды</h4>
-                <p>Команда систематически возвращается к одной идее без продвижения. Рекомендация: сменить формат работы.</p>
+                <h4>📊 Team patterns analysis</h4>
+                <p>The team systematically returns to the same idea without progressing. Recommendation: change the work format.</p>
               </div>
               <div class="rec-card" onclick="openMaterial(10)">
-                <h4>🎯 Общие рекомендации по проекту</h4>
-                <p>Следующий логичный шаг — тестирование прототипа с реальными пользователями. Подготовка займёт 2-3 дня.</p>
+                <h4>🎯 General project recommendations</h4>
+                <p>The next logical step is to test the prototype with real users. Preparation will take 2-3 days.</p>
               </div>
             </div>
           </div>
 
-          <!-- Materials from AI -->
           <div class="card">
-            <div class="section-head"><h3 style="margin:0;">Материалы от ИИ-агента</h3></div>
+            <div class="section-head"><h3 style="margin:0;">Materials from AI Agent</h3></div>
             <div style="margin-top:10px;">
-              <div class="material-item" onclick="openMaterial(11)"><div class="material-icon ai">✦</div><div class="material-info"><strong>Подборка: тактильные интерфейсы</strong><div class="meta">5 статей и примеров · Сгенерировано агентом</div></div></div>
-              <div class="material-item" onclick="openMaterial(12)"><div class="material-icon ai">✦</div><div class="material-info"><strong>Аналогии из других индустрий</strong><div class="meta">3 примера решения похожих проблем</div></div></div>
+              <div class="material-item" onclick="openMaterial(11)"><div class="material-icon ai">✦</div><div class="material-info"><strong>Selection: Haptic Interfaces</strong><div class="meta">5 articles and examples · Generated by Agent</div></div></div>
+              <div class="material-item" onclick="openMaterial(12)"><div class="material-icon ai">✦</div><div class="material-info"><strong>Analogies from other industries</strong><div class="meta">3 examples of solving similar problems</div></div></div>
             </div>
           </div>
 
-          <!-- Agent Chat -->
           <div class="card">
-            <div class="section-head"><h3 style="margin:0;">Диалог с агентом</h3></div>
+            <div class="section-head"><h3 style="margin:0;">Agent Chat</h3></div>
             <div class="msg-list" id="agentMessages">
-              <div class="msg agent"><div class="msg-label">Агент</div>Я вижу, что команда застряла в обсуждении. Рекомендую сменить формат: перейдите в зону прототипирования.</div>
-              <div class="msg user">Спасибо, попробуем.</div>
-              <div class="msg agent"><div class="msg-label">Агент</div>Отличное решение. Не забудьте зафиксировать результаты в нарративе.</div>
+              <div class="msg agent"><div class="msg-label">Agent</div>I see that the team is stuck in discussion. I recommend changing the format: move to the prototyping zone.</div>
+              <div class="msg user">Thanks, we'll try that.</div>
+              <div class="msg agent"><div class="msg-label">Agent</div>Excellent decision. Don't forget to capture the results in the narrative.</div>
             </div>
-            <div class="composer"><input id="agentInput" placeholder="Спросить агента с учётом контекста..." onkeydown="if(event.key==='Enter')sendAgentMsg()"/><button class="btn primary sm" onclick="sendAgentMsg()">↑</button></div>
+            <div class="composer"><input id="agentInput" placeholder="Ask the agent based on context..." onkeydown="if(event.key==='Enter')sendAgentMsg()"/><button class="btn primary sm" onclick="sendAgentMsg()">↑</button></div>
           </div>
         </div>
       </section>
 
-      <!-- ===== AI SESSION SCREEN ===== -->
       <section class="screen" id="aiSession">
         <div class="stack">
-          <button class="btn ghost left" onclick="go('agent')">← Назад к агенту</button>
+          <button class="btn ghost left" onclick="go('agent')">← Back to agent</button>
 
           <div class="ai-session-header">
             <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:4px;">
-              <div class="session-title">🎙 ИИ-агент в пространстве</div>
-              <span class="badge" style="background:rgba(255,255,255,0.2);color:white;">Сессия активна</span>
+              <div class="session-title">🎙 AI Agent in Space</div>
+              <span class="badge" style="background:rgba(255,255,255,0.2);color:white;">Session active</span>
             </div>
-            <div class="session-sub">Фиксация диалогов · Анализ в реальном времени · Материалы</div>
+            <div class="session-sub">Dialogue capture · Real-time analysis · Materials</div>
           </div>
 
-          <!-- Recording Indicator -->
           <div class="recording-indicator">
             <div class="rec-dot"></div>
-            <span class="rec-text">Запись активна</span>
+            <span class="rec-text">Recording active</span>
             <span class="rec-meta" id="sessionTimer">00:00:00</span>
           </div>
 
-          <!-- AI Context -->
           <div class="ai-context-card">
-            <h4>📍 Текущий контекст</h4>
-            <p>Фаза: <strong>Создание</strong> · Проект: <strong>Нейро-Интерфейс VR</strong></p>
-            <p style="margin-top:6px;">Команда работает в <strong>зоне прототипирования</strong>. Последнее действие: обсуждение конструкции перчатки с сенсорами.</p>
-            <p style="margin-top:6px;">Фото и аудиозаметки можно добавлять прямо в ходе очной сессии, чтобы агент видел весь контекст работы.</p>
+            <h4>📍 Current Context</h4>
+            <p>Phase: <strong>Creation</strong> · Project: <strong>Neuro-Interface VR</strong></p>
+            <p style="margin-top:6px;">The team is working in the <strong>prototyping zone</strong>. Last action: discussing the sensor glove design.</p>
+            <p style="margin-top:6px;">Photos and audio notes can be added right during the in-person session so the agent sees the full context of the work.</p>
           </div>
 
-          <!-- AI Suggestions -->
           <div class="ai-suggestion">
-            <div class="sug-title">💡 Предложение агента</div>
-            <div class="sug-text">Заметил, что команда 15 минут обсуждает один аспект без продвижения. Рекомендую: Мария (дизайнер) может набросать схему на доске, пока Игорь (инженер) подготавливает материалы. Это позволит распараллелить работу.</div>
+            <div class="sug-title">💡 Agent's Suggestion</div>
+            <div class="sug-text">Noticed that the team has been discussing one aspect for 15 minutes without progress. I recommend: Maria (designer) can sketch a diagram on the board while Igor (engineer) prepares materials. This will allow parallel work.</div>
           </div>
           <div class="ai-suggestion">
-            <div class="sug-title">🔄 Предложение по роли</div>
-            <div class="sug-text">Анастасия (лидер) взяла на себя задачу программирования сенсоров. Возможно, стоит передать это Дмитрию (разработчику), а лидеру сфокусироваться на координации и подготовке к тестированию.</div>
+            <div class="sug-title">🔄 Role Suggestion</div>
+            <div class="sug-text">Anastasia (leader) took on the task of programming sensors. Perhaps it is worth passing this to Dmitry (developer), and the leader can focus on coordination and preparation for testing.</div>
           </div>
 
           <div class="ai-photo-panel">
-            <h4>📷 Фото из сессии</h4>
-            <p>Сделайте фото доски, макета, схемы или артефакта. Фото будет сохранено как часть сессии и передано агенту для анализа.</p>
+            <h4>📷 Session Photo</h4>
+            <p>Take a picture of the board, model, diagram, or artifact. The photo will be saved as part of the session and passed to the agent for analysis.</p>
             <input class="photo-input" type="file" id="sessionPhotoInput" accept="image/*" capture="environment" />
             <div class="photo-input-row">
-              <button class="btn sm" onclick="openSessionPhotoPicker()">📷 Сделать фото</button>
-              <button class="btn sm" onclick="clearSessionPhoto()">🗑 Удалить</button>
-              <button class="btn sm" onclick="sessionAction('photo')">✦ Проанализировать фото</button>
+              <button class="btn sm" onclick="openSessionPhotoPicker()">📷 Take Photo</button>
+              <button class="btn sm" onclick="clearSessionPhoto()">🗑 Delete</button>
+              <button class="btn sm" onclick="sessionAction('photo')">✦ Analyze Photo</button>
             </div>
             <div class="photo-preview" id="sessionPhotoPreview">
-              <img id="sessionPhotoPreviewImg" alt="Фото сессии" />
+              <img id="sessionPhotoPreviewImg" alt="Session Photo" />
               <div>
-                <div class="name" id="sessionPhotoPreviewName">Фото не выбрано</div>
-                <div class="meta" id="sessionPhotoPreviewMeta">Сделайте снимок или загрузите файл с устройства.</div>
+                <div class="name" id="sessionPhotoPreviewName">No photo selected</div>
+                <div class="meta" id="sessionPhotoPreviewMeta">Take a snapshot or upload a file from your device.</div>
               </div>
             </div>
           </div>
 
-          <!-- Quick Actions -->
-          <div class="section-head"><h3 style="margin:0;">Быстрые действия</h3></div>
+          <div class="section-head"><h3 style="margin:0;">Quick Actions</h3></div>
           <div class="session-actions">
             <div class="session-action" onclick="sessionAction('summary')">
               <div class="sa-ico">📋</div>
-              <div class="sa-text">Создать конспект</div>
+              <div class="sa-text">Create notes</div>
             </div>
             <div class="session-action" onclick="sessionAction('role')">
               <div class="sa-ico">🔄</div>
-              <div class="sa-text">Предложить роли</div>
+              <div class="sa-text">Suggest roles</div>
             </div>
             <div class="session-action" onclick="sessionAction('idea')">
               <div class="sa-ico">💡</div>
-              <div class="sa-text">Найти аналогию</div>
+              <div class="sa-text">Find analogy</div>
             </div>
             <div class="session-action" onclick="sessionAction('trigger')">
               <div class="sa-ico">⚡</div>
-              <div class="sa-text">Вызов команды</div>
+              <div class="sa-text">Team challenge</div>
             </div>
           </div>
 
-          <!-- Chat -->
           <div class="card">
-            <div class="section-head"><h3 style="margin:0;">Чат сессии</h3><span class="badge blue">3 участника</span></div>
+            <div class="section-head"><h3 style="margin:0;">Session Chat</h3><span class="badge blue">3 participants</span></div>
             <div class="session-msg-list" id="sessionChat">
-              <div class="session-msg system">Сессия начата в 14:32 · Зона прототипирования</div>
-              <div class="session-msg ai"><div class="msg-label">Агент</div>Зафиксирую все решения и идеи в реальном времени. Если нужна помощь — просто напишите.</div>
-              <div class="session-msg user">Какие сенсоры лучше использовать для пальцев?</div>
-              <div class="session-msg ai"><div class="msg-label">Агент</div>Рекомендую ERM-моторы 10мм — они компактные и хорошо передают тактильную обратную связь. Аналоги: решение bHaptics использует похожие компоненты.</div>
-              <div class="session-msg user">Спасибо! Попробуем.</div>
-              <div class="session-msg system">Агент зафиксировал: выбор ERM-моторов 10мм · Добавлено в материалы</div>
+              <div class="session-msg system">Session started at 14:32 · Prototyping zone</div>
+              <div class="session-msg ai"><div class="msg-label">Agent</div>I will capture all decisions and ideas in real time. If you need help — just type.</div>
+              <div class="session-msg user">Which sensors are best to use for the fingers?</div>
+              <div class="session-msg ai"><div class="msg-label">Agent</div>I recommend 10mm ERM motors — they are compact and transmit haptic feedback well. Analogies: the bHaptics solution uses similar components.</div>
+              <div class="session-msg user">Thanks! Let's try.</div>
+              <div class="session-msg system">Agent captured: selection of 10mm ERM motors · Added to materials</div>
             </div>
             <div class="session-composer">
-              <input id="sessionInput" placeholder="Спросить агента, команду или описать фото..." onkeydown="if(event.key==='Enter')sendSessionMsg()"/>
+              <input id="sessionInput" placeholder="Ask the agent, team, or describe a photo..." onkeydown="if(event.key==='Enter')sendSessionMsg()"/>
               <button class="btn primary sm" onclick="sendSessionMsg()">↑</button>
             </div>
           </div>
 
-          <!-- Stop Session -->
-          <button class="btn block" onclick="stopSession()" style="margin-top:8px;color:var(--danger);border-color:rgba(239,68,68,0.3);background:rgba(239,68,68,0.06);">⏹ Завершить сессию и сохранить</button>
+          <button class="btn block" onclick="stopSession()" style="margin-top:8px;color:var(--danger);border-color:rgba(239,68,68,0.3);background:rgba(239,68,68,0.06);">⏹ End Session and Save</button>
         </div>
       </section>
 
-      <!-- NOTIFICATIONS -->
       <section class="screen" id="notifications">
         <div class="stack">
           <div class="card">
-            <div class="section-head"><h3 style="margin:0;">Уведомления</h3><span class="badge blue">3 новых</span></div>
+            <div class="section-head"><h3 style="margin:0;">Notifications</h3><span class="badge blue">3 new</span></div>
             <div class="list" style="margin-top:8px;">
               <div class="item" style="border-left:3px solid var(--accent);cursor:default;">
-                <div class="left"><strong>✦ Новый совет от агента</strong><div class="meta">Персональная рекомендация по вашей роли · 15 мин назад</div></div>
+                <div class="left"><strong>✦ New advice from agent</strong><div class="meta">Personal recommendation for your role · 15 mins ago</div></div>
               </div>
               <div class="item" style="border-left:3px solid var(--gold);cursor:default;">
-                <div class="left"><strong>🏆 Новое достижение!</strong><div class="meta">Вы завершили фазу исследования. Бейдж "Исследователь".</div></div>
+                <div class="left"><strong>🏆 New achievement!</strong><div class="meta">You completed the research phase. Badge "Researcher".</div></div>
               </div>
               <div class="item" style="border-left:3px solid var(--warn);cursor:default;">
-                <div class="left"><strong>⚡ Вызов от агента</strong><div class="meta">Попробуйте построить физический макет · 1ч назад</div></div>
+                <div class="left"><strong>⚡ Challenge from agent</strong><div class="meta">Try building a physical model · 1h ago</div></div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- ===== PROFILE ===== -->
       <section class="screen" id="profile">
         <div class="card" style="padding:0;overflow:visible;">
           <div class="profile-header">
             <div class="profile-avatar">👤<div class="edit-badge" onclick="go('editProfile')">✎</div></div>
-            <div class="profile-name">Тихомирова Анастасия</div>
-            <div class="profile-bio">Студентка HSE, исследователь в области нейроинтерфейсов. Увлекаюсь UX-дизайном.</div>
+            <div class="profile-name">Anastasia Tikhomirova</div>
+            <div class="profile-bio">HSE student, researcher in the field of neuro-interfaces. Passionate about UX design.</div>
           </div>
           <div class="profile-info">
-            <div class="profile-info-row"><span class="label">Email</span><span class="value">exs@mail.ru</span></div>
-            <div class="profile-info-row"><span class="label">Город</span><span class="value">Нижний Новгород</span></div>
-            <div class="profile-info-row"><span class="label">Никнейм</span><span class="value">exs01</span></div>
-            <div class="profile-info-row"><span class="label">Страна</span><span class="value">Россия</span></div>
-            <div class="profile-info-row"><span class="label">Обо мне</span><span class="value">Ищу команду для VR-проекта</span></div>
+            <div class="profile-info-row"><span class="label">Email</span><span class="value">exs@mail.com</span></div>
+            <div class="profile-info-row"><span class="label">City</span><span class="value">Nizhny Novgorod</span></div>
+            <div class="profile-info-row"><span class="label">Nickname</span><span class="value">exs01</span></div>
+            <div class="profile-info-row"><span class="label">Country</span><span class="value">Russia</span></div>
+            <div class="profile-info-row"><span class="label">About Me</span><span class="value">Looking for a team for a VR project</span></div>
           </div>
         </div>
         <div class="settings-list">
-          <div class="settings-item" onclick="go('settings')"><div class="left"><span class="ico">⚙</span><span class="label">Настройки</span></div><span class="arrow">›</span></div>
-          <div class="settings-item" onclick="go('editProfile')"><div class="left"><span class="ico">✎</span><span class="label">Редактировать профиль</span></div><span class="arrow">›</span></div>
+          <div class="settings-item" onclick="go('settings')"><div class="left"><span class="ico">⚙</span><span class="label">Settings</span></div><span class="arrow">›</span></div>
+          <div class="settings-item" onclick="go('editProfile')"><div class="left"><span class="ico">✎</span><span class="label">Edit Profile</span></div><span class="arrow">›</span></div>
         </div>
-        <div style="margin-top:20px;"><button class="btn danger-btn block" onclick="doLogout()">Выйти из аккаунта</button></div>
+        <div style="margin-top:20px;"><button class="btn danger-btn block" onclick="doLogout()">Log out of account</button></div>
       </section>
 
-      <!-- ===== SETTINGS ===== -->
       <section class="screen" id="settings">
         <div class="stack">
-          <div class="card"><div class="section-head"><h3 style="margin:0;">Настройки</h3></div></div>
+          <div class="card"><div class="section-head"><h3 style="margin:0;">Settings</h3></div></div>
           <div class="settings-list">
-            <div class="settings-item"><div class="left"><span class="ico">🔒</span><div><div class="label">Безопасность и вход</div></div></div><span class="arrow">›</span></div>
-            <div class="settings-item"><div class="left"><span class="ico">🔊</span><div><div class="label">Звук</div></div></div><span class="arrow">›</span></div>
-            <div class="settings-item"><div class="left"><span class="ico">🔔</span><div><div class="label">Push-уведомления</div></div></div><span class="arrow">›</span></div>
-            <div class="settings-item"><div class="left"><span class="ico">🌙</span><div><div class="label">Тёмная тема</div></div></div><span class="arrow">›</span></div>
+            <div class="settings-item"><div class="left"><span class="ico">🔒</span><div><div class="label">Security and Login</div></div></div><span class="arrow">›</span></div>
+            <div class="settings-item"><div class="left"><span class="ico">🔊</span><div><div class="label">Sound</div></div></div><span class="arrow">›</span></div>
+            <div class="settings-item"><div class="left"><span class="ico">🔔</span><div><div class="label">Push Notifications</div></div></div><span class="arrow">›</span></div>
+            <div class="settings-item"><div class="left"><span class="ico">🌙</span><div><div class="label">Dark Theme</div></div></div><span class="arrow">›</span></div>
           </div>
         </div>
       </section>
 
-      <!-- ===== EDIT PROFILE ===== -->
       <section class="screen" id="editProfile">
         <div class="card">
           <div style="text-align:center;padding:16px 0 12px;"><div class="profile-avatar" style="margin:0 auto 12px;width:80px;height:80px;font-size:30px;">👤</div></div>
-          <div class="field"><label>Имя</label><input id="editName" value="Анастасия" /></div>
-          <div class="field"><label>Фамилия</label><input id="editSurname" value="Тихомирова" /></div>
-          <div class="field"><label>Ник</label><input id="editNick" value="exs01" /></div>
-          <div class="field"><label>Email</label><input id="editEmail" value="exs@mail.ru" type="email" /></div>
-          <div class="field"><label>Страна</label><select id="editCountry"><option selected>Россия</option><option>Другая</option></select></div>
-          <div class="field"><label>Обо мне</label><textarea id="editBio" style="min-height:80px">Студентка HSE, исследователь...</textarea></div>
-          <div class="btn-row"><button class="btn primary block" onclick="saveProfile()">Сохранить</button></div>
+          <div class="field"><label>First Name</label><input id="editName" value="Anastasia" /></div>
+          <div class="field"><label>Last Name</label><input id="editSurname" value="Tikhomirova" /></div>
+          <div class="field"><label>Nickname</label><input id="editNick" value="exs01" /></div>
+          <div class="field"><label>Email</label><input id="editEmail" value="exs@mail.com" type="email" /></div>
+          <div class="field"><label>Country</label><select id="editCountry"><option selected>Russia</option><option>Other</option></select></div>
+          <div class="field"><label>About me</label><textarea id="editBio" style="min-height:80px">HSE student, researcher...</textarea></div>
+          <div class="btn-row"><button class="btn primary block" onclick="saveProfile()">Save</button></div>
         </div>
       </section>
 
     </main>
     <nav class="tabs">
-      <button class="tab active" data-screen="home" onclick="go('home')"><span class="ico">⌂</span><span class="txt">Главная</span></button>
-      <button class="tab" data-screen="myproject" onclick="go('myproject')"><span class="ico">🚀</span><span class="txt">Мой проект</span></button>
-      <button class="tab" data-screen="agent" onclick="go('agent')"><span class="ico">✦</span><span class="txt">Агент</span></button>
-      <button class="tab" data-screen="profile" onclick="go('profile')"><span class="ico">👤</span><span class="txt">Профиль</span></button>
+      <button class="tab active" data-screen="home" onclick="go('home')"><span class="ico">⌂</span><span class="txt">Home</span></button>
+      <button class="tab" data-screen="myproject" onclick="go('myproject')"><span class="ico">🚀</span><span class="txt">My Project</span></button>
+      <button class="tab" data-screen="agent" onclick="go('agent')"><span class="ico">✦</span><span class="txt">Agent</span></button>
+      <button class="tab" data-screen="profile" onclick="go('profile')"><span class="ico">👤</span><span class="txt">Profile</span></button>
     </nav>
   </div>
 
@@ -1171,11 +1134,11 @@
 
   <script>
     const meta = {
-      home: ['Главная'], marketplace: ['Проекты'], myproject: ['Мой проект'],
-      create: ['Новый проект'], work: ['Рабочий процесс'], agent: ['ИИ-агент'],
-      notifications: ['Уведомления'], profile: ['Профиль'], settings: ['Настройки'],
-      editProfile: ['Редактировать профиль'], projectDetail: ['Детали проекта'],
-      materialDetail: ['Материал'], aiSession: ['Сессия в пространстве']
+      home: ['Home'], marketplace: ['Projects'], myproject: ['My Project'],
+      create: ['New Project'], work: ['Workflow'], agent: ['AI Agent'],
+      notifications: ['Notifications'], profile: ['Profile'], settings: ['Settings'],
+      editProfile: ['Edit Profile'], projectDetail: ['Project Details'],
+      materialDetail: ['Material'], aiSession: ['Session in Space']
     };
     const $ = id => document.getElementById(id);
     const screens = document.querySelectorAll('.screen');
@@ -1195,7 +1158,7 @@
     }
 
     function doLogin() {
-      showToast('Вход выполнен успешно','success');
+      showToast('Successfully logged in','success');
       setTimeout(() => {
         document.querySelectorAll('.auth-screen').forEach(s => s.classList.remove('active'));
         $('mainApp').style.display = '';
@@ -1208,24 +1171,24 @@
       $('mainApp').style.display = 'none';
       document.querySelectorAll('.auth-screen').forEach(s => s.classList.remove('active'));
       goAuth('login');
-      showToast('Вы вышли из аккаунта','info');
+      showToast('You have logged out','info');
     }
     function saveProfile() {
       const name = $('editName').value.trim();
       const surname = $('editSurname').value.trim();
       const bio = $('editBio').value.trim();
-      document.querySelector('.profile-name').textContent = surname + ' ' + name;
+      document.querySelector('.profile-name').textContent = name + ' ' + surname;
       document.querySelector('.profile-bio').textContent = bio;
-      showToast('Профиль обновлён','success');
+      showToast('Profile updated','success');
       setTimeout(() => go('profile'), 600);
     }
 
     // Project data
     const projectData = [
-      { source: 'От: IT-Corp', sourceType: 'company', title: 'Оптимизация логистики склада', desc: 'Python, Аналитика данных.', skills: ['Python','SQL','Аналитика'], status: 'Открыто', fullDesc: 'Компания IT-Corp ищет команду для разработки системы оптимизации складской логистики.' },
-      { source: 'От: Студент', sourceType: 'student', title: 'Мобильное приложение для студентов', desc: 'Flutter, UI/UX, Бэкенд.', skills: ['Flutter','Firebase'], status: 'Исследование', fullDesc: 'Студент предлагает разработать мобильное приложение для расписания и заметок.' },
-      { source: 'От: EcoStart', sourceType: 'company', title: 'Система умного полива для теплиц', desc: 'Arduino, IoT, Мехатроника.', skills: ['C++','Hardware'], status: 'Срочно', fullDesc: 'EcoStart разрабатывает систему умного полива для тепличных хозяйств.' },
-      { source: 'От: Студент', sourceType: 'student', title: 'Геймификация обучения', desc: 'Геймдизайн, Педагогика.', skills: ['Геймдизайн','UX'], status: 'Креатив', fullDesc: 'Исследование возможностей геймификации в образовательном процессе.' }
+      { source: 'From: IT-Corp', sourceType: 'company', title: 'Warehouse Logistics Optimization', desc: 'Python, Data Analytics.', skills: ['Python','SQL','Analytics'], status: 'Open', fullDesc: 'IT-Corp is looking for a team to develop a system for optimizing warehouse logistics.' },
+      { source: 'From: Student', sourceType: 'student', title: 'Mobile App for Students', desc: 'Flutter, UI/UX, Backend.', skills: ['Flutter','Firebase'], status: 'Research', fullDesc: 'A student proposes to develop a mobile application for schedules and notes.' },
+      { source: 'From: EcoStart', sourceType: 'company', title: 'Smart Irrigation System for Greenhouses', desc: 'Arduino, IoT, Mechatronics.', skills: ['C++','Hardware'], status: 'Urgent', fullDesc: 'EcoStart is developing a smart irrigation system for greenhouse facilities.' },
+      { source: 'From: Student', sourceType: 'student', title: 'Gamification of Learning', desc: 'Game Design, Pedagogy.', skills: ['Game Design','UX'], status: 'Creative', fullDesc: 'Researching the possibilities of gamification in the educational process.' }
     ];
 
     function openProjectDetail(idx) {
@@ -1238,17 +1201,17 @@
       $('detailStatus').textContent = p.status;
       go('projectDetail');
     }
-    function takeProject() { showToast('Проект добавлен в ваши!','success'); setTimeout(() => go('myproject'), 800); }
+    function takeProject() { showToast('Project added to yours!','success'); setTimeout(() => go('myproject'), 800); }
     function createProject() {
       const name = $('projName').value.trim();
-      if (!name) { showToast('Введите название','info'); return; }
+      if (!name) { showToast('Enter a title','info'); return; }
       const newCard = document.createElement('div');
       newCard.className = 'project-card'; newCard.dataset.type = 'student';
       newCard.onclick = function() { openProjectDetail(4); };
-      newCard.innerHTML = `<div class="project-header"><div class="project-source student">От: Студент</div><span class="badge blue">Новый</span></div><div class="project-title">${name}</div>`;
+      newCard.innerHTML = `<div class="project-header"><div class="project-source student">From: Student</div><span class="badge blue">New</span></div><div class="project-title">${name}</div>`;
       $('projectList').prepend(newCard);
-      projectData.push({ source: 'От: Студент', sourceType: 'student', title: name, desc: '', skills: [], status: 'Новый', fullDesc: '' });
-      showToast(`Проект «${name}» создан!`,'success');
+      projectData.push({ source: 'From: Student', sourceType: 'student', title: name, desc: '', skills: [], status: 'New', fullDesc: '' });
+      showToast(`Project "${name}" created!`,'success');
       setTimeout(() => go('marketplace'), 800);
     }
     function filterProjects(type, el) {
@@ -1269,291 +1232,291 @@
     // ===== MATERIAL DATA =====
     const materialData = [
       {
-        icon: 'meeting', iconEmoji: '📝', title: 'Конспект встречи от 15.01',
-        meta: 'Зафиксировано ИИ-агентом · 15 января 2025',
-        tags: ['Встреча', 'Фаза: Исследование'],
+        icon: 'meeting', iconEmoji: '📝', title: 'Meeting Notes Jan 15',
+        meta: 'Captured by AI Agent · January 15, 2025',
+        tags: ['Meeting', 'Phase: Research'],
         content: `
-          <h3>Тема: Формулировка проблемы проекта</h3>
-          <p>Команда собралась в активной зоне для обсуждения основной проблемы проекта. В ходе дискуссии были выявлены ключевые боли пользователей VR-систем.</p>
+          <h3>Topic: Project Problem Statement</h3>
+          <p>The team gathered in the active zone to discuss the core problem of the project. During the discussion, key pain points of VR system users were identified.</p>
           <div class="highlight">
-            <p><strong>Ключевой вывод:</strong> Отсутствие тактильной обратной связи в VR-интерфейсах является основным барьером для погружения пользователей.</p>
+            <p><strong>Key Takeaway:</strong> The lack of haptic feedback in VR interfaces is the main barrier to user immersion.</p>
           </div>
-          <h3>Обсуждаемые вопросы:</h3>
+          <h3>Issues Discussed:</h3>
           <ul>
-            <li>Какие типы тактильной обратной связи наиболее важны для пользователей?</li>
-            <li>Какие технологии существуют для реализации haptic feedback?</li>
-            <li>Как структурировать процесс исследования?</li>
+            <li>What types of haptic feedback are most important for users?</li>
+            <li>What technologies exist to implement haptic feedback?</li>
+            <li>How to structure the research process?</li>
           </ul>
-          <h3>Принятые решения:</h3>
+          <h3>Decisions Made:</h3>
           <ul>
-            <li>Провести 5 интервью с пользователями VR-систем</li>
-            <li>Изучить существующие решения в области haptic feedback</li>
-            <li>Сформировать гипотезы для тестирования</li>
+            <li>Conduct 5 interviews with VR system users</li>
+            <li>Study existing haptic feedback solutions</li>
+            <li>Formulate hypotheses for testing</li>
           </ul>
-          <p><strong>Следующий шаг:</strong> Подготовить гайд для интервью и назначить даты проведения.</p>
+          <p><strong>Next Step:</strong> Prepare an interview guide and schedule dates.</p>
         `
       },
       {
-        icon: 'doc', iconEmoji: '📄', title: 'Результаты интервью с пользователями',
-        meta: 'PDF · Загружено командой · 17 января 2025',
-        tags: ['Исследование', 'Пользователи'],
+        icon: 'doc', iconEmoji: '📄', title: 'User Interview Results',
+        meta: 'PDF · Uploaded by team · January 17, 2025',
+        tags: ['Research', 'Users'],
         content: `
-          <h3>Результаты интервью: 5 респондентов</h3>
-          <p>Команда провела серию интервью с пользователями VR-систем для понимания их потребностей в тактильной обратной связи.</p>
-          <h3>Ключевые инсайты:</h3>
+          <h3>Interview Results: 5 Respondents</h3>
+          <p>The team conducted a series of interviews with VR system users to understand their needs for haptic feedback.</p>
+          <h3>Key Insights:</h3>
           <ul>
-            <li><strong>80% респондентов</strong> отметили отсутствие тактильной обратной связи как главную проблему VR</li>
-            <li><strong>60%</strong> хотели бы чувствовать текстуры виртуальных объектов</li>
-            <li><strong>40%</strong> считают вибрацию недостаточной для полноценного погружения</li>
+            <li><strong>80% of respondents</strong> noted the lack of haptic feedback as the main issue in VR</li>
+            <li><strong>60%</strong> would like to feel the textures of virtual objects</li>
+            <li><strong>40%</strong> consider vibration insufficient for full immersion</li>
           </ul>
           <div class="highlight">
-            <p><strong>Цитата респондента:</strong> "Когда я трогаю виртуальный объект, я ожидаю чувствовать его, а не просто видеть анимацию. Без тактильности это как смотреть фильм без звука."</p>
+            <p><strong>Respondent Quote:</strong> "When I touch a virtual object, I expect to feel it, not just see an animation. Without touch, it's like watching a movie without sound."</p>
           </div>
-          <h3>Следующие шаги:</h3>
-          <p>На основе полученных данных команда переходит к генерации идей и прототипированию решений.</p>
+          <h3>Next Steps:</h3>
+          <p>Based on the data gathered, the team will transition to idea generation and prototyping solutions.</p>
         `
       },
       {
-        icon: 'ai', iconEmoji: '✦', title: 'Анализ ИИ-агента: паттерны команды',
-        meta: 'Автоматический отчёт · Сгенерировано 18 января 2025',
-        tags: ['ИИ-агент', 'Аналитика'],
+        icon: 'ai', iconEmoji: '✦', title: 'AI Agent Analysis: Team Patterns',
+        meta: 'Auto-report · Generated January 18, 2025',
+        tags: ['AI Agent', 'Analytics'],
         content: `
-          <h3>Анализ паттернов работы команды</h3>
-          <p>ИИ-агент проанализировал динамику работы команды за последние 7 дней и выявил следующие паттерны:</p>
-          <h3>Выявленные закономерности:</h3>
+          <h3>Team Work Patterns Analysis</h3>
+          <p>The AI Agent analyzed the team's working dynamics over the last 7 days and identified the following patterns:</p>
+          <h3>Identified Patterns:</h3>
           <ul>
-            <li>Команда 3 раза возвращалась к обсуждению одной и той же идеи без продвижения</li>
-            <li>Пик активности приходится на первые 2 часа сессии, затем эффективность снижается</li>
-            <li>Распределение активности внутри команды несбалансировано: лидер проекта выполняет 40% задач</li>
+            <li>The team returned to discussing the same idea 3 times without any forward progress</li>
+            <li>Activity peaks in the first 2 hours of a session, then efficiency drops</li>
+            <li>Work distribution within the team is unbalanced: the project leader is performing 40% of the tasks</li>
           </ul>
           <div class="highlight">
-            <p><strong>Рекомендация агента:</strong> Попробуйте сменить формат работы — перейдите от текстового обсуждения к физическому прототипированию. Это может раскрыть новые аспекты решения.</p>
+            <p><strong>Agent Recommendation:</strong> Try changing the work format — transition from text discussions to physical prototyping. This may unlock new aspects of the solution.</p>
           </div>
-          <h3>Предложения по оптимизации:</h3>
+          <h3>Optimization Suggestions:</h3>
           <ul>
-            <li>Перераспределить задачи между участниками команды</li>
-            <li>Использовать технику "таймбоксинга" для сессий (макс. 2 часа)</li>
-            <li>Внедрить регулярные короткие синхронизации (15 мин)</li>
+            <li>Redistribute tasks among team members</li>
+            <li>Use the "timeboxing" technique for sessions (max 2 hours)</li>
+            <li>Implement regular brief syncs (15 min)</li>
           </ul>
         `
       },
       {
-        icon: 'doc', iconEmoji: '🖼', title: 'Фото прототипа v1',
-        meta: 'Изображение · Загружено 18.01.2025',
-        tags: ['Прототип', 'Фаза: Создание'],
+        icon: 'doc', iconEmoji: '🖼', title: 'Prototype v1 Photo',
+        meta: 'Image · Uploaded Jan 18, 2025',
+        tags: ['Prototype', 'Phase: Creation'],
         content: `
-          <h3>Прототип v1: Перчатка с сенсорами</h3>
-          <p>Команда создала первый физический прототип перчатки с тактильными сенсорами для VR-интерфейсов.</p>
+          <h3>Prototype v1: Sensor Glove</h3>
+          <p>The team created the first physical prototype of a glove with haptic sensors for VR interfaces.</p>
           <div class="highlight">
-            <p><strong>Описание прототипа:</strong> Перчатка оснащена 12 вибрационными моторами, расположенными на кончиках пальцев и ладони. Управление осуществляется через Arduino Nano.</p>
+            <p><strong>Prototype Description:</strong> The glove is equipped with 12 vibration motors located on the fingertips and palm. It is controlled via an Arduino Nano.</p>
           </div>
-          <h3>Технические характеристики:</h3>
+          <h3>Technical Specifications:</h3>
           <ul>
-            <li>12 вибрационных моторов (ERM)</li>
-            <li>Контроллер: Arduino Nano</li>
-            <li>Питание: Li-Po аккумулятор 3.7V</li>
-            <li>Вес: ~85 грамм</li>
+            <li>12 vibration motors (ERM)</li>
+            <li>Controller: Arduino Nano</li>
+            <li>Power: Li-Po battery 3.7V</li>
+            <li>Weight: ~85 grams</li>
           </ul>
-          <h3>Полученная обратная связь:</h3>
-          <p>При тестировании прототипа пользователи отметили, что вибрация на кончиках пальцев наиболее эффективна для распознавания виртуальных объектов.</p>
-          <p><strong>Следующая итерация:</strong> Увеличить количество сенсоров и добавить обратную связь на ладонь.</p>
+          <h3>Feedback Received:</h3>
+          <p>During prototype testing, users noted that fingertip vibration is most effective for recognizing virtual objects.</p>
+          <p><strong>Next Iteration:</strong> Increase the number of sensors and add haptic feedback to the palm.</p>
         `
       },
       {
-        icon: 'meeting', iconEmoji: '📋', title: 'План тестирования',
-        meta: 'Документ · Совместное редактирование · 20 января 2025',
-        tags: ['Тестирование', 'Фаза: Проверка'],
+        icon: 'meeting', iconEmoji: '📋', title: 'Testing Plan',
+        meta: 'Document · Collaborative editing · January 20, 2025',
+        tags: ['Testing', 'Phase: Validation'],
         content: `
-          <h3>План тестирования прототипа v1</h3>
-          <p>Документ описывает методологию тестирования прототипа перчатки с тактильными сенсорами.</p>
-          <h3>Цели тестирования:</h3>
+          <h3>Testing Plan for Prototype v1</h3>
+          <p>This document describes the methodology for testing the prototype of the haptic sensor glove.</p>
+          <h3>Testing Goals:</h3>
           <ul>
-            <li>Оценить точность распознавания виртуальных объектов</li>
-            <li>Измерить время реакции пользователя на тактильную обратную связь</li>
-            <li>Собрать субъективную оценку удобства использования</li>
+            <li>Evaluate the accuracy of virtual object recognition</li>
+            <li>Measure user reaction time to haptic feedback</li>
+            <li>Gather subjective assessments of usability</li>
           </ul>
-          <h3>Методология:</h3>
+          <h3>Methodology:</h3>
           <ul>
-            <li><strong>Участники:</strong> 10 пользователей VR-систем</li>
-            <li><strong>Формат:</strong> Индивидуальные сессии по 30 минут</li>
-            <li><strong>Метрики:</strong> Точность, время реакции, оценка по шкале SUS</li>
+            <li><strong>Participants:</strong> 10 VR system users</li>
+            <li><strong>Format:</strong> Individual 30-minute sessions</li>
+            <li><strong>Metrics:</strong> Accuracy, reaction time, SUS score evaluation</li>
           </ul>
           <div class="highlight">
-            <p><strong>Критерий успеха:</strong> Точность распознавания ≥ 70%, средняя оценка SUS ≥ 68</p>
+            <p><strong>Success Criterion:</strong> Recognition accuracy ≥ 70%, average SUS score ≥ 68</p>
           </div>
         `
       },
       {
-        icon: 'ai', iconEmoji: '✦', title: 'Рекомендации по материалам',
-        meta: 'ИИ-агент · На основе анализа проекта · 19 января 2025',
-        tags: ['ИИ-агент', 'Рекомендации'],
+        icon: 'ai', iconEmoji: '✦', title: 'Material Recommendations',
+        meta: 'AI Agent · Based on project analysis · January 19, 2025',
+        tags: ['AI Agent', 'Recommendations'],
         content: `
-          <h3>Рекомендации от ИИ-агента по материалам проекта</h3>
-          <p>На основе анализа текущего состояния проекта и прогресса команды, ИИ-агент подготовил следующие рекомендации:</p>
-          <h3>Приоритетные материалы для изучения:</h3>
+          <h3>Recommendations from AI Agent regarding project materials</h3>
+          <p>Based on the analysis of the project's current state and team progress, the AI Agent has prepared the following recommendations:</p>
+          <h3>Priority Materials for Study:</h3>
           <ul>
-            <li>Исследования по тактильной обратной связи в VR (2020-2024)</li>
-            <li>Кейсы компаний: Meta, Sony, Valve в области haptic feedback</li>
-            <li>Технические руководства по Arduino и вибрационным моторам</li>
+            <li>Research on haptic feedback in VR (2020-2024)</li>
+            <li>Company cases: Meta, Sony, Valve regarding haptic feedback</li>
+            <li>Technical manuals on Arduino and vibration motors</li>
           </ul>
           <div class="highlight">
-            <p><strong>Совет:</strong> Рекомендуется изучить работу компании "bHaptics" — их решения в области тактильных костюмов могут дать полезные идеи для вашего проекта.</p>
+            <p><strong>Tip:</strong> We recommend exploring the work of "bHaptics" — their haptic suit solutions may provide useful ideas for your project.</p>
           </div>
-          <h3>Связанные материалы:</h3>
-          <p>Для углублённого изучения темы рекомендуем обратиться к разделу "Материалы от ИИ-агента", где подобрана релевантная подборка статей и примеров.</p>
+          <h3>Related Materials:</h3>
+          <p>For an in-depth study of the topic, we recommend checking the "Materials from AI Agent" section, where a relevant selection of articles and examples has been curated.</p>
         `
       },
       {
-        icon: 'tip', iconEmoji: '💡', title: 'Совет по вашей роли: Лидер проекта',
-        meta: 'Персональная рекомендация · Для: Тихомирова А.',
-        tags: ['Совет', 'Роль'],
+        icon: 'tip', iconEmoji: '💡', title: 'Tip on your role: Project Leader',
+        meta: 'Personal recommendation · For: A. Tikhomirova',
+        tags: ['Tip', 'Role'],
         content: `
-          <h3>💡 Персональный совет по вашей роли</h3>
-          <p>ИИ-агент проанализировал вашу активность и роль в команде и подготовил персональную рекомендацию:</p>
+          <h3>💡 Personal Tip Regarding Your Role</h3>
+          <p>The AI Agent has analyzed your activity and role within the team and prepared a personal recommendation:</p>
           <div class="highlight">
-            <p><strong>Как лидер проекта:</strong> Вы тратите слишком много времени на операционные задачи (сбор данных, организация встреч). Попробуйте делегировать сбор данных аналитику (Петрову А.), чтобы сосредоточиться на координации прототипирования и взаимодействии с экспертами.</p>
+            <p><strong>As a project leader:</strong> You are spending too much time on operational tasks (data collection, organizing meetings). Try delegating data collection to the analyst (A. Petrov) so you can focus on prototyping coordination and interacting with experts.</p>
           </div>
-          <h3>Конкретные шаги:</h3>
+          <h3>Specific Steps:</h3>
           <ul>
-            <li>Делегируйте Петрову А. задачу по анализу данных интервью</li>
-            <li>Сосредоточьтесь на координации команды и взаимодействии с экспертами</li>
-            <li>Проведите короткую сессию (15 мин) для перераспределения задач</li>
+            <li>Delegate the task of analyzing interview data to A. Petrov</li>
+            <li>Focus on team coordination and interacting with experts</li>
+            <li>Hold a short session (15 min) to redistribute tasks</li>
           </ul>
-          <h3>Полезные ресурсы:</h3>
-          <div class="link-item" onclick="go('agent')"><span class="link-ico">✦</span><span class="link-text">Обсудить рекомендацию с ИИ-агентом →</span></div>
-          <div class="link-item"><span class="link-ico">📖</span><span class="link-text">Статья: "Эффективное лидерство в инновационных командах"</span></div>
+          <h3>Useful Resources:</h3>
+          <div class="link-item" onclick="go('agent')"><span class="link-ico">✦</span><span class="link-text">Discuss this recommendation with the AI Agent →</span></div>
+          <div class="link-item"><span class="link-ico">📖</span><span class="link-text">Article: "Effective Leadership in Innovative Teams"</span></div>
         `
       },
       {
-        icon: 'tip', iconEmoji: '📈', title: 'Рекомендация по активности',
-        meta: 'Анализ активности · 20 января 2025',
-        tags: ['Активность', 'Совет'],
+        icon: 'tip', iconEmoji: '📈', title: 'Activity Recommendation',
+        meta: 'Activity analysis · January 20, 2025',
+        tags: ['Activity', 'Tip'],
         content: `
-          <h3>📈 Анализ вашей активности</h3>
-          <p>ИИ-агент заметил снижение вашей активности в проекте за последние 3 дня:</p>
+          <h3>📈 Analysis of Your Activity</h3>
+          <p>The AI Agent noticed a decrease in your activity on the project over the last 3 days:</p>
           <div class="highlight">
-            <p><strong>Обнаружено:</strong> Ваша активность снизилась на 30% по сравнению с предыдущей неделей. Количество идей и комментариев уменьшилось.</p>
+            <p><strong>Detected:</strong> Your activity has decreased by 30% compared to the previous week. The number of ideas and comments has dropped.</p>
           </div>
-          <h3>Возможные причины:</h3>
+          <h3>Possible Causes:</h3>
           <ul>
-            <li>Высокая когнитивная нагрузка от текущей задачи</li>
-            <li>Нехватка времени из-за других обязательств</li>
-            <li>Неопределённость в следующем шаге</li>
+            <li>High cognitive load from the current task</li>
+            <li>Lack of time due to other commitments</li>
+            <li>Uncertainty regarding the next step</li>
           </ul>
-          <h3>Рекомендация:</h3>
-          <p>Попробуйте провести короткую сессию синхронизации с командой (15-20 мин), чтобы обсудить текущее состояние и определить следующие шаги.</p>
-          <div class="link-item" onclick="go('agent')"><span class="link-ico">✦</span><span class="link-text">Обсудить с ИИ-агентом →</span></div>
+          <h3>Recommendation:</h3>
+          <p>Try conducting a brief sync session with the team (15-20 mins) to discuss the current status and determine the next steps.</p>
+          <div class="link-item" onclick="go('agent')"><span class="link-ico">✦</span><span class="link-text">Discuss with the AI Agent →</span></div>
         `
       },
       {
-        icon: 'tip', iconEmoji: '🔍', title: 'Глубже в тему: тактильные интерфейсы',
-        meta: 'Рекомендация по изучению · 21 января 2025',
-        tags: ['Обучение', 'Исследование'],
+        icon: 'tip', iconEmoji: '🔍', title: 'Deeper into the topic: haptic interfaces',
+        meta: 'Study recommendation · January 21, 2025',
+        tags: ['Learning', 'Research'],
         content: `
-          <h3>🔍 Углублённое изучение темы</h3>
-          <p>ИИ-агент рекомендует изучить кейсы тактильных интерфейсов в медицине — аналогии могут помочь в вашем проекте:</p>
+          <h3>🔍 In-depth Topic Study</h3>
+          <p>The AI Agent recommends exploring cases of haptic interfaces in medicine — these analogies may help with your project:</p>
           <div class="highlight">
-            <p><strong>Почему это полезно:</strong> В хирургических симуляторах используются похожие технологии тактильной обратной связи. Изучение этих решений может дать новые идеи для вашего VR-проекта.</p>
+            <p><strong>Why this is useful:</strong> Surgical simulators utilize similar haptic feedback technologies. Studying these solutions can yield fresh ideas for your VR project.</p>
           </div>
-          <h3>Рекомендуемые материалы:</h3>
+          <h3>Recommended Materials:</h3>
           <ul>
-            <li>Исследование "Haptic Feedback in Surgical Simulation" (IEEE, 2023)</li>
-            <li>Кейс компании "Simbionix" — тактильные симуляторы для хирургов</li>
-            <li>Обзор технологий тактильной обратной связи в медицине</li>
+            <li>Study: "Haptic Feedback in Surgical Simulation" (IEEE, 2023)</li>
+            <li>Case study: "Simbionix" company — haptic simulators for surgeons</li>
+            <li>Overview of haptic feedback technologies in the medical field</li>
           </ul>
-          <h3>Как применить:</h3>
-          <p>Попробуйте адаптировать принципы из медицинских симуляторов для вашего VR-проекта. Например, использование зон различной интенсивности вибрации для передачи текстуры.</p>
-          <div class="link-item" onclick="go('agent')"><span class="link-ico">✦</span><span class="link-text">Попросить агента найти больше примеров →</span></div>
+          <h3>How to Apply:</h3>
+          <p>Try adapting principles from medical simulators for your VR project. For example, using zones of varying vibration intensity to convey texture.</p>
+          <div class="link-item" onclick="go('agent')"><span class="link-ico">✦</span><span class="link-text">Ask the agent to find more examples →</span></div>
         `
       },
       {
-        icon: 'ai', iconEmoji: '📊', title: 'Анализ паттернов команды',
-        meta: 'ИИ-агент · Автоматический отчёт · 18 января 2025',
-        tags: ['ИИ-агент', 'Аналитика'],
+        icon: 'ai', iconEmoji: '📊', title: 'Team patterns analysis',
+        meta: 'AI Agent · Auto-report · January 18, 2025',
+        tags: ['AI Agent', 'Analytics'],
         content: `
-          <h3>📊 Анализ паттернов команды</h3>
-          <p>ИИ-агент провёл глубокий анализ работы команды и выявил следующие паттерны:</p>
+          <h3>📊 Team Patterns Analysis</h3>
+          <p>The AI Agent conducted a deep analysis of the team's workflow and identified the following patterns:</p>
           <div class="highlight">
-            <p><strong>Основная проблема:</strong> Команда систематически возвращается к одной идее (тактильная перчатка) без продвижения к тестированию. Это указывает на застревание в фазе прототипирования.</p>
+            <p><strong>Core Problem:</strong> The team systematically returns to the same idea (the haptic glove) without advancing to testing. This indicates getting stuck in the prototyping phase.</p>
           </div>
-          <h3>Детальный анализ:</h3>
+          <h3>Detailed Analysis:</h3>
           <ul>
-            <li><strong>Повторяющиеся действия:</strong> 3 обсуждения одной идеи без нового прототипа</li>
-            <li><strong>Время на задачу:</strong> Фаза "Создание" длится на 40% дольше, чем планировалось</li>
-            <li><strong>Командная динамика:</strong> 2 участника проявляют низкую активность</li>
+            <li><strong>Repetitive actions:</strong> 3 discussions on the same idea with no new prototype</li>
+            <li><strong>Time spent on task:</strong> The "Creation" phase is taking 40% longer than planned</li>
+            <li><strong>Team dynamics:</strong> 2 members are showing low activity</li>
           </ul>
-          <h3>Рекомендация:</h3>
-          <p>Сменить формат работы — перейти от обсуждения к физическому тестированию прототипа. Провести сессию с реальными пользователями для получения обратной связи.</p>
-          <div class="link-item" onclick="go('agent')"><span class="link-ico">✦</span><span class="link-text">Обсудить анализ с ИИ-агентом →</span></div>
+          <h3>Recommendation:</h3>
+          <p>Change the work format — shift from discussion to physical testing of the prototype. Conduct a session with real users to get feedback.</p>
+          <div class="link-item" onclick="go('agent')"><span class="link-ico">✦</span><span class="link-text">Discuss this analysis with the AI Agent →</span></div>
         `
       },
       {
-        icon: 'ai', iconEmoji: '🎯', title: 'Общие рекомендации по проекту',
-        meta: 'ИИ-агент · Стратегические рекомендации · 20 января 2025',
-        tags: ['ИИ-агент', 'Стратегия'],
+        icon: 'ai', iconEmoji: '🎯', title: 'General project recommendations',
+        meta: 'AI Agent · Strategic recommendations · January 20, 2025',
+        tags: ['AI Agent', 'Strategy'],
         content: `
-          <h3>🎯 Общие рекомендации по проекту</h3>
-          <p>На основе анализа текущего состояния проекта ИИ-агент подготовил стратегические рекомендации:</p>
+          <h3>🎯 General Project Recommendations</h3>
+          <p>Based on the analysis of the project's current state, the AI Agent has prepared strategic recommendations:</p>
           <div class="highlight">
-            <p><strong>Следующий логичный шаг:</strong> Тестирование прототипа с реальными пользователями. Подготовка к этому этапу займёт 2-3 дня.</p>
+            <p><strong>Next logical step:</strong> Test the prototype with real users. Preparation for this phase will take 2-3 days.</p>
           </div>
-          <h3>План действий:</h3>
+          <h3>Action Plan:</h3>
           <ul>
-            <li><strong>День 1:</strong> Подготовить сценарий тестирования и招募овать 5-7 пользователей</li>
-            <li><strong>День 2:</strong> Провести тестирование и собрать обратную связь</li>
-            <li><strong>День 3:</strong> Проанализировать результаты и определить следующую итерацию</li>
+            <li><strong>Day 1:</strong> Prepare a testing scenario and recruit 5-7 users</li>
+            <li><strong>Day 2:</strong> Conduct the testing and gather feedback</li>
+            <li><strong>Day 3:</strong> Analyze the results and determine the next iteration</li>
           </ul>
-          <h3>Критерии успеха:</h3>
+          <h3>Success Criteria:</h3>
           <ul>
-            <li>Получить обратную связь минимум от 5 пользователей</li>
-            <li>Выявить 3+ конкретных улучшения для прототипа</li>
-            <li>Определить готовность к следующей итерации</li>
+            <li>Obtain feedback from at least 5 users</li>
+            <li>Identify 3+ specific improvements for the prototype</li>
+            <li>Determine readiness for the next iteration</li>
           </ul>
-          <div class="link-item" onclick="go('agent')"><span class="link-ico">✦</span><span class="link-text">Обсудить план с ИИ-агентом →</span></div>
+          <div class="link-item" onclick="go('agent')"><span class="link-ico">✦</span><span class="link-text">Discuss the plan with the AI Agent →</span></div>
         `
       },
       {
-        icon: 'ai', iconEmoji: '✦', title: 'Подборка: тактильные интерфейсы',
-        meta: '5 статей и примеров · Сгенерировано агентом · 19 января 2025',
-        tags: ['ИИ-агент', 'Материалы'],
+        icon: 'ai', iconEmoji: '✦', title: 'Selection: haptic interfaces',
+        meta: '5 articles and examples · Generated by Agent · January 19, 2025',
+        tags: ['AI Agent', 'Materials'],
         content: `
-          <h3>📚 Подборка материалов: тактильные интерфейсы</h3>
-          <p>ИИ-агент подготовил подборку релевантных материалов на основе анализа вашего проекта:</p>
-          <h3>Статьи и исследования:</h3>
+          <h3>📚 Material Selection: Haptic Interfaces</h3>
+          <p>The AI Agent has curated a selection of relevant materials based on an analysis of your project:</p>
+          <h3>Articles and Studies:</h3>
           <ul>
             <li>"Haptic Feedback in Virtual Reality: A Comprehensive Review" (ACM, 2023)</li>
             <li>"Designing Tactile Interfaces for Immersive Environments" (IEEE, 2024)</li>
             <li>"The Future of Touch in VR" (MIT Technology Review)</li>
           </ul>
-          <h3>Примеры решений:</h3>
+          <h3>Example Solutions:</h3>
           <ul>
-            <li><strong>bHaptics TactSuit:</strong> Тактильный костюм для VR с 40 точками обратной связи</li>
-            <li><strong>Meta Quest Touch Plus:</strong> Контроллеры с улучшенной тактильной обратной связью</li>
-            <li><strong>Ultraleap:</strong> Технология тактильной обратной связи без перчаток</li>
+            <li><strong>bHaptics TactSuit:</strong> A haptic suit for VR with 40 feedback points</li>
+            <li><strong>Meta Quest Touch Plus:</strong> Controllers with improved haptic feedback</li>
+            <li><strong>Ultraleap:</strong> Haptic feedback technology without gloves</li>
           </ul>
           <div class="highlight">
-            <p><strong>Совет:</strong> Обратите внимание на решение Ultraleap — оно использует ультразвуковые волны для создания тактильных ощущений без контакта с кожей.</p>
+            <p><strong>Tip:</strong> Take a look at the Ultraleap solution — it uses ultrasonic waves to create haptic sensations without skin contact.</p>
           </div>
-          <div class="link-item" onclick="go('agent')"><span class="link-ico">✦</span><span class="link-text">Попросить агента найти больше материалов →</span></div>
+          <div class="link-item" onclick="go('agent')"><span class="link-ico">✦</span><span class="link-text">Ask the agent to find more materials →</span></div>
         `
       },
       {
-        icon: 'ai', iconEmoji: '✦', title: 'Аналогии из других индустрий',
-        meta: '3 примера решения похожих проблем · 20 января 2025',
-        tags: ['ИИ-агент', 'Аналогии'],
+        icon: 'ai', iconEmoji: '✦', title: 'Analogies from other industries',
+        meta: '3 examples of solving similar problems · January 20, 2025',
+        tags: ['AI Agent', 'Analogies'],
         content: `
-          <h3>🔗 Аналогии из других индустрий</h3>
-          <p>ИИ-агент нашёл решения похожих проблем в других индустриях, которые могут вдохновить вашу команду:</p>
-          <h3>1. Медицина: Хирургические симуляторы</h3>
-          <p>Компания "Simbionix" использует тактильную обратную связь для обучения хирургов. Принцип: зоны различной интенсивности вибрации передают текстуру тканей.</p>
-          <h3>2. Автомобильная промышленность: Рулевое управление</h3>
-          <p>Системы "Force Feedback" в рулевом управлении передают водителю информацию о дорожном покрытии через вибрацию. Аналогия: можно использовать для передачи текстуры виртуальных объектов.</p>
-          <h3>3. Игровая индустрия: Контроллеры PlayStation</h3>
-          <p>Контроллер DualSense использует адаптивные триггеры и тактильную обратную связь для создания ощущения различных поверхностей. Принцип: различная интенсивность и частота вибрации.</p>
+          <h3>🔗 Analogies from Other Industries</h3>
+          <p>The AI Agent has found solutions to similar problems in other industries that might inspire your team:</p>
+          <h3>1. Medicine: Surgical Simulators</h3>
+          <p>The "Simbionix" company uses haptic feedback to train surgeons. Principle: zones of varying vibration intensity convey tissue texture.</p>
+          <h3>2. Automotive Industry: Steering</h3>
+          <p>"Force Feedback" systems in steering transmit road surface information to the driver via vibration. Analogy: this can be used to convey the texture of virtual objects.</p>
+          <h3>3. Gaming Industry: PlayStation Controllers</h3>
+          <p>The DualSense controller uses adaptive triggers and haptic feedback to create the sensation of various surfaces. Principle: varying intensity and frequency of vibration.</p>
           <div class="highlight">
-            <p><strong>Как применить:</strong> Попробуйте адаптировать принцип адаптивных триггеров из PlayStation для вашей VR-перчатки — это может улучшить точность распознавания объектов.</p>
+            <p><strong>How to Apply:</strong> Try adapting the principle of adaptive triggers from PlayStation for your VR glove — this could improve object recognition accuracy.</p>
           </div>
-          <div class="link-item" onclick="go('agent')"><span class="link-ico">✦</span><span class="link-text">Обсудить аналогии с ИИ-агентом →</span></div>
+          <div class="link-item" onclick="go('agent')"><span class="link-ico">✦</span><span class="link-text">Discuss analogies with the AI Agent →</span></div>
         `
       }
     ];
@@ -1578,7 +1541,7 @@
     function activateAgent() {
       sessionActive = true;
       sessionSeconds = 0;
-      showToast('Агент активирован для сессии', 'success');
+      showToast('Agent activated for session', 'success');
       setTimeout(() => {
         go('aiSession');
         startSessionTimer();
@@ -1606,20 +1569,20 @@
 
       const actions = {
         summary: {
-          sys: 'Агент создаёт конспект текущей сессии...',
-          ai: 'Конспект сформирован! Зафиксированы 3 решения, 5 идей и 2 открытых вопроса. Материал добавлен в нарратив проекта.'
+          sys: 'Agent is generating session notes...',
+          ai: 'Notes created! 3 decisions, 5 ideas, and 2 open questions captured. The material has been added to the project narrative.'
         },
         role: {
-          sys: 'Агент анализирует распределение ролей...',
-          ai: 'Рекомендация: Дмитрий (разработчик) может взять на себя программирование сенсоров, а Анастасия (лидер) — координацию и подготовку к тестированию.'
+          sys: 'Agent is analyzing role distribution...',
+          ai: 'Recommendation: Dmitry (developer) could take on sensor programming, while Anastasia (leader) focuses on coordination and preparation for testing.'
         },
         idea: {
-          sys: 'Агент ищет аналогии...',
-          ai: 'Нашёл аналогию: компания Simbionix использует похожий подход в хирургических симуляторах — зоны различной интенсивности вибрации передают текстуру тканей.'
+          sys: 'Agent is searching for analogies...',
+          ai: 'Found an analogy: Simbionix uses a similar approach in surgical simulators — zones of varying vibration intensity convey tissue textures.'
         },
         trigger: {
-          sys: 'Агент генерирует вызов...',
-          ai: '⚡ Вызов для команды: Вы 15 минут обсуждаете один аспект без продвижения. Попробуйте распараллелить работу!'
+          sys: 'Agent is generating a challenge...',
+          ai: '⚡ Challenge for the team: You have been discussing one aspect for 15 minutes without progress. Try to parallelize the work!'
         }
       };
 
@@ -1629,7 +1592,7 @@
         chat.scrollTop = chat.scrollHeight;
 
         setTimeout(() => {
-          chat.innerHTML += `<div class="session-msg ai"><div class="msg-label">Агент</div>${action.ai}</div>`;
+          chat.innerHTML += `<div class="session-msg ai"><div class="msg-label">Agent</div>${action.ai}</div>`;
           chat.scrollTop = chat.scrollHeight;
         }, 1000);
       }
@@ -1648,13 +1611,13 @@
       // Simulate AI response
       setTimeout(() => {
         const responses = [
-          'Понял. Зафиксирую это в материалах. Рекомендую также рассмотреть альтернативные подходы.',
-          'Интересная мысль! Это напоминает подход, который использовала компания bHaptics. Хотите, найду больше информации?',
-          'Записал. Это может стать частью конспекта. Если нужна помощь с технической реализацией — обращайтесь.',
-          'Отличное наблюдение! Добавлю это в нарратив проекта. Заметил паттерн: команда часто возвращается к этой теме.'
+          'Got it. I will record this in the materials. I recommend also considering alternative approaches.',
+          'Interesting thought! This resembles the approach used by bHaptics. Should I find more information?',
+          'Recorded. This can become part of the notes. If you need help with technical implementation — just ask.',
+          'Great observation! Adding this to the project narrative. I noticed a pattern: the team often returns to this topic.'
         ];
         const resp = responses[Math.floor(Math.random() * responses.length)];
-        chat.innerHTML += `<div class="session-msg ai"><div class="msg-label">Агент</div>${resp}</div>`;
+        chat.innerHTML += `<div class="session-msg ai"><div class="msg-label">Agent</div>${resp}</div>`;
         chat.scrollTop = chat.scrollHeight;
       }, 1200);
     }
@@ -1662,7 +1625,7 @@
     function stopSession() {
       sessionActive = false;
       if (timerInterval) clearInterval(timerInterval);
-      showToast('Сессия завершена. Конспект сохранён в материалы.', 'success');
+      showToast('Session ended. Notes saved to materials.', 'success');
       setTimeout(() => go('myproject'), 800);
     }
 
@@ -1680,7 +1643,7 @@
       list.scrollTop = list.scrollHeight;
       const loadingMsg = document.createElement('div');
       loadingMsg.className = 'msg agent';
-      loadingMsg.innerHTML = '<span class="msg-label">Агент</span><i>Анализирую контекст...</i>';
+      loadingMsg.innerHTML = '<span class="msg-label">Agent</span><i>Analyzing context...</i>';
       list.appendChild(loadingMsg);
       list.scrollTop = list.scrollHeight;
       try {
@@ -1703,16 +1666,16 @@
         list.removeChild(loadingMsg);
         const agentMsg = document.createElement('div');
         agentMsg.className = 'msg agent';
-        const responseText = data.reply || data.output || data.message || "Нет ответа от агента";
-        agentMsg.innerHTML = `<div class="msg-label">Агент</div>${String(responseText).replace(/\n/g, '<br>')}`;
+        const responseText = data.reply || data.output || data.message || "No response from agent";
+        agentMsg.innerHTML = `<div class="msg-label">Agent</div>${String(responseText).replace(/\n/g, '<br>')}`;
         list.appendChild(agentMsg);
       } catch (error) {
-        console.error('Ошибка подключения к n8n:', error);
+        console.error('Error connecting to n8n:', error);
         list.removeChild(loadingMsg);
         const errorMsg = document.createElement('div');
         errorMsg.className = 'msg agent';
         errorMsg.style.color = '#ef4444';
-        errorMsg.innerHTML = `<div class="msg-label">Ошибка</div>Не удалось связаться с ИИ-агентом.<br><small>${error.message}</small>`;
+        errorMsg.innerHTML = `<div class="msg-label">Error</div>Failed to contact AI Agent.<br><small>${error.message}</small>`;
         list.appendChild(errorMsg);
       }
       list.scrollTop = list.scrollHeight;
@@ -1754,13 +1717,13 @@
   const state = {
     context: {
       type: 'dashboard',
-      title: 'Главная',
-      summary: 'Выберите проект, материал или сессию, чтобы передать контекст ИИ-агенту.',
-      phase: 'Исследование',
-      source: 'Платформа',
+      title: 'Home',
+      summary: 'Select a project, material, or session to pass context to the AI Agent.',
+      phase: 'Research',
+      source: 'Platform',
       sourceType: 'dashboard',
-      tags: ['Фаза: Исследование', 'Фаза: Создание', 'Фаза: Проверка'],
-      suggestedPrompt: 'Подскажи следующий шаг для текущего контекста.'
+      tags: ['Phase: Research', 'Phase: Creation', 'Phase: Validation'],
+      suggestedPrompt: 'Suggest the next step for the current context.'
     },
     contextIntroKey: '',
     session: {
@@ -1768,8 +1731,8 @@
       seconds: 0,
       timer: null,
       transcript: [],
-      location: 'Зона прототипирования',
-      lastAction: 'ожидание запуска',
+      location: 'Prototyping zone',
+      lastAction: 'awaiting start',
       photo: null
     },
     mode: {
@@ -1805,7 +1768,7 @@
     const btn = byId('wideChatToggleBtn');
     if (btn) {
       btn.classList.toggle('toggle-active', Boolean(state.ui.wideChat));
-      btn.title = state.ui.wideChat ? 'Свернуть чат' : 'Развернуть чат';
+      btn.title = state.ui.wideChat ? 'Collapse chat' : 'Expand chat';
       btn.textContent = state.ui.wideChat ? '⤡' : '⤢';
     }
   }
@@ -1835,7 +1798,7 @@
     const targetMime = toDataUrlMime(originalMime);
     const readerResult = await new Promise((resolve, reject) => {
       const reader = new FileReader();
-      reader.onerror = () => reject(new Error('Не удалось прочитать файл'));
+      reader.onerror = () => reject(new Error('Failed to read file'));
       reader.onload = () => resolve(reader.result);
       reader.readAsDataURL(file);
     });
@@ -1846,7 +1809,7 @@
     const img = await new Promise((resolve, reject) => {
       const image = new Image();
       image.onload = () => resolve(image);
-      image.onerror = () => reject(new Error('Не удалось загрузить изображение'));
+      image.onerror = () => reject(new Error('Failed to load image'));
       image.src = src;
     });
 
@@ -1855,7 +1818,7 @@
     canvas.width = Math.max(1, Math.round((img.width || maxSide) * scale));
     canvas.height = Math.max(1, Math.round((img.height || maxSide) * scale));
     const ctx = canvas.getContext('2d');
-    if (!ctx) throw new Error('Canvas недоступен');
+    if (!ctx) throw new Error('Canvas not available');
     ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
     const dataUrl = canvas.toDataURL(targetMime, targetMime === 'image/png' ? undefined : quality);
     return { dataUrl, mimeType: targetMime, width: canvas.width, height: canvas.height };
@@ -1871,14 +1834,14 @@
     if (!state.session.photo) {
       preview.classList.remove('active');
       img.removeAttribute('src');
-      name.textContent = 'Фото не выбрано';
-      meta.textContent = 'Сделайте снимок или загрузите файл с устройства.';
+      name.textContent = 'No photo selected';
+      meta.textContent = 'Take a snapshot or upload a file from your device.';
       return;
     }
 
     preview.classList.add('active');
     img.src = state.session.photo.dataUrl;
-    name.textContent = state.session.photo.fileName || 'Фото сессии';
+    name.textContent = state.session.photo.fileName || 'Session photo';
     meta.textContent = `${state.session.photo.mimeType || 'image'} · ${state.session.photo.width || '?'}×${state.session.photo.height || '?'} · ${state.session.photo.capturedAt || ''}`;
   }
 
@@ -1892,15 +1855,15 @@
         dataUrl: processed.dataUrl,
         width: processed.width,
         height: processed.height,
-        capturedAt: new Date().toLocaleString('ru-RU'),
-        note: 'Фото сессии'
+        capturedAt: new Date().toLocaleString('en-US'),
+        note: 'Session photo'
       };
-      state.session.lastAction = 'добавлено фото';
+      state.session.lastAction = 'photo added';
       renderSessionPhotoPreview();
       ensureSessionContextCard();
-      showToast('Фото добавлено в сессию', 'success');
+      showToast('Photo added to session', 'success');
     } catch (error) {
-      showToast(`Фото не удалось добавить: ${error.message}`, 'info');
+      showToast(`Failed to add photo: ${error.message}`, 'info');
     }
   }
 
@@ -1915,24 +1878,24 @@
     if (input) input.value = '';
     renderSessionPhotoPreview();
     ensureSessionContextCard();
-    showToast('Фото удалено', 'info');
+    showToast('Photo removed', 'info');
   }
 
 
   function formatDate(iso = new Date().toISOString()) {
     try {
-      return new Intl.DateTimeFormat('ru-RU', { day: '2-digit', month: 'long', year: 'numeric' }).format(new Date(iso));
+      return new Intl.DateTimeFormat('en-US', { day: '2-digit', month: 'long', year: 'numeric' }).format(new Date(iso));
     } catch {
-      return new Date(iso).toLocaleDateString('ru-RU');
+      return new Date(iso).toLocaleDateString('en-US');
     }
   }
 
   function summarizeProject(p) {
     const chunks = [p.title];
-    if (p.company) chunks.push(`компания: ${p.company}`);
-    if (p.university) chunks.push(`университет: ${p.university}`);
-    if (p.case) chunks.push(`кейс: ${p.case}`);
-    if (p.phase) chunks.push(`фаза: ${p.phase}`);
+    if (p.company) chunks.push(`company: ${p.company}`);
+    if (p.university) chunks.push(`university: ${p.university}`);
+    if (p.case) chunks.push(`case: ${p.case}`);
+    if (p.phase) chunks.push(`phase: ${p.phase}`);
     return chunks.filter(Boolean).join(' · ');
   }
 
@@ -1944,10 +1907,10 @@
     const photo = input.photo || input.sessionPhoto || null;
     const ctx = {
       type: input.type || 'dashboard',
-      title: input.title || 'Главная',
-      summary: input.summary || 'Выберите контекст для агента.',
-      phase: input.phase || 'Создание',
-      source: input.source || 'Платформа',
+      title: input.title || 'Home',
+      summary: input.summary || 'Select a context for the agent.',
+      phase: input.phase || 'Creation',
+      source: input.source || 'Platform',
       sourceType: input.sourceType || input.type || 'dashboard',
       company: input.company || '',
       university: input.university || '',
@@ -1970,58 +1933,58 @@
 
     if (!ctx.tags.length) {
       if (ctx.type === 'project') {
-        ctx.tags = [ctx.company ? `Компания: ${ctx.company}` : 'Проект', `Фаза: ${ctx.phase}`];
+        ctx.tags = [ctx.company ? `Company: ${ctx.company}` : 'Project', `Phase: ${ctx.phase}`];
       } else if (ctx.type === 'material') {
-        ctx.tags = ['Материал', `Фаза: ${ctx.phase}`];
+        ctx.tags = ['Material', `Phase: ${ctx.phase}`];
       } else if (ctx.type === 'session') {
-        ctx.tags = ['Сессия', `Локация: ${ctx.location}`];
+        ctx.tags = ['Session', `Location: ${ctx.location}`];
       } else {
-        ctx.tags = ['Фаза: Исследование', 'Фаза: Создание', 'Фаза: Проверка'];
+        ctx.tags = ['Phase: Research', 'Phase: Creation', 'Phase: Validation'];
       }
     }
 
     if (!ctx.suggestedPrompt) {
       if (ctx.type === 'project') {
-        ctx.suggestedPrompt = 'Разбери этот кейс и предложи следующий логичный шаг.';
+        ctx.suggestedPrompt = 'Analyze this case and suggest the next logical step.';
       } else if (ctx.type === 'material') {
-        ctx.suggestedPrompt = 'Объясни, как этот материал помогает проекту, и предложи аналогии.';
+        ctx.suggestedPrompt = 'Explain how this material helps the project and suggest analogies.';
       } else if (ctx.type === 'session') {
-        ctx.suggestedPrompt = 'Сформируй конспект сессии и зафиксируй решения.';
+        ctx.suggestedPrompt = 'Generate session notes and capture the decisions.';
       } else {
-        ctx.suggestedPrompt = 'Подскажи следующий шаг для текущего контекста.';
+        ctx.suggestedPrompt = 'Suggest the next step for the current context.';
       }
     }
     return ctx;
   }
 
   function buildTips(ctx) {
-    const projectLine = ctx.type === 'project' ? summarizeProject(ctx) : 'Текущий проект без уточнённого кейса';
+    const projectLine = ctx.type === 'project' ? summarizeProject(ctx) : 'Current project without specified case';
     const materialLine = ctx.type === 'material'
       ? `${ctx.materialTitle}${ctx.materialMeta ? ` · ${ctx.materialMeta}` : ''}`
-      : 'Материал ещё не выбран';
+      : 'Material not selected yet';
 
     return [
       {
-        title: '💡 Совет по вашей роли',
+        title: '💡 Tip on your role',
         text: ctx.type === 'project'
-          ? `В этом кейсе лучше удерживать фокус на координации и делегировании. ${projectLine}.`
+          ? `In this case, it's better to maintain focus on coordination and delegation. ${projectLine}.`
           : ctx.type === 'session' && ctx.photoAttached
-            ? 'В сессии уже есть фото: попросите агента быстро разметить увиденное и превратить его в короткий список решений.'
-            : 'Сфокусируйтесь на координации команды и передавайте агенту часть анализа и фиксации контекста.'
+            ? 'There is already a photo in the session: ask the agent to quickly label what is visible and turn it into a short list of decisions.'
+            : 'Focus on coordinating the team and pass part of the analysis and context capturing to the agent.'
       },
       {
-        title: '📈 Рекомендация по работе',
+        title: '📈 Work recommendation',
         text: ctx.type === 'session'
-          ? 'Сессия активна. Зафиксируйте короткое резюме после каждого смыслового шага, чтобы не терять решения.'
-          : `Если обсуждение зациклилось, переключитесь на визуальную фиксацию или прототипирование. ${materialLine}.`
+          ? 'Session is active. Capture a brief summary after each logical step so you do not lose decisions.'
+          : `If the discussion loops, switch to visual capturing or prototyping. ${materialLine}.`
       },
       {
-        title: '🔍 Глубже в тему',
+        title: '🔍 Deeper into the topic',
         text: ctx.type === 'material'
-          ? 'Попросите агента найти 2–3 аналогии из других индустрий и объяснить, как перенести принципы в ваш проект.'
+          ? 'Ask the agent to find 2-3 analogies from other industries and explain how to transfer those principles to your project.'
           : ctx.type === 'session' && ctx.photoAttached
-            ? 'Фото из сессии можно использовать как опорный артефакт для вопроса: что видно, что улучшить и какой следующий шаг?'
-            : 'Агент может подобрать смежные кейсы из других индустрий и показать, какие решения можно адаптировать.'
+            ? 'A photo from the session can be used as a supporting artifact for the question: what is visible, what to improve, and what is the next step?'
+            : 'The agent can curate related cases from other industries and show which solutions can be adapted.'
       }
     ];
   }
@@ -2030,27 +1993,27 @@
     const base = [];
     if (ctx.type === 'project') {
       base.push(
-        `📊 Сверить требования кейса: ${ctx.company || ctx.source || 'заказчик'}`,
-        `🎓 Уточнить университетский/командный контекст: ${ctx.university || 'нет данных'}`,
-        '➡️ Предложить следующий шаг по фазе'
+        `📊 Verify case requirements: ${ctx.company || ctx.source || 'client'}`,
+        `🎓 Clarify university/team context: ${ctx.university || 'no data'}`,
+        '➡️ Suggest the next phase step'
       );
     } else if (ctx.type === 'material') {
       base.push(
-        '📋 Создать краткий конспект этого материала',
-        '🔎 Найти связанные артефакты и решения',
-        '💡 Попросить агента объяснить аналогии'
+        '📋 Create a brief summary of this material',
+        '🔎 Find related artifacts and solutions',
+        '💡 Ask the agent to explain analogies'
       );
     } else if (ctx.type === 'session') {
       base.push(
-        '📋 Сформировать конспект физической сессии',
-        '🔄 Предложить роли и распределение задач',
-        ctx.photoAttached ? '📷 Проанализировать фото сессии' : '💾 Сохранить материал сессии в проект'
+        '📋 Generate notes of the physical session',
+        '🔄 Suggest roles and task distribution',
+        ctx.photoAttached ? '📷 Analyze session photo' : '💾 Save session material to the project'
       );
     } else {
       base.push(
-        '💡 Уточнить контекст для более точного совета',
-        '📋 Сформировать конспект',
-        '➡️ Предложить следующий шаг'
+        '💡 Clarify context for more accurate advice',
+        '📋 Generate notes',
+        '➡️ Suggest the next step'
       );
     }
     return base.slice(0, 3);
@@ -2059,20 +2022,20 @@
   function buildMaterials(ctx) {
     return [
       {
-        title: ctx.type === 'project' ? `Кейс: ${ctx.title}` : 'Подборка: материалы по текущему контексту',
-        meta: ctx.type === 'project' ? summarizeProject(ctx) : 'Связанные материалы и артефакты',
+        title: ctx.type === 'project' ? `Case: ${ctx.title}` : 'Selection: materials for the current context',
+        meta: ctx.type === 'project' ? summarizeProject(ctx) : 'Related materials and artifacts',
       },
       {
         title: ctx.type === 'material'
-          ? `Продолжить обсуждение: ${ctx.materialTitle}`
+          ? `Continue discussion: ${ctx.materialTitle}`
           : ctx.type === 'session' && ctx.photoAttached
-            ? `Фото сессии: ${ctx.photoName || 'без названия'}`
-            : 'Аналогии и смежные примеры',
+            ? `Session photo: ${ctx.photoName || 'untitled'}`
+            : 'Analogies and related examples',
         meta: ctx.type === 'material'
-          ? 'Открыть контекст материала в чате'
+          ? 'Open material context in chat'
           : ctx.type === 'session' && ctx.photoAttached
-            ? 'Показать фото агенту и получить разбор'
-            : 'Попросить агента найти больше примеров',
+            ? 'Show photo to agent and get analysis'
+            : 'Ask the agent to find more examples',
       }
     ];
   }
@@ -2088,16 +2051,16 @@
       `
       <div class="card" id="dynamicAgentContextCard">
         <div class="section-head">
-          <h3 style="margin:0;">Контекст для агента</h3>
-          <span class="badge blue" id="dynamicAgentBadge">Готов</span>
+          <h3 style="margin:0;">Agent Context</h3>
+          <span class="badge blue" id="dynamicAgentBadge">Ready</span>
         </div>
         <div id="dynamicAgentSummary" style="font-size:13px;line-height:1.6;color:var(--text-2);">
-          Выберите проект, материал или сессию, и я подстрою ответ под этот контекст.
+          Select a project, material, or session, and I will tailor my response to this context.
         </div>
         <div class="project-skills" id="dynamicAgentTags" style="margin-top:10px;"></div>
         <div class="btn-row" style="margin-top:12px;">
-          <button class="btn sm" id="dynamicAgentPromptBtn">💡 Спросить по контексту</button>
-          <button class="btn sm" id="dynamicAgentSessionBtn">🎙 В сессию</button>
+          <button class="btn sm" id="dynamicAgentPromptBtn">💡 Ask based on context</button>
+          <button class="btn sm" id="dynamicAgentSessionBtn">🎙 In session</button>
         </div>
       </div>
       `
@@ -2122,10 +2085,10 @@
         openAgentContext({
           ...state.context,
           suggestedPrompt: idx === 0
-            ? 'Сформулируй совет по моей роли с учётом текущего контекста.'
+            ? 'Formulate advice on my role taking into account the current context.'
             : idx === 1
-              ? 'Проверь динамику команды и предложи рабочую рекомендацию.'
-              : 'Подбери аналогии и объясни, как перенести их в проект.'
+              ? 'Check team dynamics and suggest a work recommendation.'
+              : 'Find analogies and explain how to transfer them to the project.'
         }, { openAgent: true, seedIntro: false });
         byId('agentInput')?.focus();
       };
@@ -2135,15 +2098,15 @@
     recCards.forEach((card, idx) => {
       const text = recs[idx];
       if (!text) return;
-      const title = idx === 0 ? '📊 Анализ паттернов команды' : '🎯 Следующий логичный шаг';
+      const title = idx === 0 ? '📊 Team patterns analysis' : '🎯 Next logical step';
       card.innerHTML = `<h4>${title}</h4><p>${text}</p>`;
       card.style.cursor = 'pointer';
       card.onclick = () => {
         openAgentContext({
           ...state.context,
           suggestedPrompt: idx === 0
-            ? 'Проанализируй паттерны команды: асимметрия, простои, зацикливание на идее.'
-            : 'Какой следующий логичный шаг сейчас для этого проекта?'
+            ? 'Analyze team patterns: asymmetry, downtime, looping on ideas.'
+            : 'What is the next logical step for this project right now?'
         }, { openAgent: true, seedIntro: false });
       };
     });
@@ -2161,8 +2124,8 @@
         openAgentContext({
           ...state.context,
           suggestedPrompt: idx === 0
-            ? 'Создай краткий конспект текущего контекста.'
-            : 'Найди 2–3 аналогии из других индустрий и объясни применимость.'
+            ? 'Create brief notes for the current context.'
+            : 'Find 2-3 analogies from other industries and explain their applicability.'
         }, { openAgent: true, seedIntro: false });
       };
     });
@@ -2179,12 +2142,12 @@
 
     if (badge) {
       badge.textContent = state.context.type === 'project'
-        ? 'Проект'
+        ? 'Project'
         : state.context.type === 'material'
-          ? 'Материал'
+          ? 'Material'
           : state.context.type === 'session'
-            ? 'Сессия'
-            : 'Общий';
+            ? 'Session'
+            : 'General';
     }
 
     if (summary) {
@@ -2193,13 +2156,13 @@
         ? `${state.context.materialTitle}${state.context.materialMeta ? ` · ${state.context.materialMeta}` : ''}`
         : '';
       const sessionLine = state.context.type === 'session'
-        ? `Локация: ${state.session.location} · Последнее действие: ${state.session.lastAction}`
+        ? `Location: ${state.session.location} · Last action: ${state.session.lastAction}`
         : '';
       summary.innerHTML = [
         state.context.summary,
-        projectLine ? `<div style="margin-top:8px;"><strong>Проект:</strong> ${projectLine}</div>` : '',
-        materialLine ? `<div style="margin-top:8px;"><strong>Материал:</strong> ${materialLine}</div>` : '',
-        sessionLine ? `<div style="margin-top:8px;"><strong>Сессия:</strong> ${sessionLine}</div>` : ''
+        projectLine ? `<div style="margin-top:8px;"><strong>Project:</strong> ${projectLine}</div>` : '',
+        materialLine ? `<div style="margin-top:8px;"><strong>Material:</strong> ${materialLine}</div>` : '',
+        sessionLine ? `<div style="margin-top:8px;"><strong>Session:</strong> ${sessionLine}</div>` : ''
       ].filter(Boolean).join('');
     }
 
@@ -2208,7 +2171,7 @@
     }
 
     if (input) {
-      input.placeholder = state.context.suggestedPrompt || 'Спросить агента...';
+      input.placeholder = state.context.suggestedPrompt || 'Ask the agent...';
     }
 
     if (promptBtn) {
@@ -2234,27 +2197,27 @@
     if (!contextCard) return;
 
     contextCard.innerHTML = `
-      <h4>📍 Текущий контекст</h4>
-      <p>Фаза: <strong>${state.context.phase || 'Создание'}</strong> · Проект: <strong>${state.context.title || 'Проект'}</strong></p>
+      <h4>📍 Current Context</h4>
+      <p>Phase: <strong>${state.context.phase || 'Creation'}</strong> · Project: <strong>${state.context.title || 'Project'}</strong></p>
       <p style="margin-top:6px;">
         ${state.context.type === 'project'
-          ? `${state.context.company ? `Компания: <strong>${state.context.company}</strong>` : ''}${state.context.university ? ` · Университет: <strong>${state.context.university}</strong>` : ''}`
+          ? `${state.context.company ? `Company: <strong>${state.context.company}</strong>` : ''}${state.context.university ? ` · University: <strong>${state.context.university}</strong>` : ''}`
           : state.context.type === 'material'
-            ? `Материал: <strong>${state.context.materialTitle || 'без названия'}</strong>`
-            : 'Сессия готова к записи и фиксации решений.'}
+            ? `Material: <strong>${state.context.materialTitle || 'untitled'}</strong>`
+            : 'Session is ready for recording and capturing decisions.'}
       </p>
-      <p style="margin-top:6px;">Последнее действие: <strong>${state.session.lastAction || 'ожидание запуска'}</strong></p>
-      ${state.session.photo ? `<p style="margin-top:6px;">Фото: <strong>${state.session.photo.fileName || 'session-photo'}</strong> · ${state.session.photo.mimeType || 'image'}</p>` : ''}
+      <p style="margin-top:6px;">Last action: <strong>${state.session.lastAction || 'awaiting start'}</strong></p>
+      ${state.session.photo ? `<p style="margin-top:6px;">Photo: <strong>${state.session.photo.fileName || 'session-photo'}</strong> · ${state.session.photo.mimeType || 'image'}</p>` : ''}
       <div class="project-skills" style="margin-top:10px;">
         ${(state.context.tags || []).slice(0, 4).map(tag => `<span class="skill-tag">${tag}</span>`).join('')}
       </div>
       <div class="btn-row" style="margin-top:12px;">
-        <button class="btn sm" id="sessionSaveArtifactBtn">📥 Сохранить материал</button>
-        <button class="btn sm" id="sessionAskAgentBtn">💡 Спросить агента</button>
+        <button class="btn sm" id="sessionSaveArtifactBtn">📥 Save Material</button>
+        <button class="btn sm" id="sessionAskAgentBtn">💡 Ask Agent</button>
       </div>
       <div class="btn-row" style="margin-top:10px;">
-        <button class="btn sm" id="sessionPhotoAskBtn">📷 Показать фото агенту</button>
-        <button class="btn sm" id="sessionPhotoClearBtn">🗑 Удалить фото</button>
+        <button class="btn sm" id="sessionPhotoAskBtn">📷 Show photo to agent</button>
+        <button class="btn sm" id="sessionPhotoClearBtn">🗑 Delete photo</button>
       </div>
     `;
 
@@ -2266,7 +2229,7 @@
     if (askBtn) askBtn.onclick = () => {
       go('agent');
       const input = byId('agentInput');
-      if (input) input.value = state.context.suggestedPrompt || 'Попроси агента помочь по текущей сессии.';
+      if (input) input.value = state.context.suggestedPrompt || 'Ask the agent for help with the current session.';
       input?.focus();
     };
     if (photoAskBtn) photoAskBtn.onclick = () => sessionAction('photo');
@@ -2276,34 +2239,34 @@
     if (suggestions[0]) {
       const titleEl = suggestions[0].querySelector('.sug-title');
       const textEl = suggestions[0].querySelector('.sug-text');
-      if (titleEl) titleEl.textContent = '💡 Предложение агента';
+      if (titleEl) titleEl.textContent = '💡 Agent\'s Suggestion';
       if (textEl) {
         textEl.textContent = state.context.type === 'session'
           ? (state.session.photo
-            ? 'Сессия уже активна. У вас есть фото артефакта — попросите агента быстро разобрать его и выделить следующий шаг.'
-            : 'Сессия уже активна. Зафиксируйте ключевые реплики и завершайте каждый смысловой блок коротким выводом.')
-          : `Следующий шаг для ${state.context.title || 'проекта'}: ${state.context.suggestedPrompt}`;
+            ? 'The session is already active. You have a photo of an artifact — ask the agent to quickly analyze it and highlight the next step.'
+            : 'The session is already active. Capture key remarks and conclude each logical block with a brief summary.')
+          : `Next step for ${state.context.title || 'project'}: ${state.context.suggestedPrompt}`;
       }
       suggestions[0].onclick = () => {
         go('agent');
         const input = byId('agentInput');
-        if (input) input.value = state.context.suggestedPrompt || 'Сформулируй следующий шаг.';
+        if (input) input.value = state.context.suggestedPrompt || 'Formulate the next step.';
       };
     }
 
     if (suggestions[1]) {
       const titleEl = suggestions[1].querySelector('.sug-title');
       const textEl = suggestions[1].querySelector('.sug-text');
-      if (titleEl) titleEl.textContent = '🔄 Предложение по роли';
+      if (titleEl) titleEl.textContent = '🔄 Role Suggestion';
       if (textEl) {
         textEl.textContent = state.context.type === 'project'
-          ? `Рекомендуется распределить роли с учётом кейса: ${state.context.company || state.context.source || 'заказчик'} и этапа ${state.context.phase}.`
-          : 'Агент может подсказать, кому лучше делегировать текущий участок работы.';
+          ? `It is recommended to distribute roles considering the case: ${state.context.company || state.context.source || 'client'} and phase ${state.context.phase}.`
+          : 'The agent can suggest who to delegate the current portion of work to.';
       }
       suggestions[1].onclick = () => {
         go('agent');
         const input = byId('agentInput');
-        if (input) input.value = 'Предложи роли и делегирование задач с учётом текущего контекста.';
+        if (input) input.value = 'Suggest roles and task delegation taking into account the current context.';
       };
     }
 
@@ -2312,7 +2275,7 @@
       chat.dataset.contextIntro = '1';
       chat.insertAdjacentHTML(
         'afterbegin',
-        `<div class="session-msg system">Контекст загружен: ${stripHtml(state.context.title || 'Проект')} · ${state.context.type === 'material' ? 'материал' : state.context.type === 'project' ? 'проект' : 'сессия'}</div>`
+        `<div class="session-msg system">Context loaded: ${stripHtml(state.context.title || 'Project')} · ${state.context.type === 'material' ? 'material' : state.context.type === 'project' ? 'project' : 'session'}</div>`
       );
     }
   }
@@ -2327,7 +2290,7 @@
     if (existingIntro) existingIntro.remove();
     list.insertAdjacentHTML(
       'afterbegin',
-      `<div class="msg agent" data-context-intro="1"><div class="msg-label">Агент</div>Контекст загружен: ${stripHtml(state.context.title || 'Главная')}. Я уже учитываю его в ответах.</div>`
+      `<div class="msg agent" data-context-intro="1"><div class="msg-label">Agent</div>Context loaded: ${stripHtml(state.context.title || 'Home')}. I am already taking it into account in my responses.</div>`
     );
   }
 
@@ -2436,7 +2399,7 @@
   function addAgentMessage(list, text) {
     const msg = document.createElement('div');
     msg.className = 'msg agent';
-    msg.innerHTML = `<div class="msg-label">Агент</div>${formatReplyToHTML(text)}`;
+    msg.innerHTML = `<div class="msg-label">Agent</div>${formatReplyToHTML(text)}`;
     list.appendChild(msg);
     list.scrollTop = list.scrollHeight;
   }
@@ -2453,7 +2416,7 @@
     const msg = document.createElement('div');
     msg.className = `session-msg ${type}`;
     if (type === 'ai') {
-      msg.innerHTML = `<div class="msg-label">Агент</div>${formatReplyToHTML(text)}`;
+      msg.innerHTML = `<div class="msg-label">Agent</div>${formatReplyToHTML(text)}`;
     } else {
       msg.textContent = text;
     }
@@ -2513,7 +2476,7 @@
           <div class="material-icon ${artifact.icon || 'ai'}">${artifact.iconEmoji || '✦'}</div>
           <div class="material-info">
             <strong>${artifact.title}</strong>
-            <div class="meta">${artifact.meta || 'Сохранено из сессии'}</div>
+            <div class="meta">${artifact.meta || 'Saved from session'}</div>
           </div>
         `;
         listContainer.appendChild(item);
@@ -2551,7 +2514,7 @@
       <div class="material-icon ${artifact.icon || 'ai'}">${artifact.iconEmoji || '✦'}</div>
       <div class="material-info">
         <strong>${artifact.title}</strong>
-        <div class="meta">${artifact.meta || 'Сохранено из сессии'}</div>
+        <div class="meta">${artifact.meta || 'Saved from session'}</div>
       </div>
     `;
     listContainer.appendChild(item);
@@ -2562,21 +2525,21 @@
       id: `session-${Date.now()}`,
       icon: 'meeting',
       iconEmoji: '📝',
-      title: extra.title || `Конспект сессии · ${formatDate()}`,
-      meta: extra.meta || `Сохранено из физического пространства · ${state.context.title || 'Проект'}`,
-      tags: extra.tags || ['Сессия', state.context.phase || 'Создание'],
+      title: extra.title || `Session Notes · ${formatDate()}`,
+      meta: extra.meta || `Saved from physical space · ${state.context.title || 'Project'}`,
+      tags: extra.tags || ['Session', state.context.phase || 'Creation'],
       content: extra.content || `
-        <h3>Конспект физической сессии</h3>
+        <h3>Physical Session Notes</h3>
         <p>${formatReplyToHTML(summaryText)}</p>
         <div class="highlight">
-          <p><strong>Контекст:</strong> ${formatReplyToHTML(state.context.summary || state.context.title || 'Проект')}</p>
+          <p><strong>Context:</strong> ${formatReplyToHTML(state.context.summary || state.context.title || 'Project')}</p>
         </div>
       `,
-      source: 'Сохранено агентом'
+      source: 'Saved by Agent'
     };
     saveArtifactToStorage(artifact);
     appendArtifactToMaterials(artifact);
-    showToast('Материал сессии сохранён в проект', 'success');
+    showToast('Session material saved to project', 'success');
     return artifact;
   }
 
@@ -2602,7 +2565,7 @@
     const input = byId('agentInput');
     openAgentContext(state.context, {
       openAgent: true,
-      prefill: 'Разбери этот проект: что важно в кейсе, какие риски и какой следующий шаг?'
+      prefill: 'Analyze this project: what is important in the case, what are the risks, and what is the next step?'
     });
     applyWideChatState();
     input?.focus();
@@ -2612,7 +2575,7 @@
     const input = byId('agentInput');
     openAgentContext(state.context, {
       openAgent: true,
-      prefill: 'Объясни, как этот материал связан с проектом, и дай 2–3 аналогии.'
+      prefill: 'Explain how this material relates to the project, and give 2-3 analogies.'
     });
     applyWideChatState();
     input?.focus();
@@ -2638,12 +2601,12 @@
   function injectDetailButtons() {
     const projectPrimary = document.querySelector('#projectDetail .btn.primary.block');
     if (projectPrimary && !byId('projectAgentBtn')) {
-      projectPrimary.insertAdjacentHTML('afterend', `<button class="btn block" id="projectAgentBtn" onclick="openProjectInAgent()">✦ Обсудить проект с агентом</button>`);
+      projectPrimary.insertAdjacentHTML('afterend', `<button class="btn block" id="projectAgentBtn" onclick="openProjectInAgent()">✦ Discuss project with Agent</button>`);
     }
 
     const materialPrimary = document.querySelector('#materialDetail .btn.primary.block');
     if (materialPrimary && !byId('materialAgentBtn')) {
-      materialPrimary.insertAdjacentHTML('afterend', `<button class="btn block" id="materialAgentBtn" onclick="openMaterialInAgent()">✦ Обсудить материал с агентом</button>`);
+      materialPrimary.insertAdjacentHTML('afterend', `<button class="btn block" id="materialAgentBtn" onclick="openMaterialInAgent()">✦ Discuss material with Agent</button>`);
     }
   }
 
@@ -2652,19 +2615,19 @@
     const tabs = document.querySelectorAll('.tab');
     const titleEl = byId('screenTitle');
     const titleMap = {
-      home: 'Главная',
-      marketplace: 'Проекты',
-      myproject: 'Мой проект',
-      create: 'Новый проект',
-      work: 'Рабочий процесс',
-      agent: 'ИИ-агент',
-      notifications: 'Уведомления',
-      profile: 'Профиль',
-      settings: 'Настройки',
-      editProfile: 'Редактировать профиль',
-      projectDetail: 'Детали проекта',
-      materialDetail: 'Материал',
-      aiSession: 'Сессия в пространстве'
+      home: 'Home',
+      marketplace: 'Projects',
+      myproject: 'My Project',
+      create: 'New Project',
+      work: 'Workflow',
+      agent: 'AI Agent',
+      notifications: 'Notifications',
+      profile: 'Profile',
+      settings: 'Settings',
+      editProfile: 'Edit Profile',
+      projectDetail: 'Project Details',
+      materialDetail: 'Material',
+      aiSession: 'Session in Space'
     };
 
     screens.forEach((screen) => screen.classList.toggle('active', screen.id === id));
@@ -2689,32 +2652,32 @@
     const p = projectStore?.[idx];
     if (!p) return;
 
-    byId('detailSource').textContent = p.sourceDisplay || p.source || 'Проект';
-    byId('detailTitle').textContent = p.title || 'Проект';
+    byId('detailSource').textContent = p.sourceDisplay || p.source || 'Project';
+    byId('detailTitle').textContent = p.title || 'Project';
     byId('detailDesc').textContent = p.desc || '';
     byId('detailFullDesc').textContent = p.fullDesc || '';
     byId('detailSkills').innerHTML = (p.skills || []).map((s) => `<span class="skill-tag">${s}</span>`).join('');
-    byId('detailStatus').textContent = p.status || 'Открыто';
+    byId('detailStatus').textContent = p.status || 'Open';
 
     openAgentContext({
       type: 'project',
-      title: p.title || 'Проект',
-      summary: p.fullDesc || p.desc || 'Проект выбран из маркетплейса.',
-      phase: p.phase || 'Исследование',
-      source: p.source || 'Маркетплейс',
+      title: p.title || 'Project',
+      summary: p.fullDesc || p.desc || 'Project selected from marketplace.',
+      phase: p.phase || 'Research',
+      source: p.source || 'Marketplace',
       sourceType: p.sourceType || 'project',
       company: p.company || '',
       university: p.university || '',
       case: p.case || p.desc || '',
       projectIndex: idx,
       tags: [
-        p.company ? `Компания: ${p.company}` : `Источник: ${p.source || 'Маркетплейс'}`,
-        p.university ? `Университет: ${p.university}` : `Фаза: ${p.phase || 'Исследование'}`,
+        p.company ? `Company: ${p.company}` : `Source: ${p.source || 'Marketplace'}`,
+        p.university ? `University: ${p.university}` : `Phase: ${p.phase || 'Research'}`,
         ...(p.skills || []).slice(0, 2)
       ],
       suggestedPrompt: p.company
-        ? `Разбери кейс компании ${p.company} и предложи следующий шаг.`
-        : `Разбери этот проект и предложи следующий шаг.`
+        ? `Analyze the case of ${p.company} and suggest the next step.`
+        : `Analyze this project and suggest the next step.`
     }, { seedIntro: true });
 
     go('projectDetail');
@@ -2726,38 +2689,38 @@
 
     byId('matDetailIcon').className = `material-detail-icon ${m.icon || 'ai'}`;
     byId('matDetailIcon').textContent = m.iconEmoji || '✦';
-    byId('matDetailTitle').textContent = m.title || 'Материал';
+    byId('matDetailTitle').textContent = m.title || 'Material';
     byId('matDetailMeta').textContent = m.meta || '';
-    byId('matDetailContent').innerHTML = m.content || '<p>Материал пуст.</p>';
+    byId('matDetailContent').innerHTML = m.content || '<p>Material is empty.</p>';
     byId('matDetailTags').innerHTML = (m.tags || []).map((t) => `<span class="badge neutral">${t}</span>`).join('');
 
     openAgentContext({
       type: 'material',
-      title: m.title || 'Материал',
+      title: m.title || 'Material',
       summary: short(stripHtml(m.content || m.meta || m.title || ''), 360),
-      phase: m.phase || 'Исследование',
-      source: m.source || 'Сохранено в проекте',
+      phase: m.phase || 'Research',
+      source: m.source || 'Saved in project',
       sourceType: 'material',
-      materialTitle: m.title || 'Материал',
+      materialTitle: m.title || 'Material',
       materialMeta: m.meta || '',
       materialContent: m.content || '',
       materialIndex: idx,
-      tags: m.tags || ['Материал', 'Контекст'],
-      suggestedPrompt: 'Объясни, как этот материал связан с текущим проектом, и дай практическую аналогию.'
+      tags: m.tags || ['Material', 'Context'],
+      suggestedPrompt: 'Explain how this material relates to the current project, and provide a practical analogy.'
     }, { seedIntro: true });
 
     go('materialDetail');
   }
 
   function takeProject() {
-    showToast('Проект добавлен в ваши!', 'success');
+    showToast('Project added to yours!', 'success');
     setTimeout(() => go('myproject'), 700);
   }
 
   function createProject() {
     const name = byId('projName')?.value.trim();
     if (!name) {
-      showToast('Введите название', 'info');
+      showToast('Enter a title', 'info');
       return;
     }
     const newCard = document.createElement('div');
@@ -2765,27 +2728,27 @@
     newCard.dataset.type = 'student';
     newCard.onclick = function () { openProjectDetailLocal(4); };
     newCard.innerHTML = `
-      <div class="project-header"><div class="project-source student">От: Студент</div><span class="badge blue">Новый</span></div>
+      <div class="project-header"><div class="project-source student">From: Student</div><span class="badge blue">New</span></div>
       <div class="project-title">${name}</div>
     `;
     byId('projectList')?.prepend(newCard);
     if (hasProjectData) {
       projectStore.push({
-        source: 'От: Студент',
-        sourceDisplay: 'От: Студент',
+        source: 'From: Student',
+        sourceDisplay: 'From: Student',
         sourceType: 'student',
         title: name,
         company: '',
-        university: 'Университетский кейс',
+        university: 'University Case',
         case: name,
-        phase: 'Создание',
+        phase: 'Creation',
         desc: '',
         skills: [],
-        status: 'Новый',
+        status: 'New',
         fullDesc: ''
       });
     }
-    showToast(`Проект «${name}» создан!`, 'success');
+    showToast(`Project "${name}" created!`, 'success');
     setTimeout(() => go('marketplace'), 700);
   }
 
@@ -2809,15 +2772,15 @@
     state.session.active = true;
     state.session.seconds = 0;
     state.session.transcript = [];
-    state.session.lastAction = 'сессия активирована';
+    state.session.lastAction = 'session activated';
     updateSessionTimer();
     startSessionTimer();
     renderSessionPhotoPreview();
-    showToast('Агент активирован для сессии', 'success');
+    showToast('Agent activated for session', 'success');
     go('aiSession');
     const chat = byId('sessionChat');
     if (chat) {
-      addSessionMessage(chat, 'system', `Сессия начата · ${state.session.location}`);
+      addSessionMessage(chat, 'system', `Session started · ${state.session.location}`);
     }
   }
 
@@ -2832,7 +2795,7 @@
 
     const loadingMsg = document.createElement('div');
     loadingMsg.className = 'msg agent';
-    loadingMsg.innerHTML = '<span class="msg-label">Агент</span><i>Анализирую контекст...</i>';
+    loadingMsg.innerHTML = '<span class="msg-label">Agent</span><i>Analyzing context...</i>';
     list.appendChild(loadingMsg);
     list.scrollTop = list.scrollHeight;
 
@@ -2847,7 +2810,7 @@
       }));
 
       loadingMsg.remove();
-      const reply = data.reply || data.output || data.message || 'Нет ответа от агента';
+      const reply = data.reply || data.output || data.message || 'No response from agent';
       addAgentMessage(list, reply);
 
       if (Array.isArray(data.recommendations) && data.recommendations.length) {
@@ -2864,10 +2827,10 @@
         saveSessionArtifact(reply, data.sessionArtifact);
       }
 
-      state.session.lastAction = 'диалог с агентом';
+      state.session.lastAction = 'dialogue with agent';
     } catch (error) {
       loadingMsg.remove();
-      addAgentMessage(list, `Не удалось связаться с ИИ-агентом.\n${error.message}`);
+      addAgentMessage(list, `Failed to contact AI Agent.\n${error.message}`);
     }
   }
 
@@ -2876,24 +2839,24 @@
     if (!chat) return;
 
     state.session.lastAction =
-      type === 'summary' ? 'создание конспекта'
-      : type === 'role' ? 'анализ ролей'
-      : type === 'idea' ? 'поиск аналогии'
-      : type === 'photo' ? 'анализ фото'
-      : 'вызов команды';
+      type === 'summary' ? 'creating notes'
+      : type === 'role' ? 'analyzing roles'
+      : type === 'idea' ? 'searching for analogy'
+      : type === 'photo' ? 'analyzing photo'
+      : 'team challenge';
 
     const actionPrompts = {
-      summary: 'Сформируй короткий конспект с тезисами, решениями, открытыми вопросами и следующим шагом.',
-      role: 'Предложи перераспределение ролей и коротко объясни, почему это полезно.',
-      idea: 'Найди 2–3 аналогии из других индустрий и объясни, как перенести их в наш проект.',
-      trigger: 'Сформулируй мягкий вызов команде, если обсуждение зациклилось.',
-      photo: 'Проанализируй прикреплённое фото сессии: опиши, что видно, какие элементы прототипа или записи заметны, какие риски и идеи появляются, и что делать дальше.'
+      summary: 'Generate a short summary with key points, decisions, open questions, and next step.',
+      role: 'Suggest role redistribution and briefly explain why this is useful.',
+      idea: 'Find 2-3 analogies from other industries and explain how to transfer them to our project.',
+      trigger: 'Formulate a gentle challenge for the team if the discussion loops.',
+      photo: 'Analyze the attached session photo: describe what is visible, what prototype elements or notes are noticeable, what risks and ideas appear, and what to do next.'
     };
 
-    addSessionMessage(chat, 'system', `Запрос: ${actionPrompts[type] || 'Задача агента'}${state.session.photo ? ` · фото: ${state.session.photo.fileName}` : ''}`);
+    addSessionMessage(chat, 'system', `Request: ${actionPrompts[type] || 'Agent task'}${state.session.photo ? ` · photo: ${state.session.photo.fileName}` : ''}`);
 
     try {
-      const data = await callAgent(makePayload(actionPrompts[type] || 'Сформируй полезную рекомендацию.', type === 'summary' ? 'session_summary' : type, {
+      const data = await callAgent(makePayload(actionPrompts[type] || 'Formulate a useful recommendation.', type === 'summary' ? 'session_summary' : type, {
         sourceScreen: 'session',
         project: state.context.type === 'project' ? state.context : {},
         material: state.context.type === 'material' ? state.context : {},
@@ -2901,12 +2864,12 @@
         includePhoto: true
       }));
 
-      addSessionMessage(chat, 'ai', data.reply || data.output || data.message || 'Нет ответа от агента');
+      addSessionMessage(chat, 'ai', data.reply || data.output || data.message || 'No response from agent');
       if (type === 'summary' && (data.sessionArtifact || data.reply)) {
-        saveSessionArtifact(data.reply || data.output || 'Конспект сессии', data.sessionArtifact || {});
+        saveSessionArtifact(data.reply || data.output || 'Session notes', data.sessionArtifact || {});
       }
     } catch (error) {
-      addSessionMessage(chat, 'system', `Не удалось получить ответ агента: ${error.message}`);
+      addSessionMessage(chat, 'system', `Failed to get agent response: ${error.message}`);
     }
   }
 
@@ -2919,7 +2882,7 @@
     addSessionMessage(chat, 'user', text);
     if (input) input.value = '';
     state.session.transcript.push({ role: 'user', text });
-    state.session.lastAction = 'сообщение в сессии';
+    state.session.lastAction = 'message in session';
 
     try {
       const data = await callAgent(makePayload(text, 'session_live', {
@@ -2930,10 +2893,10 @@
         includePhoto: true
       }));
 
-      addSessionMessage(chat, 'ai', data.reply || data.output || data.message || 'Нет ответа от агента');
+      addSessionMessage(chat, 'ai', data.reply || data.output || data.message || 'No response from agent');
       state.session.transcript.push({ role: 'ai', text: data.reply || data.output || data.message || '' });
     } catch (error) {
-      addSessionMessage(chat, 'system', `Не удалось связаться с ИИ-агентом: ${error.message}`);
+      addSessionMessage(chat, 'system', `Failed to contact AI Agent: ${error.message}`);
     }
   }
 
@@ -2944,7 +2907,7 @@
 
     try {
       const transcript = state.session.transcript.slice();
-      const data = await callAgent(makePayload('Сессия завершается. Сформируй итоговый конспект, зафиксируй решения и открытые вопросы.', 'session_end', {
+      const data = await callAgent(makePayload('The session is ending. Formulate final notes, record decisions and open questions.', 'session_end', {
         sourceScreen: 'session',
         project: state.context.type === 'project' ? state.context : {},
         material: state.context.type === 'material' ? state.context : {},
@@ -2953,14 +2916,14 @@
         includePhoto: true
       }));
 
-      const summary = data.reply || data.output || data.message || 'Сессия завершена.';
-      addSessionMessage(chat, 'system', 'Сессия завершена · конспект сохранён в материалы');
+      const summary = data.reply || data.output || data.message || 'Session ended.';
+      addSessionMessage(chat, 'system', 'Session ended · notes saved to materials');
       addSessionMessage(chat, 'ai', summary);
       saveSessionArtifact(summary, data.sessionArtifact || {});
-      showToast('Сессия завершена. Материал сохранён.', 'success');
+      showToast('Session ended. Material saved.', 'success');
     } catch (error) {
-      addSessionMessage(chat, 'system', `Сессия завершена, но агент не ответил: ${error.message}`);
-      showToast('Сессия завершена', 'info');
+      addSessionMessage(chat, 'system', `Session ended, but agent did not reply: ${error.message}`);
+      showToast('Session ended', 'info');
     }
 
     setTimeout(() => go('myproject'), 700);
@@ -2971,7 +2934,7 @@
     if (!profile) return;
     state.context = normalizeContext({
       ...state.context,
-      summary: `Профиль пользователя: ${profile}. Выберите проект, материал или сессию для продолжения.`,
+      summary: `User Profile: ${profile}. Select a project, material, or session to proceed.`,
       type: state.context.type || 'dashboard'
     });
   }
@@ -3034,38 +2997,38 @@
     if (!contextCard) return;
 
     const projectLine = state.context.type === 'project'
-      ? `Компания: <strong>${state.context.company || '—'}</strong>${state.context.university ? ` · Университет: <strong>${state.context.university}</strong>` : ''}`
+      ? `Company: <strong>${state.context.company || '—'}</strong>${state.context.university ? ` · University: <strong>${state.context.university}</strong>` : ''}`
       : state.context.type === 'material'
-        ? `Материал: <strong>${state.context.materialTitle || state.context.title || '—'}</strong>`
-        : 'Физическая сессия · фиксация диалога и артефактов';
+        ? `Material: <strong>${state.context.materialTitle || state.context.title || '—'}</strong>`
+        : 'Physical session · capture dialogue and artifacts';
 
     const mediaLine = [];
-    if (state.session.photo) mediaLine.push(`Фото: <strong>${state.session.photo.fileName || 'session-photo'}</strong>`);
-    if (state.session.audio) mediaLine.push(`Аудио: <strong>${state.session.audio.fileName || 'session-audio.webm'}</strong>`);
-    if (state.session.audioTranscript) mediaLine.push(`Транскрипт: <strong>${short(state.session.audioTranscript, 120)}</strong>`);
+    if (state.session.photo) mediaLine.push(`Photo: <strong>${state.session.photo.fileName || 'session-photo'}</strong>`);
+    if (state.session.audio) mediaLine.push(`Audio: <strong>${state.session.audio.fileName || 'session-audio.webm'}</strong>`);
+    if (state.session.audioTranscript) mediaLine.push(`Transcript: <strong>${short(state.session.audioTranscript, 120)}</strong>`);
 
     contextCard.innerHTML = `
-      <h4>📍 Текущий контекст</h4>
-      <p>Фаза: <strong>${state.context.phase || 'Создание'}</strong> · Проект: <strong>${state.context.title || 'Главная'}</strong></p>
+      <h4>📍 Current Context</h4>
+      <p>Phase: <strong>${state.context.phase || 'Creation'}</strong> · Project: <strong>${state.context.title || 'Home'}</strong></p>
       <p style="margin-top:6px;">${projectLine}</p>
-      <p style="margin-top:6px;">Последнее действие: <strong>${state.session.lastAction || 'ожидание запуска'}</strong></p>
+      <p style="margin-top:6px;">Last action: <strong>${state.session.lastAction || 'awaiting start'}</strong></p>
       ${mediaLine.length ? `<p style="margin-top:6px;">${mediaLine.join(' · ')}</p>` : ''}
       <div class="project-skills" style="margin-top:10px;">${(state.context.tags || []).slice(0, 4).map(tag => `<span class="skill-tag">${tag}</span>`).join('')}</div>
       <div class="btn-row" style="margin-top:12px;">
-        <button class="btn sm" id="sessionSaveArtifactBtn">📥 Сохранить материал</button>
-        <button class="btn sm" id="sessionAskAgentBtn">💡 Спросить агента</button>
+        <button class="btn sm" id="sessionSaveArtifactBtn">📥 Save Material</button>
+        <button class="btn sm" id="sessionAskAgentBtn">💡 Ask Agent</button>
       </div>
     `;
 
     const saveBtn = byId('sessionSaveArtifactBtn');
     if (saveBtn) {
       saveBtn.onclick = () => {
-        const transcriptText = state.session.transcript.map((item) => `${item.role === 'ai' ? 'Агент' : 'Участник'}: ${item.text}`).join('\n');
+        const transcriptText = state.session.transcript.map((item) => `${item.role === 'ai' ? 'Agent' : 'Participant'}: ${item.text}`).join('\n');
         const summary = [state.session.audioTranscript, transcriptText, state.context.summary || state.context.title || ''].filter(Boolean).join('\n\n');
-        saveSessionArtifact(summary || 'Материал сессии', {
-          title: `Материал сессии · ${formatDate()}`,
-          meta: `Сохранено вручную · ${state.context.title || 'Контекст'}`,
-          tags: ['Сессия', state.context.phase || 'Создание']
+        saveSessionArtifact(summary || 'Session material', {
+          title: `Session material · ${formatDate()}`,
+          meta: `Saved manually · ${state.context.title || 'Context'}`,
+          tags: ['Session', state.context.phase || 'Creation']
         });
       };
     }
@@ -3076,7 +3039,7 @@
         go('agent');
         const input = byId('agentInput');
         if (input) {
-          input.value = state.context.suggestedPrompt || 'Проанализируй текущий контекст и предложи следующий шаг.';
+          input.value = state.context.suggestedPrompt || 'Analyze the current context and suggest the next step.';
           input.focus();
         }
       };
@@ -3090,8 +3053,8 @@
     const row = panel.querySelector('.photo-input-row');
     if (row) {
       row.innerHTML = `
-        <button class="btn sm" id="sessionPhotoPickBtn">📷 Фото</button>
-        <button class="btn sm" id="sessionAudioToggleBtn">🎙 Запись звука</button>
+        <button class="btn sm" id="sessionPhotoPickBtn">📷 Photo</button>
+        <button class="btn sm" id="sessionAudioToggleBtn">🎙 Audio Record</button>
       `;
       const photoBtn = byId('sessionPhotoPickBtn');
       if (photoBtn) photoBtn.onclick = () => openSessionPhotoPicker();
@@ -3108,8 +3071,8 @@
     }
     status.innerHTML = `
       <div class="ai-status-dot" id="sessionAudioStatusDot"></div>
-      <span class="txt" id="sessionAudioStatusText">Микрофон не активен</span>
-      <span class="meta" id="sessionAudioStatusMeta">Нажмите, чтобы начать запись</span>
+      <span class="txt" id="sessionAudioStatusText">Microphone is inactive</span>
+      <span class="meta" id="sessionAudioStatusMeta">Click to start recording</span>
     `;
 
     let live = byId('sessionAudioLive');
@@ -3118,7 +3081,7 @@
       live.id = 'sessionAudioLive';
       live.className = 'ai-suggestion';
       live.style.marginTop = '10px';
-      live.innerHTML = '<div class="sug-title">🎧 Живой транскрипт</div><div class="sug-text" id="sessionAudioLiveText">Пока нет распознанного текста.</div>';
+      live.innerHTML = '<div class="sug-title">🎧 Live Transcript</div><div class="sug-text" id="sessionAudioLiveText">No recognized text yet.</div>';
       status.insertAdjacentElement('afterend', live);
     }
   }
@@ -3131,13 +3094,13 @@
     const live = byId('sessionAudioLiveText');
 
     if (dot) dot.classList.toggle('active', Boolean(active));
-    if (text) text.textContent = statusText || (active ? 'Запись звука активна' : 'Микрофон не активен');
-    if (meta) meta.textContent = metaText || (active ? 'Распознаю речь в реальном времени' : 'Нажмите, чтобы начать запись');
-    if (live && typeof liveText === 'string') live.textContent = liveText || 'Пока нет распознанного текста.';
+    if (text) text.textContent = statusText || (active ? 'Audio recording active' : 'Microphone is inactive');
+    if (meta) meta.textContent = metaText || (active ? 'Recognizing speech in real time' : 'Click to start recording');
+    if (live && typeof liveText === 'string') live.textContent = liveText || 'No recognized text yet.';
 
     if (btn) {
       btn.classList.toggle('red-btn', Boolean(active));
-      btn.textContent = active ? '⏹ Стоп' : '🎙 Запись звука';
+      btn.textContent = active ? '⏹ Stop' : '🎙 Audio Record';
     }
   }
 
@@ -3200,18 +3163,18 @@
         dataUrl: processed.dataUrl,
         width: processed.width,
         height: processed.height,
-        capturedAt: new Date().toLocaleString('ru-RU'),
-        note: 'Фото сессии'
+        capturedAt: new Date().toLocaleString('en-US'),
+        note: 'Session photo'
       };
-      state.session.lastAction = 'добавлено фото';
+      state.session.lastAction = 'photo added';
       renderSessionPhotoPreview();
       ensureSessionContextCard();
-      updateSessionAudioUI(Boolean(sessionAudioRecorder), sessionAudioRecorder ? 'Запись активна' : 'Микрофон не активен', 'Фото добавлено и отправлено на анализ');
-      addSessionMessage(byId('sessionChat'), 'system', `📷 Фото добавлено: ${file.name || 'session-photo.jpg'} · агент анализирует контекст`);
-      showToast('Фото добавлено в сессию', 'success');
+      updateSessionAudioUI(Boolean(sessionAudioRecorder), sessionAudioRecorder ? 'Recording active' : 'Microphone is inactive', 'Photo added and sent for analysis');
+      addSessionMessage(byId('sessionChat'), 'system', `📷 Photo added: ${file.name || 'session-photo.jpg'} · agent is analyzing context`);
+      showToast('Photo added to session', 'success');
       await sessionAction('photo');
     } catch (error) {
-      showToast(`Фото не удалось добавить: ${error.message}`, 'info');
+      showToast(`Failed to add photo: ${error.message}`, 'info');
     }
   }
 
@@ -3235,7 +3198,7 @@
 
     state.session.transcript.push({ role: 'user', text: clean, live: true });
     addSessionMessage(chat, 'user', `🎤 ${clean}`);
-    state.session.lastAction = 'живой транскрипт';
+    state.session.lastAction = 'live transcript';
     ensureSessionContextCard();
 
     try {
@@ -3248,14 +3211,14 @@
         includeAudio: false
       }));
 
-      const reply = data.reply || data.output || data.message || 'Нет ответа от агента';
+      const reply = data.reply || data.output || data.message || 'No response from agent';
       addSessionMessage(chat, 'ai', reply);
       state.session.transcript.push({ role: 'ai', text: reply, live: true });
       if (data.sessionArtifact) {
         saveSessionArtifact(reply, data.sessionArtifact);
       }
     } catch (error) {
-      addSessionMessage(chat, 'system', `Не удалось получить ответ на живой транскрипт: ${error.message}`);
+      addSessionMessage(chat, 'system', `Failed to get a response to the live transcript: ${error.message}`);
     }
   }
 
@@ -3264,7 +3227,7 @@
     if (!SpeechRecognition) return null;
 
     const recognition = new SpeechRecognition();
-    recognition.lang = 'ru-RU';
+    recognition.lang = 'en-US';
     recognition.continuous = true;
     recognition.interimResults = true;
     recognition.maxAlternatives = 1;
@@ -3281,7 +3244,7 @@
 
   async function startSessionAudioRecording() {
     if (!navigator.mediaDevices?.getUserMedia) {
-      showToast('Запись звука недоступна в этом браузере', 'info');
+      showToast('Audio recording is not available in this browser', 'info');
       return;
     }
 
@@ -3289,7 +3252,7 @@
       sessionAudioStream = await navigator.mediaDevices.getUserMedia({ audio: true });
       sessionAudioChunks = [];
       state.session.audioTranscript = '';
-      updateSessionAudioUI(true, 'Запись звука активна', 'Распознаю речь в реальном времени', 'Ожидание первой фразы…');
+      updateSessionAudioUI(true, 'Audio recording active', 'Recognizing speech in real time', 'Awaiting first phrase…');
 
       sessionAudioRecorder = new MediaRecorder(sessionAudioStream);
       sessionAudioRecorder.ondataavailable = (event) => {
@@ -3300,7 +3263,7 @@
           const blob = new Blob(sessionAudioChunks, { type: sessionAudioRecorder.mimeType || 'audio/webm' });
           const dataUrl = await new Promise((resolve, reject) => {
             const reader = new FileReader();
-            reader.onerror = () => reject(new Error('Не удалось прочитать аудиофайл'));
+            reader.onerror = () => reject(new Error('Failed to read audio file'));
             reader.onload = () => resolve(String(reader.result || ''));
             reader.readAsDataURL(blob);
           });
@@ -3309,17 +3272,17 @@
             fileName: `session-audio-${Date.now()}.webm`,
             mimeType: blob.type || 'audio/webm',
             dataUrl,
-            capturedAt: new Date().toLocaleString('ru-RU'),
+            capturedAt: new Date().toLocaleString('en-US'),
             duration: state.session.seconds || 0,
             transcript: state.session.audioTranscript || '',
-            note: 'Аудиозапись сессии'
+            note: 'Session audio recording'
           };
-          state.session.lastAction = 'аудиозапись завершена';
+          state.session.lastAction = 'audio recording completed';
           ensureSessionContextCard();
-          updateSessionAudioUI(false, 'Аудио сохранено', 'Агент анализирует запись', state.session.audioTranscript || 'Транскрипт отсутствует');
+          updateSessionAudioUI(false, 'Audio saved', 'Agent is analyzing the recording', state.session.audioTranscript || 'Transcript missing');
           await sessionAction('audio');
         } catch (error) {
-          addSessionMessage(byId('sessionChat'), 'system', `Аудиозапись сохранена частично: ${error.message}`);
+          addSessionMessage(byId('sessionChat'), 'system', `Audio recording partially saved: ${error.message}`);
         } finally {
           if (sessionAudioStream) {
             sessionAudioStream.getTracks().forEach((track) => track.stop());
@@ -3339,12 +3302,12 @@
             const text = String(result[0]?.transcript || '').trim();
             if (!text) continue;
             if (result.isFinal) finalChunk += (finalChunk ? ' ' : '') + text;
-            else updateSessionAudioUI(true, 'Запись звука активна', 'Слышу речь и распознаю текст', text);
+            else updateSessionAudioUI(true, 'Audio recording active', 'Hearing speech and recognizing text', text);
           }
           if (finalChunk) queueLiveTranscript(finalChunk);
         };
         sessionSpeechRecognition.onerror = () => {
-          updateSessionAudioUI(true, 'Запись звука активна', 'Микрофон работает, но распознавание речи недоступно', state.session.audioTranscript || '');
+          updateSessionAudioUI(true, 'Audio recording active', 'Microphone works, but speech recognition is unavailable', state.session.audioTranscript || '');
         };
         sessionSpeechRecognition.onend = () => {
           if (sessionAudioRecorder && sessionAudioRecorder.state === 'recording') {
@@ -3354,11 +3317,11 @@
         try { sessionSpeechRecognition.start(); } catch {}
       }
 
-      updateSessionAudioUI(true, 'Запись звука активна', 'Распознаю речь в реальном времени', 'Скажите что-нибудь, чтобы агент увидел контекст.');
-      showToast('Запись звука начата', 'success');
+      updateSessionAudioUI(true, 'Audio recording active', 'Recognizing speech in real time', 'Say something so the agent sees the context.');
+      showToast('Audio recording started', 'success');
     } catch (error) {
-      updateSessionAudioUI(false, 'Микрофон не активен', error.message, 'Проверьте разрешения браузера');
-      showToast(`Не удалось начать запись: ${error.message}`, 'info');
+      updateSessionAudioUI(false, 'Microphone is inactive', error.message, 'Check browser permissions');
+      showToast(`Failed to start recording: ${error.message}`, 'info');
     }
   }
 
@@ -3369,15 +3332,15 @@
     }
 
     if (!sessionAudioRecorder || sessionAudioRecorder.state !== 'recording') {
-      updateSessionAudioUI(false, 'Микрофон не активен', 'Нажмите, чтобы начать запись');
+      updateSessionAudioUI(false, 'Microphone is inactive', 'Click to start recording');
       return;
     }
 
     try {
       sessionAudioRecorder.stop();
-      updateSessionAudioUI(false, 'Останавливаем запись…', 'Сохраняем звук и транскрипт');
+      updateSessionAudioUI(false, 'Stopping recording…', 'Saving audio and transcript');
     } catch (error) {
-      updateSessionAudioUI(false, 'Микрофон не активен', error.message);
+      updateSessionAudioUI(false, 'Microphone is inactive', error.message);
       if (sessionAudioStream) sessionAudioStream.getTracks().forEach((track) => track.stop());
     }
   }
@@ -3387,26 +3350,26 @@
     if (!chat) return;
 
     state.session.lastAction =
-      type === 'summary' ? 'создание конспекта'
-      : type === 'role' ? 'анализ ролей'
-      : type === 'idea' ? 'поиск аналогии'
-      : type === 'photo' ? 'анализ фото'
-      : type === 'audio' ? 'анализ аудиозаписи'
-      : 'вызов команды';
+      type === 'summary' ? 'creating notes'
+      : type === 'role' ? 'analyzing roles'
+      : type === 'idea' ? 'searching for analogy'
+      : type === 'photo' ? 'analyzing photo'
+      : type === 'audio' ? 'analyzing audio recording'
+      : 'team challenge';
 
     const actionPrompts = {
-      summary: 'Сформируй короткий конспект с тезисами, решениями, открытыми вопросами и следующим шагом.',
-      role: 'Предложи перераспределение ролей и коротко объясни, почему это полезно.',
-      idea: 'Найди 2–3 аналогии из других индустрий и объясни, как перенести их в наш проект.',
-      trigger: 'Сформулируй мягкий вызов команде, если обсуждение зациклилось.',
-      photo: 'Проанализируй прикреплённое фото сессии: опиши, что видно, какие элементы прототипа или записи заметны, какие риски и идеи появляются, и что делать дальше.',
-      audio: 'Проанализируй аудиозапись физической сессии по транскрипту и дай рекомендации по следующему шагу, ролям и возможным рискам.'
+      summary: 'Generate a short summary with key points, decisions, open questions, and next step.',
+      role: 'Suggest role redistribution and briefly explain why this is useful.',
+      idea: 'Find 2-3 analogies from other industries and explain how to transfer them to our project.',
+      trigger: 'Formulate a gentle challenge for the team if the discussion loops.',
+      photo: 'Analyze the attached session photo: describe what is visible, what prototype elements or notes are noticeable, what risks and ideas appear, and what to do next.',
+      audio: 'Analyze the physical session audio recording via the transcript and give recommendations on the next step, roles, and potential risks.'
     };
 
-    addSessionMessage(chat, 'system', `Запрос: ${actionPrompts[type] || 'Задача агента'}${state.session.photo ? ` · фото: ${state.session.photo.fileName}` : ''}`);
+    addSessionMessage(chat, 'system', `Request: ${actionPrompts[type] || 'Agent task'}${state.session.photo ? ` · photo: ${state.session.photo.fileName}` : ''}`);
 
     try {
-      const data = await callAgent(buildEnhancedPayload(actionPrompts[type] || 'Сформируй полезную рекомендацию.', type === 'summary' ? 'session_summary' : (type === 'audio' ? 'session_note' : type), {
+      const data = await callAgent(buildEnhancedPayload(actionPrompts[type] || 'Formulate a useful recommendation.', type === 'summary' ? 'session_summary' : (type === 'audio' ? 'session_note' : type), {
         sourceScreen: 'session',
         project: state.context.type === 'project' ? state.context : {},
         material: state.context.type === 'material' ? state.context : {},
@@ -3415,7 +3378,7 @@
         includeAudio: type === 'audio'
       }));
 
-      const reply = data.reply || data.output || data.message || 'Нет ответа от агента';
+      const reply = data.reply || data.output || data.message || 'No response from agent';
       addSessionMessage(chat, 'ai', reply);
 
       if (type === 'summary' && (data.sessionArtifact || data.reply)) {
@@ -3428,7 +3391,7 @@
         saveSessionArtifact(reply, data.sessionArtifact);
       }
     } catch (error) {
-      addSessionMessage(chat, 'system', `Не удалось получить ответ агента: ${error.message}`);
+      addSessionMessage(chat, 'system', `Failed to get agent response: ${error.message}`);
     }
   }
 
@@ -3441,7 +3404,7 @@
     addSessionMessage(chat, 'user', text);
     if (input) input.value = '';
     state.session.transcript.push({ role: 'user', text });
-    state.session.lastAction = 'сообщение в сессии';
+    state.session.lastAction = 'message in session';
     ensureSessionContextCard();
 
     try {
@@ -3454,7 +3417,7 @@
         includeAudio: false
       }));
 
-      const reply = data.reply || data.output || data.message || 'Нет ответа от агента';
+      const reply = data.reply || data.output || data.message || 'No response from agent';
       addSessionMessage(chat, 'ai', reply);
       state.session.transcript.push({ role: 'ai', text: reply });
 
@@ -3462,7 +3425,7 @@
         saveSessionArtifact(reply, data.sessionArtifact);
       }
     } catch (error) {
-      addSessionMessage(chat, 'system', `Не удалось связаться с ИИ-агентом: ${error.message}`);
+      addSessionMessage(chat, 'system', `Failed to contact AI Agent: ${error.message}`);
     }
   }
 
@@ -3477,7 +3440,7 @@
 
     const loadingMsg = document.createElement('div');
     loadingMsg.className = 'msg agent';
-    loadingMsg.innerHTML = '<span class="msg-label">Агент</span><i>Анализирую контекст...</i>';
+    loadingMsg.innerHTML = '<span class="msg-label">Agent</span><i>Analyzing context...</i>';
     list.appendChild(loadingMsg);
     list.scrollTop = list.scrollHeight;
 
@@ -3494,7 +3457,7 @@
       }));
 
       loadingMsg.remove();
-      const reply = data.reply || data.output || data.message || 'Нет ответа от агента';
+      const reply = data.reply || data.output || data.message || 'No response from agent';
       addAgentMessage(list, reply);
 
       if (Array.isArray(data.recommendations) && data.recommendations.length) {
@@ -3511,10 +3474,10 @@
         saveSessionArtifact(reply, data.sessionArtifact);
       }
 
-      state.session.lastAction = 'диалог с агентом';
+      state.session.lastAction = 'dialogue with agent';
     } catch (error) {
       loadingMsg.remove();
-      addAgentMessage(list, `Не удалось связаться с ИИ-агентом.\n${error.message}`);
+      addAgentMessage(list, `Failed to contact AI Agent.\n${error.message}`);
     }
   }
 
@@ -3542,7 +3505,7 @@
         go('agent');
         const input = byId('agentInput');
         if (input) {
-          input.value = state.context.suggestedPrompt || 'Проанализируй текущий контекст и предложи следующий шаг.';
+          input.value = state.context.suggestedPrompt || 'Analyze the current context and suggest the next step.';
           input.focus();
         }
       };
@@ -3552,3 +3515,6 @@
   enhancePrototypeUI();
 
 })();
+</script>
+</body>
+</html>
